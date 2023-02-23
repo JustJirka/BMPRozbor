@@ -31,6 +31,8 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.btn_openFile = new System.Windows.Forms.Button();
             this.txtBx_info = new System.Windows.Forms.TextBox();
+            this.picBx_hlavni = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picBx_hlavni)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -57,15 +59,26 @@
             this.txtBx_info.Size = new System.Drawing.Size(193, 356);
             this.txtBx_info.TabIndex = 1;
             // 
+            // picBx_hlavni
+            // 
+            this.picBx_hlavni.Location = new System.Drawing.Point(39, 30);
+            this.picBx_hlavni.Name = "picBx_hlavni";
+            this.picBx_hlavni.Size = new System.Drawing.Size(550, 408);
+            this.picBx_hlavni.TabIndex = 2;
+            this.picBx_hlavni.TabStop = false;
+            this.picBx_hlavni.Paint += new System.Windows.Forms.PaintEventHandler(this.picBx_hlavni_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.picBx_hlavni);
             this.Controls.Add(this.txtBx_info);
             this.Controls.Add(this.btn_openFile);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.picBx_hlavni)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -76,6 +89,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button btn_openFile;
         private System.Windows.Forms.TextBox txtBx_info;
+        private System.Windows.Forms.PictureBox picBx_hlavni;
     }
 }
 
