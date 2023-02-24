@@ -76,8 +76,8 @@ namespace BMPRozbor
         }
         public int ScanlineDoplnek()
         {
-            decimal nasobek = Convert.ToDecimal(ByteArrayToWholeValue(SubArray(byteArray, 28, 2)) * ByteArrayToWholeValue(SubArray(byteArray, 18, 4)));
-            return Convert.ToInt32((Math.Ceiling( nasobek / 32) * 32 - nasobek));
+            double nasobek = Convert.ToDouble(ByteArrayToWholeValue(SubArray(byteArray, 28, 2)) * ByteArrayToWholeValue(SubArray(byteArray, 18, 4)));
+            return Convert.ToInt32((Math.Ceiling( nasobek / 32.0) * 32 - nasobek));
         }
 
 

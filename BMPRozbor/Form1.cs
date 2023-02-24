@@ -34,8 +34,8 @@ namespace BMPRozbor
             fs.CopyTo(memoryStream);
             // Convert Stream To Array
             Soubor = new BMP(memoryStream.ToArray());
-            imgLoaded= true;
-            txtBx_info.Text += "bfType: " + Soubor.BfType() + Environment.NewLine + "bfSize: " + Soubor.BfSize() + Environment.NewLine + "bfOffBits: " + Soubor.BfOffBits() + Environment.NewLine + "biSize: " + Soubor.BiSize() + Environment.NewLine + "biWidth: " + Soubor.BiWidth() + Environment.NewLine + "biHeight: " + Soubor.BiHeight() + Environment.NewLine + "biPlanes: " + Soubor.BiPlanes() + Environment.NewLine + "biBitCount: " + Soubor.BiBitCount() + Environment.NewLine + "biCompression: " + Soubor.BiCompression() + Environment.NewLine + "biSizeImage: " + Soubor.BiSizeImage() + Environment.NewLine + "biXPelsPerMeter: " + Soubor.BiXPelsPerMeter() + Environment.NewLine + "biYPelsPerMeter: " + Soubor.BiYPelsPerMeter() + Environment.NewLine + "biClrUsed: " + Soubor.BiClrUsed() + Environment.NewLine + "biClrImportant: " + Soubor.BiClrImportant();
+            imgLoaded = true;
+            txtBx_info.Text = "bfType: " + Soubor.BfType() + Environment.NewLine + "bfSize: " + Soubor.BfSize() + Environment.NewLine + "bfOffBits: " + Soubor.BfOffBits() + Environment.NewLine + "biSize: " + Soubor.BiSize() + Environment.NewLine + "biWidth: " + Soubor.BiWidth() + Environment.NewLine + "biHeight: " + Soubor.BiHeight() + Environment.NewLine + "biPlanes: " + Soubor.BiPlanes() + Environment.NewLine + "biBitCount: " + Soubor.BiBitCount() + Environment.NewLine + "biCompression: " + Soubor.BiCompression() + Environment.NewLine + "biSizeImage: " + Soubor.BiSizeImage() + Environment.NewLine + "biXPelsPerMeter: " + Soubor.BiXPelsPerMeter() + Environment.NewLine + "biYPelsPerMeter: " + Soubor.BiYPelsPerMeter() + Environment.NewLine + "biClrUsed: " + Soubor.BiClrUsed() + Environment.NewLine + "biClrImportant: " + Soubor.BiClrImportant();
             picBx_hlavni.Refresh();
         }
         public String intToHex(int i)
@@ -64,25 +64,31 @@ namespace BMPRozbor
                 }
                 else if (Soubor.BiBitCount() == 1)
                 {
-                    int curentByte = Soubor.BfOffBits()+8;
+                    int curentByte = Soubor.BfOffBits();
                     Brush[] paleta = new Brush[2];
                     for (int i = 0; i < 2; i++)
                     {
-                        paleta[i] = new SolidBrush(Color.FromArgb(Soubor.byteArray[Soubor.BfOffBits() + (i * 4) + 2], Soubor.byteArray[Soubor.BfOffBits() + (i * 4) + 1], Soubor.byteArray[Soubor.BfOffBits() + (i * 4)]));
+                        paleta[i] = new SolidBrush(Color.FromArgb(Soubor.byteArray[Soubor.BfOffBits() - 8 + (i * 4) + 2], Soubor.byteArray[Soubor.BfOffBits() - 8 + (i * 4) + 1], Soubor.byteArray[Soubor.BfOffBits() - 8 + (i * 4)]));
                     }
                     for (int i = Soubor.BiHeight(); i > 0; i--)
                     {
-                        for (int j = 0; j < (Soubor.BiWidth()-1)/8; j++)
+                        for (int j = 0; j < Soubor.BiWidth();)
                         {
                             string hodnoty = Soubor.IntToBinary(Soubor.byteArray[curentByte]);
                             for (int k = 0; k < 8; k++)
                             {
-                                int indexPalety = (int)(hodnoty[k])-48;
-                                e.Graphics.FillRectangle(paleta[indexPalety], (j * 8 + k) * imageScale, i * imageScale,imageScale,imageScale);
+                                int indexPalety = (int)(hodnoty[k]) - 48;
+                                e.Graphics.FillRectangle(paleta[indexPalety], j * imageScale, i * imageScale, imageScale, imageScale);
+                                j++;
+                                if (j > Soubor.BiWidth()-1)
+                                {
+                                    curentByte += Soubor.ScanlineDoplnek()/8;
+                                    break;
+                                }
                             }
                             curentByte++;
+
                         }
-                        // curentByte += Soubor.ScanlineDoplnek();
                     }
                 }
             }
