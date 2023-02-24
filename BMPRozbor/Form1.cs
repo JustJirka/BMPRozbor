@@ -38,24 +38,6 @@ namespace BMPRozbor
             txtBx_info.Text += "bfType: " + Soubor.BfType() + Environment.NewLine + "bfSize: " + Soubor.BfSize() + Environment.NewLine + "bfOffBits: " + Soubor.BfOffBits() + Environment.NewLine + "biSize: " + Soubor.BiSize() + Environment.NewLine + "biWidth: " + Soubor.BiWidth() + Environment.NewLine + "biHeight: " + Soubor.BiHeight() + Environment.NewLine + "biPlanes: " + Soubor.BiPlanes() + Environment.NewLine + "biBitCount: " + Soubor.BiBitCount() + Environment.NewLine + "biCompression: " + Soubor.BiCompression() + Environment.NewLine + "biSizeImage: " + Soubor.BiSizeImage() + Environment.NewLine + "biXPelsPerMeter: " + Soubor.BiXPelsPerMeter() + Environment.NewLine + "biYPelsPerMeter: " + Soubor.BiYPelsPerMeter() + Environment.NewLine + "biClrUsed: " + Soubor.BiClrUsed() + Environment.NewLine + "biClrImportant: " + Soubor.BiClrImportant();
             picBx_hlavni.Refresh();
         }
-        public string IntToBinary(int vstup)
-        {
-            string vystup = "";
-            //convert int to binary
-            for (int i = 128; i > 0; i /= 2)
-            {
-                if (vstup-i>=0)
-                {
-                    vstup -=i;
-                    vystup +=1;
-                }
-                else
-                {
-                    vystup += 0;
-                }
-            }
-            return vystup;
-        }
         public String intToHex(int i)
         {
             StringBuilder hex = new StringBuilder();
@@ -65,34 +47,45 @@ namespace BMPRozbor
 
         private void picBx_hlavni_Paint(object sender, PaintEventArgs e)
         {
-            if(imgLoaded)
+            if (imgLoaded)
             {
-                int curentByte = Soubor.BfOffBits();
-                for (int i = Soubor.BiHeight(); i > 0; i--)
+                if (Soubor.BiBitCount() == 24)
                 {
-                    for (int j = 0; j < Soubor.BiWidth(); j++)
+                    int curentByte = Soubor.BfOffBits();
+                    for (int i = Soubor.BiHeight(); i > 0; i--)
                     {
-                        e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(Soubor.byteArray[curentByte + 2], Soubor.byteArray[curentByte + 1], Soubor.byteArray[curentByte])), j* imageScale, i* imageScale, imageScale, imageScale);
-                        curentByte +=3;
+                        for (int j = 0; j < Soubor.BiWidth(); j++)
+                        {
+                            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(Soubor.byteArray[curentByte + 2], Soubor.byteArray[curentByte + 1], Soubor.byteArray[curentByte])), j * imageScale, i * imageScale, imageScale, imageScale);
+                            curentByte += 3;
+                        }
+                        // curentByte += Soubor.ScanlineDoplnek();
                     }
-                    curentByte += Soubor.ScanlineDoplnek();
                 }
-            }
-
-
-            /*int pocetPalet = Convert.ToInt32(Math.Pow(2, biBitCount));
-            Brush[] paleta = new Brush[pocetPalet];
-            for (int i = 0; i < pocetPalet; i++)
-            {
-                paleta[i] = new SolidBrush(Color.FromArgb(byteArray[biBitCount + (i * 4) +2], byteArray[biBitCount + (i * 4) + 1], byteArray[biBitCount + (i * 4)]));
-            }
-            for (int i = 0; i < biWidth; i++)
-            {
-                for (int j = 0; j < biHeight; j++)
+                else if (Soubor.BiBitCount() == 1)
                 {
-                    e.Graphics.FillRectangle()
+                    int curentByte = Soubor.BfOffBits()+8;
+                    Brush[] paleta = new Brush[2];
+                    for (int i = 0; i < 2; i++)
+                    {
+                        paleta[i] = new SolidBrush(Color.FromArgb(Soubor.byteArray[Soubor.BfOffBits() + (i * 4) + 2], Soubor.byteArray[Soubor.BfOffBits() + (i * 4) + 1], Soubor.byteArray[Soubor.BfOffBits() + (i * 4)]));
+                    }
+                    for (int i = Soubor.BiHeight(); i > 0; i--)
+                    {
+                        for (int j = 0; j < (Soubor.BiWidth()-1)/8; j++)
+                        {
+                            string hodnoty = Soubor.IntToBinary(Soubor.byteArray[curentByte]);
+                            for (int k = 0; k < 8; k++)
+                            {
+                                int indexPalety = (int)(hodnoty[k])-48;
+                                e.Graphics.FillRectangle(paleta[indexPalety], (j * 8 + k) * imageScale, i * imageScale,imageScale,imageScale);
+                            }
+                            curentByte++;
+                        }
+                        // curentByte += Soubor.ScanlineDoplnek();
+                    }
                 }
-            }*/
+            }
         }
     }
 }

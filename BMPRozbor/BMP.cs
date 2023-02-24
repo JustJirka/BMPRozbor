@@ -99,6 +99,23 @@ namespace BMPRozbor
             }
             return int.Parse(hex.ToString(), System.Globalization.NumberStyles.HexNumber);
         }
+        public string IntToBinary(int vstup)
+        {
+            string vystup = "";
+            for (int i = 128; i > 0; i /= 2)
+            {
+                if (vstup - i >= 0)
+                {
+                    vstup -= i;
+                    vystup += 1;
+                }
+                else
+                {
+                    vystup += 0;
+                }
+            }
+            return vystup;
+        }
 
     }
 }
