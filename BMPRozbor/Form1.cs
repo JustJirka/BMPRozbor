@@ -65,7 +65,25 @@ namespace BMPRozbor
 
         private void btn_90Left_Click(object sender, EventArgs e)
         {
+            Soubor.Rotate90Right();
+            picBx_hlavni.Refresh();
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn__Click(object sender, EventArgs e)
+        {
+             Soubor.byteArray= BMP.RotateBMPImage (Soubor.byteArray);
+            picBx_hlavni.Refresh();
+        }
+
+        private void bnt_Flip_Click(object sender, EventArgs e)
+        {
+            Soubor.MirrorHorizontal();
+            picBx_hlavni.Refresh();
         }
     }
 }

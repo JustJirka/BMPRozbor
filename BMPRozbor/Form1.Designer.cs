@@ -36,9 +36,11 @@
             this.btn_refresh = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.btn_SaveFile = new System.Windows.Forms.Button();
-            this.btn_Invert = new System.Windows.Forms.Button();
+            this.btn_Mirror = new System.Windows.Forms.Button();
             this.btn_90Left = new System.Windows.Forms.Button();
             this.btn_90Right = new System.Windows.Forms.Button();
+            this.btn_ = new System.Windows.Forms.Button();
+            this.bnt_Flip = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBx_hlavni)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuUpDo_imageScale)).BeginInit();
             this.SuspendLayout();
@@ -52,7 +54,7 @@
             // btn_openFile
             // 
             this.btn_openFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_openFile.Location = new System.Drawing.Point(1057, 12);
+            this.btn_openFile.Location = new System.Drawing.Point(1055, 12);
             this.btn_openFile.Name = "btn_openFile";
             this.btn_openFile.Size = new System.Drawing.Size(105, 23);
             this.btn_openFile.TabIndex = 0;
@@ -63,12 +65,12 @@
             // txtBx_info
             // 
             this.txtBx_info.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBx_info.Location = new System.Drawing.Point(1057, 147);
+            this.txtBx_info.Location = new System.Drawing.Point(1055, 173);
             this.txtBx_info.Multiline = true;
             this.txtBx_info.Name = "txtBx_info";
             this.txtBx_info.ReadOnly = true;
             this.txtBx_info.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBx_info.Size = new System.Drawing.Size(193, 422);
+            this.txtBx_info.Size = new System.Drawing.Size(193, 365);
             this.txtBx_info.TabIndex = 1;
             // 
             // picBx_hlavni
@@ -76,9 +78,9 @@
             this.picBx_hlavni.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.picBx_hlavni.Location = new System.Drawing.Point(39, 30);
+            this.picBx_hlavni.Location = new System.Drawing.Point(12, 12);
             this.picBx_hlavni.Name = "picBx_hlavni";
-            this.picBx_hlavni.Size = new System.Drawing.Size(1012, 417);
+            this.picBx_hlavni.Size = new System.Drawing.Size(1037, 526);
             this.picBx_hlavni.TabIndex = 2;
             this.picBx_hlavni.TabStop = false;
             this.picBx_hlavni.Paint += new System.Windows.Forms.PaintEventHandler(this.picBx_hlavni_Paint);
@@ -86,7 +88,7 @@
             // nuUpDo_imageScale
             // 
             this.nuUpDo_imageScale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nuUpDo_imageScale.Location = new System.Drawing.Point(1057, 41);
+            this.nuUpDo_imageScale.Location = new System.Drawing.Point(1055, 41);
             this.nuUpDo_imageScale.Maximum = new decimal(new int[] {
             10000000,
             0,
@@ -109,7 +111,7 @@
             // btn_refresh
             // 
             this.btn_refresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_refresh.Location = new System.Drawing.Point(1168, 38);
+            this.btn_refresh.Location = new System.Drawing.Point(1166, 38);
             this.btn_refresh.Name = "btn_refresh";
             this.btn_refresh.Size = new System.Drawing.Size(82, 23);
             this.btn_refresh.TabIndex = 4;
@@ -126,7 +128,7 @@
             // btn_SaveFile
             // 
             this.btn_SaveFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_SaveFile.Location = new System.Drawing.Point(1168, 12);
+            this.btn_SaveFile.Location = new System.Drawing.Point(1166, 12);
             this.btn_SaveFile.Name = "btn_SaveFile";
             this.btn_SaveFile.Size = new System.Drawing.Size(82, 23);
             this.btn_SaveFile.TabIndex = 5;
@@ -134,21 +136,21 @@
             this.btn_SaveFile.UseVisualStyleBackColor = true;
             this.btn_SaveFile.Click += new System.EventHandler(this.btn_SaveFile_Click);
             // 
-            // btn_Invert
+            // btn_Mirror
             // 
-            this.btn_Invert.Location = new System.Drawing.Point(1057, 90);
-            this.btn_Invert.Name = "btn_Invert";
-            this.btn_Invert.Size = new System.Drawing.Size(105, 26);
-            this.btn_Invert.TabIndex = 6;
-            this.btn_Invert.Text = "Invertovat obrázek";
-            this.btn_Invert.UseVisualStyleBackColor = true;
-            this.btn_Invert.Click += new System.EventHandler(this.btn_Invert_Click);
+            this.btn_Mirror.Location = new System.Drawing.Point(1055, 128);
+            this.btn_Mirror.Name = "btn_Mirror";
+            this.btn_Mirror.Size = new System.Drawing.Size(105, 26);
+            this.btn_Mirror.TabIndex = 6;
+            this.btn_Mirror.Text = "Invertovat obrázek";
+            this.btn_Mirror.UseVisualStyleBackColor = true;
+            this.btn_Mirror.Click += new System.EventHandler(this.btn_Invert_Click);
             // 
             // btn_90Left
             // 
-            this.btn_90Left.Location = new System.Drawing.Point(1073, 67);
+            this.btn_90Left.Location = new System.Drawing.Point(1055, 67);
             this.btn_90Left.Name = "btn_90Left";
-            this.btn_90Left.Size = new System.Drawing.Size(75, 23);
+            this.btn_90Left.Size = new System.Drawing.Size(105, 23);
             this.btn_90Left.TabIndex = 7;
             this.btn_90Left.Text = "90° doleva";
             this.btn_90Left.UseVisualStyleBackColor = true;
@@ -156,21 +158,43 @@
             // 
             // btn_90Right
             // 
-            this.btn_90Right.Location = new System.Drawing.Point(1168, 67);
+            this.btn_90Right.Location = new System.Drawing.Point(1166, 67);
             this.btn_90Right.Name = "btn_90Right";
-            this.btn_90Right.Size = new System.Drawing.Size(75, 23);
+            this.btn_90Right.Size = new System.Drawing.Size(82, 23);
             this.btn_90Right.TabIndex = 8;
             this.btn_90Right.Text = "90° doprava";
             this.btn_90Right.UseVisualStyleBackColor = true;
+            // 
+            // btn_
+            // 
+            this.btn_.Location = new System.Drawing.Point(1173, 99);
+            this.btn_.Name = "btn_";
+            this.btn_.Size = new System.Drawing.Size(75, 23);
+            this.btn_.TabIndex = 9;
+            this.btn_.Text = "Zrcadlit";
+            this.btn_.UseVisualStyleBackColor = true;
+            this.btn_.Click += new System.EventHandler(this.btn__Click);
+            // 
+            // bnt_Flip
+            // 
+            this.bnt_Flip.Location = new System.Drawing.Point(1055, 99);
+            this.bnt_Flip.Name = "bnt_Flip";
+            this.bnt_Flip.Size = new System.Drawing.Size(112, 23);
+            this.bnt_Flip.TabIndex = 10;
+            this.bnt_Flip.Text = "Horizontální zrcadlo";
+            this.bnt_Flip.UseVisualStyleBackColor = true;
+            this.bnt_Flip.Click += new System.EventHandler(this.bnt_Flip_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1262, 550);
+            this.ClientSize = new System.Drawing.Size(1260, 550);
+            this.Controls.Add(this.bnt_Flip);
+            this.Controls.Add(this.btn_);
             this.Controls.Add(this.btn_90Right);
             this.Controls.Add(this.btn_90Left);
-            this.Controls.Add(this.btn_Invert);
+            this.Controls.Add(this.btn_Mirror);
             this.Controls.Add(this.btn_SaveFile);
             this.Controls.Add(this.btn_refresh);
             this.Controls.Add(this.nuUpDo_imageScale);
@@ -178,7 +202,7 @@
             this.Controls.Add(this.txtBx_info);
             this.Controls.Add(this.btn_openFile);
             this.Name = "Form1";
-            this.Text = "BMPMP";
+            this.Text = "BMP Image Manipulation Program";
             ((System.ComponentModel.ISupportInitialize)(this.picBx_hlavni)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuUpDo_imageScale)).EndInit();
             this.ResumeLayout(false);
@@ -196,9 +220,11 @@
         private System.Windows.Forms.Button btn_refresh;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button btn_SaveFile;
-        private System.Windows.Forms.Button btn_Invert;
+        private System.Windows.Forms.Button btn_Mirror;
         private System.Windows.Forms.Button btn_90Left;
         private System.Windows.Forms.Button btn_90Right;
+        private System.Windows.Forms.Button btn_;
+        private System.Windows.Forms.Button bnt_Flip;
     }
 }
 
