@@ -76,7 +76,7 @@ namespace BMPRozbor
 
         private void btn__Click(object sender, EventArgs e)
         {
-             Soubor.byteArray= BMP.RotateBMPImage (Soubor.byteArray);
+             Soubor.Mirror();
             picBx_hlavni.Refresh();
         }
 

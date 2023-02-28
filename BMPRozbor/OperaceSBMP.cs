@@ -41,5 +41,16 @@ namespace BMPRozbor
             }
             return vystup;
         }
+        public static int BinaryToInt(string vstup)
+        {
+            int vystup = 0;
+            int nasobek=1;
+            for (int i = 1; i <= vstup.Length; i++)
+            {
+               vystup += int.Parse(vstup[vstup.Length - i].ToString()) * nasobek;
+                nasobek*=2;
+            }
+            return vystup;
+        }
     }
 }

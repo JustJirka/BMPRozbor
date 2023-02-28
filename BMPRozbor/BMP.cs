@@ -30,7 +30,6 @@ namespace BMPRozbor
         public int BfSize()
         {
             return OperaceSBMP.ByteArrayToWholeValue(OperaceSBMP.SubArray(byteArray, 2, 4)); //Tyto 4 bajty určují celkovou velikost souboru s obrazovými údaji.
-
         }
         public int BfOffBits()
         {
@@ -47,7 +46,6 @@ namespace BMPRozbor
         public int BiHeight()
         {
             return OperaceSBMP.ByteArrayToWholeValue(OperaceSBMP.SubArray(byteArray, 22, 4)); //Tato položka udává výšku obrazu zadávanou taktéž v pixelech
-
         }
         public int BiPlanes()
         {
@@ -94,6 +92,51 @@ namespace BMPRozbor
         public void SaveFile(string path)
         {
             File.WriteAllBytes(path, byteArray);
+        }
+        public int[] GetPixelAtPosition(int x, int y)
+        {
+
+            int byteOffset = BfOffBits() * 8 + (y * (BiWidth() + ScanlineDoplnek()) + x) * BiBitCount(); // calculate the byte offset for the pixel
+            if (BiBitCount() == 1 || BiBitCount() == 4 || BiBitCount() == 8 || BiBitCount() == 16)
+            {
+                string hodnota = OperaceSBMP.IntToBinary(byteArray[byteOffset / 8]);
+                StringBuilder hodnota2 = new StringBuilder();
+                for (int i = 0; i < BiBitCount(); i++) hodnota2.Append(hodnota[byteOffset % 8 + i]);
+                int[] vystup = { OperaceSBMP.BinaryToInt(hodnota2.ToString()) };
+                return vystup;
+            }
+            else
+            {
+                int[] hodnota = { byteArray[byteOffset/8 + 2], byteArray[byteOffset / 8 + 1], byteArray[byteOffset / 8] };
+                return hodnota;
+            }
+        }
+        public byte[] SetPixelAtPosition(int x, int y, int[] setValue, byte[] pole)
+        {
+            int byteOffset = BfOffBits()*8 + (y * (BiWidth() + ScanlineDoplnek()) + x) * BiBitCount(); // calculate the byte offset for the pixel
+            if (BiBitCount() == 1 || BiBitCount() == 2 || BiBitCount() == 4 || BiBitCount() == 8 || BiBitCount() == 16)
+            {
+                int byteIndex = byteOffset/8;
+                int bitOffset = byteOffset % 8;
+                string binaryValue = OperaceSBMP.IntToBinary( pole[byteIndex]); // get the binary representation of the byte at byteIndex 
+                for (int i = 0; i < BiBitCount(); i++)
+                {
+                    int setValueBit = (setValue[0] >> i) & 1; // get the i-th bit of the setValue
+                    if (bitOffset + i < 8)
+                    {
+                        binaryValue = binaryValue.Remove(bitOffset + i, 1).Insert(bitOffset + i, setValueBit.ToString()); // set the bit value of the binary string
+                    }
+                    else break;
+                }
+                pole[byteIndex] = (byte)OperaceSBMP.BinaryToInt(binaryValue); //convert the binary string back to byte and update the byte array
+            }
+            else
+            {
+                pole[byteOffset + 2] = Convert.ToByte(setValue[0]); // blue channel
+                pole[byteOffset + 1] = Convert.ToByte(setValue[1]); // green channel
+                pole[byteOffset] = Convert.ToByte(setValue[2]); // red channel
+            }
+            return pole;
         }
         public void DrawImage(Graphics g, int imageScale)
         {
@@ -240,74 +283,67 @@ namespace BMPRozbor
         }
         public void Mirror()
         {
+            byte[] mirroredArray = new byte[byteArray.Length];
+            Array.Copy(byteArray, mirroredArray, byteArray.Length);
+            int curentByte = BfOffBits();
+            if (BiBitCount() == 1 || BiBitCount() == 4 || BiBitCount() == 8)
+            {
+                for (int i = 0; i < BiHeight(); i++)
+                {
+                    for (int j = 0; j < BiWidth(); j++)
+                    {
+                        int[] value = { GetPixelAtPosition(BiWidth() - j-1,i)[0] };
+                        mirroredArray= SetPixelAtPosition(j,i, value, mirroredArray);
+                    }
+                }
+            }
+            else if (BiBitCount() == 16 || BiBitCount() == 24 || BiBitCount() == 32)
+            {
+                int mirroredByte = BfOffBits() + BiWidth() * 3;
+                for (int i = 0; i < BiHeight(); i++)
+                {
+                    for (int j = 0; j < BiWidth(); j++)
+                    {
+                        //Copy each color component (BGR) from original to mirrored
+                        mirroredArray[mirroredByte - 3] = byteArray[curentByte];
+                        mirroredArray[mirroredByte - 2] = byteArray[curentByte + 1];
+                        mirroredArray[mirroredByte - 1] = byteArray[curentByte + 2];
 
+                        //Move to next pixel in both arrays
+                        curentByte += 3;
+                        mirroredByte -= 3;
+                    }
+                    //Move to next row in both arrays
+                    curentByte += ScanlineDoplnek() / 8;
+                    mirroredByte += ScanlineDoplnek() / 8 + BiWidth() * 6;
+                }
+
+            }
+            byteArray = mirroredArray;
         }
         public void MirrorHorizontal()
         {
             int bytusirka = 0;
-            if (BiBitCount() == 1) bytusirka = BiWidth()/8;
-            else if (BiBitCount() == 2) bytusirka = BiWidth()/4;
-            else if (BiBitCount() == 4) bytusirka = BiWidth()/2;
+            if (BiBitCount() == 1) bytusirka = BiWidth() / 8;
+            else if (BiBitCount() == 2) bytusirka = BiWidth() / 4;
+            else if (BiBitCount() == 4) bytusirka = BiWidth() / 2;
             else if (BiBitCount() == 8) bytusirka = BiWidth();
-            else if (BiBitCount() == 16) bytusirka = BiWidth()*2;
-            else if (BiBitCount() == 24) bytusirka = BiWidth()*3;
-            else if (BiBitCount() == 32) bytusirka = BiWidth()*4;
+            else if (BiBitCount() == 16) bytusirka = BiWidth() * 2;
+            else if (BiBitCount() == 24) bytusirka = BiWidth() * 3;
+            else if (BiBitCount() == 32) bytusirka = BiWidth() * 4;
             byte[] MirroredArray = new byte[byteArray.Length];
             Array.Copy(byteArray, MirroredArray, byteArray.Length);
             int curentByte = BfOffBits();
-            for (int i = BiHeight()-1; i >= 0; i--)
+            for (int i = BiHeight() - 1; i >= 0; i--)
             {
                 for (int j = 0; j < bytusirka; j++)
                 {
-                    MirroredArray[curentByte] = byteArray[BfOffBits()+ i * (bytusirka + ScanlineDoplnek()/8) + j];
+                    MirroredArray[curentByte] = byteArray[BfOffBits() + i * (bytusirka + ScanlineDoplnek() / 8) + j];
                     curentByte++;
                 }
                 curentByte += ScanlineDoplnek() / 8;
             }
             byteArray = MirroredArray;
-        }
-        public static byte[] RotateBMPImage(byte[] imageData)
-        {
-            int width = BitConverter.ToInt32(imageData, 18);
-            int height = BitConverter.ToInt32(imageData, 22);
-            int bitsPerPixel = BitConverter.ToInt16(imageData, 28);
-            int rowSize = ((width * bitsPerPixel + 31) / 32) * 4;
-
-            byte[] rotatedData = new byte[imageData.Length];
-            int rotatedIndex = 0;
-            int rowBytes = rowSize;
-            if (bitsPerPixel == 24)
-            {
-                rowBytes = width * 3;
-            }
-            else if (bitsPerPixel == 32)
-            {
-                rowBytes = width * 4;
-            }
-            for (int col = 0; col < width; col++)
-            {
-                for (int row = height - 1; row >= 0; row--)
-                {
-                    int index = row * rowBytes + col * bitsPerPixel / 8;
-                    for (int i = 0; i < bitsPerPixel / 8; i++)
-                    {
-                        rotatedData[rotatedIndex++] = imageData[index + i];
-                    }
-                }
-            }
-
-            // Update header fields for rotated image
-            int newWidth = height;
-            int newHeight = width;
-            int newImageSize = rowSize * newHeight;
-            byte[] newWidthBytes = BitConverter.GetBytes(newWidth);
-            byte[] newHeightBytes = BitConverter.GetBytes(newHeight);
-            byte[] newImageSizeBytes = BitConverter.GetBytes(newImageSize);
-            Array.Copy(newWidthBytes, 0, rotatedData, 18, 4);
-            Array.Copy(newHeightBytes, 0, rotatedData, 22, 4);
-            Array.Copy(newImageSizeBytes, 0, rotatedData, 34, 4);
-
-            return rotatedData;
         }
     }
 }
