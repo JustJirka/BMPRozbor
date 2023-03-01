@@ -138,6 +138,7 @@
             // 
             // btn_Mirror
             // 
+            this.btn_Mirror.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Mirror.Location = new System.Drawing.Point(1055, 128);
             this.btn_Mirror.Name = "btn_Mirror";
             this.btn_Mirror.Size = new System.Drawing.Size(105, 26);
@@ -148,6 +149,7 @@
             // 
             // btn_90Left
             // 
+            this.btn_90Left.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_90Left.Location = new System.Drawing.Point(1055, 67);
             this.btn_90Left.Name = "btn_90Left";
             this.btn_90Left.Size = new System.Drawing.Size(105, 23);
@@ -158,6 +160,7 @@
             // 
             // btn_90Right
             // 
+            this.btn_90Right.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_90Right.Location = new System.Drawing.Point(1166, 67);
             this.btn_90Right.Name = "btn_90Right";
             this.btn_90Right.Size = new System.Drawing.Size(82, 23);
@@ -167,6 +170,7 @@
             // 
             // btn_
             // 
+            this.btn_.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_.Location = new System.Drawing.Point(1173, 99);
             this.btn_.Name = "btn_";
             this.btn_.Size = new System.Drawing.Size(75, 23);
@@ -177,6 +181,7 @@
             // 
             // bnt_Flip
             // 
+            this.bnt_Flip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bnt_Flip.Location = new System.Drawing.Point(1055, 99);
             this.bnt_Flip.Name = "bnt_Flip";
             this.bnt_Flip.Size = new System.Drawing.Size(112, 23);

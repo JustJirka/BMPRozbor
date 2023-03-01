@@ -79,6 +79,11 @@ namespace BMPRozbor
         {
             return OperaceSBMP.ByteArrayToWholeValue(OperaceSBMP.SubArray(byteArray, 50, 4));//dává počet barev, které jsou důležité pro vykreslení bitmapy.Pokud je tato hodnota nulová, jsou všechny barvy důležité.Tento údaj je používán při zobrazování na zařízeních, které mají omezený počet současně zobrazitelných barev. Ovladač displeje může upravit systémovou paletu tak, aby zobrazil daný obrázek co nejvěrněji.Také je vhodné upravit paletu metodou seřazení jednotlivých barev podle důležitosti
         }
+        public int Scanline()
+        {
+            double nasobek = Convert.ToDouble(BiBitCount() * BiWidth());
+            return Convert.ToInt32((Math.Ceiling(nasobek / 32.0) * 32));
+        }
         public int ScanlineDoplnek()
         {
             double nasobek = Convert.ToDouble(BiBitCount() * BiWidth());
@@ -95,13 +100,12 @@ namespace BMPRozbor
         }
         public int[] GetPixelAtPosition(int x, int y)
         {
-
-            int byteOffset = BfOffBits() * 8 + (y * (BiWidth() + ScanlineDoplnek()) + x) * BiBitCount(); // calculate the byte offset for the pixel
+            int byteOffset = BfOffBits()*8 + (y * (BiWidth()*BiBitCount() +ScanlineDoplnek())+ x * BiBitCount()); // calculate the byte offset for the pixel
             if (BiBitCount() == 1 || BiBitCount() == 4 || BiBitCount() == 8 || BiBitCount() == 16)
             {
                 string hodnota = OperaceSBMP.IntToBinary(byteArray[byteOffset / 8]);
                 StringBuilder hodnota2 = new StringBuilder();
-                for (int i = 0; i < BiBitCount(); i++) hodnota2.Append(hodnota[byteOffset % 8 + i]);
+                for (int i = 0; i < BiBitCount(); i++) hodnota2.Append(hodnota[x*BiBitCount() % 8 + i]);
                 int[] vystup = { OperaceSBMP.BinaryToInt(hodnota2.ToString()) };
                 return vystup;
             }
@@ -113,11 +117,11 @@ namespace BMPRozbor
         }
         public byte[] SetPixelAtPosition(int x, int y, int[] setValue, byte[] pole)
         {
-            int byteOffset = BfOffBits()*8 + (y * (BiWidth() + ScanlineDoplnek()) + x) * BiBitCount(); // calculate the byte offset for the pixel
+            int byteOffset = BfOffBits() * 8 + (y * (BiWidth() * BiBitCount() + ScanlineDoplnek()) + x * BiBitCount()); // calculate the byte offset for the pixel
             if (BiBitCount() == 1 || BiBitCount() == 2 || BiBitCount() == 4 || BiBitCount() == 8 || BiBitCount() == 16)
             {
                 int byteIndex = byteOffset/8;
-                int bitOffset = byteOffset % 8;
+                int bitOffset = BiBitCount()*x % 8;
                 string binaryValue = OperaceSBMP.IntToBinary( pole[byteIndex]); // get the binary representation of the byte at byteIndex 
                 for (int i = 0; i < BiBitCount(); i++)
                 {
@@ -140,7 +144,7 @@ namespace BMPRozbor
         }
         public void DrawImage(Graphics g, int imageScale)
         {
-            if (BiBitCount() == 1 || BiBitCount() == 2 || BiBitCount() == 4 || BiBitCount() == 8)
+            if (BiBitCount() == 1 || BiBitCount() == 4 || BiBitCount() == 8)
             {
                 int curentByte = BfOffBits();
                 int pocetPalet = (int)Math.Pow(2, BiBitCount());
@@ -158,7 +162,6 @@ namespace BMPRozbor
                         {
                             int indexPalety = 0;
                             if (BiBitCount() == 1) indexPalety = (int)(hodnoty[k]) - 48;
-                            else if (BiBitCount() == 2) indexPalety = ((int)(hodnoty[k]) - 48) * 2 + ((int)(hodnoty[k + 1]) - 48);
                             else if (BiBitCount() == 4) indexPalety = ((int)(hodnoty[k]) - 48) * 8 + ((int)(hodnoty[k + 1]) - 48) * 4 + ((int)(hodnoty[k + 2]) - 48) * 2 + ((int)(hodnoty[k + 3]) - 48);
                             else if (BiBitCount() == 8) indexPalety = byteArray[curentByte];
                             g.FillRectangle(paleta[indexPalety], j * imageScale, i * imageScale, imageScale, imageScale);
@@ -325,7 +328,6 @@ namespace BMPRozbor
         {
             int bytusirka = 0;
             if (BiBitCount() == 1) bytusirka = BiWidth() / 8;
-            else if (BiBitCount() == 2) bytusirka = BiWidth() / 4;
             else if (BiBitCount() == 4) bytusirka = BiWidth() / 2;
             else if (BiBitCount() == 8) bytusirka = BiWidth();
             else if (BiBitCount() == 16) bytusirka = BiWidth() * 2;
@@ -338,7 +340,9 @@ namespace BMPRozbor
             {
                 for (int j = 0; j < bytusirka; j++)
                 {
-                    MirroredArray[curentByte] = byteArray[BfOffBits() + i * (bytusirka + ScanlineDoplnek() / 8) + j];
+                    int byteOffset =((BfOffBits() * 8 + i * (BiWidth() * BiBitCount() + ScanlineDoplnek()))/8 + j); // calculate the byte offset for the pixel
+
+                    MirroredArray[curentByte] = byteArray[byteOffset];
                     curentByte++;
                 }
                 curentByte += ScanlineDoplnek() / 8;
