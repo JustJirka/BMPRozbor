@@ -136,9 +136,9 @@ namespace BMPRozbor
             }
             else
             {
-                pole[byteOffset + 2] = Convert.ToByte(setValue[0]); // blue channel
-                pole[byteOffset + 1] = Convert.ToByte(setValue[1]); // green channel
-                pole[byteOffset] = Convert.ToByte(setValue[2]); // red channel
+                pole[byteOffset/8 + 2] = Convert.ToByte(setValue[0]); // blue channel
+                pole[byteOffset/8 + 1] = Convert.ToByte(setValue[1]); // green channel
+                pole[byteOffset/8] = Convert.ToByte(setValue[2]); // red channel
             }
             return pole;
         }

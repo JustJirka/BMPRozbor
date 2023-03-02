@@ -41,8 +41,11 @@
             this.btn_90Right = new System.Windows.Forms.Button();
             this.btn_ = new System.Windows.Forms.Button();
             this.bnt_Flip = new System.Windows.Forms.Button();
+            this.btn_blur = new System.Windows.Forms.Button();
+            this.nUpDo_Blur = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.picBx_hlavni)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuUpDo_imageScale)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_Blur)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -65,12 +68,12 @@
             // txtBx_info
             // 
             this.txtBx_info.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBx_info.Location = new System.Drawing.Point(1055, 173);
+            this.txtBx_info.Location = new System.Drawing.Point(1055, 195);
             this.txtBx_info.Multiline = true;
             this.txtBx_info.Name = "txtBx_info";
             this.txtBx_info.ReadOnly = true;
             this.txtBx_info.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBx_info.Size = new System.Drawing.Size(193, 365);
+            this.txtBx_info.Size = new System.Drawing.Size(193, 343);
             this.txtBx_info.TabIndex = 1;
             // 
             // picBx_hlavni
@@ -139,9 +142,9 @@
             // btn_Mirror
             // 
             this.btn_Mirror.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Mirror.Location = new System.Drawing.Point(1055, 128);
+            this.btn_Mirror.Location = new System.Drawing.Point(1055, 163);
             this.btn_Mirror.Name = "btn_Mirror";
-            this.btn_Mirror.Size = new System.Drawing.Size(105, 26);
+            this.btn_Mirror.Size = new System.Drawing.Size(193, 26);
             this.btn_Mirror.TabIndex = 6;
             this.btn_Mirror.Text = "Invertovat obrázek";
             this.btn_Mirror.UseVisualStyleBackColor = true;
@@ -190,11 +193,42 @@
             this.bnt_Flip.UseVisualStyleBackColor = true;
             this.bnt_Flip.Click += new System.EventHandler(this.bnt_Flip_Click);
             // 
+            // btn_blur
+            // 
+            this.btn_blur.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_blur.Location = new System.Drawing.Point(1173, 130);
+            this.btn_blur.Name = "btn_blur";
+            this.btn_blur.Size = new System.Drawing.Size(75, 23);
+            this.btn_blur.TabIndex = 11;
+            this.btn_blur.Text = "Blur";
+            this.btn_blur.UseVisualStyleBackColor = true;
+            this.btn_blur.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // nUpDo_Blur
+            // 
+            this.nUpDo_Blur.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nUpDo_Blur.Location = new System.Drawing.Point(1055, 133);
+            this.nUpDo_Blur.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nUpDo_Blur.Name = "nUpDo_Blur";
+            this.nUpDo_Blur.Size = new System.Drawing.Size(105, 20);
+            this.nUpDo_Blur.TabIndex = 12;
+            this.nUpDo_Blur.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1260, 550);
+            this.Controls.Add(this.nUpDo_Blur);
+            this.Controls.Add(this.btn_blur);
             this.Controls.Add(this.bnt_Flip);
             this.Controls.Add(this.btn_);
             this.Controls.Add(this.btn_90Right);
@@ -210,6 +244,7 @@
             this.Text = "BMP Image Manipulation Program";
             ((System.ComponentModel.ISupportInitialize)(this.picBx_hlavni)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuUpDo_imageScale)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_Blur)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -230,6 +265,8 @@
         private System.Windows.Forms.Button btn_90Right;
         private System.Windows.Forms.Button btn_;
         private System.Windows.Forms.Button bnt_Flip;
+        private System.Windows.Forms.Button btn_blur;
+        private System.Windows.Forms.NumericUpDown nUpDo_Blur;
     }
 }
 

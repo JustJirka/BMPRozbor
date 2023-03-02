@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,13 +45,54 @@ namespace BMPRozbor
         public static int BinaryToInt(string vstup)
         {
             int vystup = 0;
-            int nasobek=1;
+            int nasobek = 1;
             for (int i = 1; i <= vstup.Length; i++)
             {
-               vystup += int.Parse(vstup[vstup.Length - i].ToString()) * nasobek;
-                nasobek*=2;
+                vystup += int.Parse(vstup[vstup.Length - i].ToString()) * nasobek;
+                nasobek *= 2;
             }
             return vystup;
+        }
+        public static BMP Blur(BMP image, int blurSize)
+        {
+            for (int imageY = 0; imageY < image.BiHeight(); imageY += image.BiHeight() / blurSize)
+            {
+                for (int imageX = 0; imageX < image.BiHeight(); imageX += image.BiWidth()/ blurSize)
+                {
+                    int avgR = 0, avgG = 0, avgB = 0;
+                    int blurPixelCount = 0;
+                    for (int blurX = imageX; blurX < imageX+ image.BiWidth() / blurSize; blurX++)
+                    {
+                        for (int blurY = imageY; blurY < imageY+ image.BiHeight() / blurSize; blurY++)
+                        {
+                            // average the color of the red, green and blue for each pixel in the blur size while making sure you don't go outside the image bounds
+                            int[] colorData = image.GetPixelAtPosition(blurX, blurY);
+
+                            avgR += colorData[2];
+                            avgG += colorData[1];
+                            avgB += colorData[0];
+
+                            blurPixelCount++;
+                        }
+                    }
+                    avgR /= blurPixelCount;
+                    avgG /= blurPixelCount;
+                    avgB /= blurPixelCount;
+                    int[] setValue = {avgB,avgG,avgR};
+
+                    //  set each pixel to that color
+                    for (int blurX = imageX; blurX <imageX+ (image.BiHeight() / blurSize); blurX++)
+                    {
+                        for (int blurY = imageY; blurY <imageY+ (image.BiWidth() / blurSize); blurY++)
+                        {
+                            image.byteArray= image.SetPixelAtPosition(blurX, blurY,setValue,image.byteArray);
+                        }
+
+                    }
+
+                }
+            }
+            return image;
         }
     }
 }

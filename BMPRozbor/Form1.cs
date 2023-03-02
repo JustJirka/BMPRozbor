@@ -85,5 +85,11 @@ namespace BMPRozbor
             Soubor.MirrorHorizontal();
             picBx_hlavni.Refresh();
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+           Soubor = OperaceSBMP.Blur(Soubor,(int)nUpDo_Blur.Value);
+           picBx_hlavni.Refresh();
+        }
     }
 }
