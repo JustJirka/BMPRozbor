@@ -22,6 +22,11 @@ namespace BMPRozbor
             var memoryStream = new MemoryStream();
             fs.CopyTo(memoryStream);
             byteArray = memoryStream.ToArray();
+            fs.Close();
+        }
+        public BMP(byte[] pole) 
+        {
+            byteArray = pole;
         }
         public string BfType()
         {
@@ -115,14 +120,14 @@ namespace BMPRozbor
                 return hodnota;
             }
         }
-        public byte[] SetPixelAtPosition(int x, int y, int[] setValue, byte[] pole)
+        public void SetPixelAtPosition(int x, int y, int[] setValue)
         {
             int byteOffset = BfOffBits() * 8 + (y * (BiWidth() * BiBitCount() + ScanlineDoplnek()) + x * BiBitCount()); // calculate the byte offset for the pixel
             if (BiBitCount() == 1 || BiBitCount() == 2 || BiBitCount() == 4 || BiBitCount() == 8 || BiBitCount() == 16)
             {
                 int byteIndex = byteOffset/8;
                 int bitOffset = BiBitCount()*x % 8;
-                string binaryValue = OperaceSBMP.IntToBinary( pole[byteIndex]); // get the binary representation of the byte at byteIndex 
+                string binaryValue = OperaceSBMP.IntToBinary( byteArray[byteIndex]); // get the binary representation of the byte at byteIndex 
                 for (int i = 0; i < BiBitCount(); i++)
                 {
                     int setValueBit = (setValue[0] >> i) & 1; // get the i-th bit of the setValue
@@ -132,15 +137,14 @@ namespace BMPRozbor
                     }
                     else break;
                 }
-                pole[byteIndex] = (byte)OperaceSBMP.BinaryToInt(binaryValue); //convert the binary string back to byte and update the byte array
+                byteArray[byteIndex] = (byte)OperaceSBMP.BinaryToInt(binaryValue); //convert the binary string back to byte and update the byte array
             }
             else
             {
-                pole[byteOffset/8 + 2] = Convert.ToByte(setValue[0]); // blue channel
-                pole[byteOffset/8 + 1] = Convert.ToByte(setValue[1]); // green channel
-                pole[byteOffset/8] = Convert.ToByte(setValue[2]); // red channel
+                byteArray[byteOffset/8 + 2] = Convert.ToByte(setValue[0]); // blue channel
+                byteArray[byteOffset/8 + 1] = Convert.ToByte(setValue[1]); // green channel
+                byteArray[byteOffset/8] = Convert.ToByte(setValue[2]); // red channel
             }
-            return pole;
         }
         public void DrawImage(Graphics g, int imageScale)
         {
@@ -208,9 +212,7 @@ namespace BMPRozbor
             }
             else if (BiBitCount() == 1 || BiBitCount() == 4 || BiBitCount() == 8)
             {
-                int curentByte = BfOffBits();
                 int pocetPalet = (int)Math.Pow(2, BiBitCount());
-                Brush[] paleta = new Brush[pocetPalet];
                 for (int i = 0; i < pocetPalet; i++)
                 {
                     byteArray[BfOffBits() - pocetPalet * 4 + (i * 4) + 2] = Convert.ToByte(255 - Convert.ToInt32(byteArray[BfOffBits() - pocetPalet * 4 + (i * 4) + 2]));
@@ -283,46 +285,6 @@ namespace BMPRozbor
                 }
                 byteArray = RotatedbyteArray;
             }
-        }
-        public void Mirror()
-        {
-            byte[] mirroredArray = new byte[byteArray.Length];
-            Array.Copy(byteArray, mirroredArray, byteArray.Length);
-            int curentByte = BfOffBits();
-            if (BiBitCount() == 1 || BiBitCount() == 4 || BiBitCount() == 8)
-            {
-                for (int i = 0; i < BiHeight(); i++)
-                {
-                    for (int j = 0; j < BiWidth(); j++)
-                    {
-                        int[] value = { GetPixelAtPosition(BiWidth() - j-1,i)[0] };
-                        mirroredArray= SetPixelAtPosition(j,i, value, mirroredArray);
-                    }
-                }
-            }
-            else if (BiBitCount() == 16 || BiBitCount() == 24 || BiBitCount() == 32)
-            {
-                int mirroredByte = BfOffBits() + BiWidth() * 3;
-                for (int i = 0; i < BiHeight(); i++)
-                {
-                    for (int j = 0; j < BiWidth(); j++)
-                    {
-                        //Copy each color component (BGR) from original to mirrored
-                        mirroredArray[mirroredByte - 3] = byteArray[curentByte];
-                        mirroredArray[mirroredByte - 2] = byteArray[curentByte + 1];
-                        mirroredArray[mirroredByte - 1] = byteArray[curentByte + 2];
-
-                        //Move to next pixel in both arrays
-                        curentByte += 3;
-                        mirroredByte -= 3;
-                    }
-                    //Move to next row in both arrays
-                    curentByte += ScanlineDoplnek() / 8;
-                    mirroredByte += ScanlineDoplnek() / 8 + BiWidth() * 6;
-                }
-
-            }
-            byteArray = mirroredArray;
         }
         public void MirrorHorizontal()
         {

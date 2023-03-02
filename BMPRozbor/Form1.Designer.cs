@@ -43,6 +43,7 @@
             this.bnt_Flip = new System.Windows.Forms.Button();
             this.btn_blur = new System.Windows.Forms.Button();
             this.nUpDo_Blur = new System.Windows.Forms.NumericUpDown();
+            this.btn_Grayscale = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBx_hlavni)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuUpDo_imageScale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUpDo_Blur)).BeginInit();
@@ -68,12 +69,12 @@
             // txtBx_info
             // 
             this.txtBx_info.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBx_info.Location = new System.Drawing.Point(1055, 195);
+            this.txtBx_info.Location = new System.Drawing.Point(1055, 288);
             this.txtBx_info.Multiline = true;
             this.txtBx_info.Name = "txtBx_info";
             this.txtBx_info.ReadOnly = true;
             this.txtBx_info.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtBx_info.Size = new System.Drawing.Size(193, 343);
+            this.txtBx_info.Size = new System.Drawing.Size(193, 250);
             this.txtBx_info.TabIndex = 1;
             // 
             // picBx_hlavni
@@ -142,9 +143,9 @@
             // btn_Mirror
             // 
             this.btn_Mirror.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Mirror.Location = new System.Drawing.Point(1055, 163);
+            this.btn_Mirror.Location = new System.Drawing.Point(1173, 128);
             this.btn_Mirror.Name = "btn_Mirror";
-            this.btn_Mirror.Size = new System.Drawing.Size(193, 26);
+            this.btn_Mirror.Size = new System.Drawing.Size(75, 26);
             this.btn_Mirror.TabIndex = 6;
             this.btn_Mirror.Text = "Invertovat obrázek";
             this.btn_Mirror.UseVisualStyleBackColor = true;
@@ -153,9 +154,9 @@
             // btn_90Left
             // 
             this.btn_90Left.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_90Left.Location = new System.Drawing.Point(1055, 67);
+            this.btn_90Left.Location = new System.Drawing.Point(1204, 67);
             this.btn_90Left.Name = "btn_90Left";
-            this.btn_90Left.Size = new System.Drawing.Size(105, 23);
+            this.btn_90Left.Size = new System.Drawing.Size(17, 23);
             this.btn_90Left.TabIndex = 7;
             this.btn_90Left.Text = "90° doleva";
             this.btn_90Left.UseVisualStyleBackColor = true;
@@ -164,9 +165,9 @@
             // btn_90Right
             // 
             this.btn_90Right.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_90Right.Location = new System.Drawing.Point(1166, 67);
+            this.btn_90Right.Location = new System.Drawing.Point(1227, 67);
             this.btn_90Right.Name = "btn_90Right";
-            this.btn_90Right.Size = new System.Drawing.Size(82, 23);
+            this.btn_90Right.Size = new System.Drawing.Size(21, 23);
             this.btn_90Right.TabIndex = 8;
             this.btn_90Right.Text = "90° doprava";
             this.btn_90Right.UseVisualStyleBackColor = true;
@@ -196,7 +197,7 @@
             // btn_blur
             // 
             this.btn_blur.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_blur.Location = new System.Drawing.Point(1173, 130);
+            this.btn_blur.Location = new System.Drawing.Point(1123, 67);
             this.btn_blur.Name = "btn_blur";
             this.btn_blur.Size = new System.Drawing.Size(75, 23);
             this.btn_blur.TabIndex = 11;
@@ -207,14 +208,14 @@
             // nUpDo_Blur
             // 
             this.nUpDo_Blur.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.nUpDo_Blur.Location = new System.Drawing.Point(1055, 133);
+            this.nUpDo_Blur.Location = new System.Drawing.Point(1063, 67);
             this.nUpDo_Blur.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.nUpDo_Blur.Name = "nUpDo_Blur";
-            this.nUpDo_Blur.Size = new System.Drawing.Size(105, 20);
+            this.nUpDo_Blur.Size = new System.Drawing.Size(54, 20);
             this.nUpDo_Blur.TabIndex = 12;
             this.nUpDo_Blur.Value = new decimal(new int[] {
             1,
@@ -222,11 +223,22 @@
             0,
             0});
             // 
+            // btn_Grayscale
+            // 
+            this.btn_Grayscale.Location = new System.Drawing.Point(1055, 131);
+            this.btn_Grayscale.Name = "btn_Grayscale";
+            this.btn_Grayscale.Size = new System.Drawing.Size(105, 23);
+            this.btn_Grayscale.TabIndex = 13;
+            this.btn_Grayscale.Text = "Grayscale by averaging";
+            this.btn_Grayscale.UseVisualStyleBackColor = true;
+            this.btn_Grayscale.Click += new System.EventHandler(this.btn_Grayscale_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1260, 550);
+            this.Controls.Add(this.btn_Grayscale);
             this.Controls.Add(this.nUpDo_Blur);
             this.Controls.Add(this.btn_blur);
             this.Controls.Add(this.bnt_Flip);
@@ -267,6 +279,7 @@
         private System.Windows.Forms.Button bnt_Flip;
         private System.Windows.Forms.Button btn_blur;
         private System.Windows.Forms.NumericUpDown nUpDo_Blur;
+        private System.Windows.Forms.Button btn_Grayscale;
     }
 }
 

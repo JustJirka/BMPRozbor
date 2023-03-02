@@ -76,7 +76,7 @@ namespace BMPRozbor
 
         private void btn__Click(object sender, EventArgs e)
         {
-             Soubor.Mirror();
+            Soubor = OperaceSBMP.Mirror(Soubor);
             picBx_hlavni.Refresh();
         }
 
@@ -90,6 +90,12 @@ namespace BMPRozbor
         {
            Soubor = OperaceSBMP.Blur(Soubor,(int)nUpDo_Blur.Value);
            picBx_hlavni.Refresh();
+        }
+
+        private void btn_Grayscale_Click(object sender, EventArgs e)
+        {
+            Soubor = OperaceSBMP.Grayscale(Soubor);
+            picBx_hlavni.Refresh();
         }
     }
 }
