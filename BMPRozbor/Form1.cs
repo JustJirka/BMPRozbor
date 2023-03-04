@@ -110,13 +110,51 @@ namespace BMPRozbor
 
         private void odstínyŠediPomocíPrůměruToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Soubor = OperaceSBMP.GrayscaleByAveraging(Soubor);
+            OperaceSBMP.GrayscaleByAveraging(ref Soubor);
             picBx_hlavni.Refresh();
         }
 
         private void empirickéOdstínyŠediToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Soubor = OperaceSBMP.GrayscaleEpirical(Soubor);
+            OperaceSBMP.GrayscaleEpirical(ref Soubor);
+            picBx_hlavni.Refresh();
+        }
+
+        private void přechodBarevšedáToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperaceSBMP.GrayscaleTransition(ref Soubor);
+            picBx_hlavni.Refresh();
+        }
+
+        private void prádhToolStripMenuItem_Click(object sender, EventArgs e)//přidat možnost nastavit threshold
+        {
+            OperaceSBMP.GrayscaleThreshold(ref Soubor,125);
+            picBx_hlavni.Refresh();
+        }
+
+        private void sépieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperaceSBMP.Sepie(ref Soubor);
+            picBx_hlavni.Refresh();
+        }
+
+        private void odstínVybranéBarvyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            colorDialog1.FullOpen = true;
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                OperaceSBMP.OneColorShades(ref Soubor, colorDialog1.Color);
+            }
+            picBx_hlavni.Refresh();
+        }
+
+        private void photoFiltrToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            colorDialog1.FullOpen = true;
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                OperaceSBMP.PhotoFiltr(ref Soubor, colorDialog1.Color);
+            }
             picBx_hlavni.Refresh();
         }
     }
