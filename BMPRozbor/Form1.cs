@@ -25,14 +25,7 @@ namespace BMPRozbor
         }
 
         private void btn_openFile_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK) 
-            {
-                Soubor = new BMP(openFileDialog1.FileName);
-                imgLoaded = true;
-                txtBx_info.Text = "bfType: " + Soubor.BfType() + Environment.NewLine + "bfSize: " + Soubor.BfSize() + Environment.NewLine + "bfOffBits: " + Soubor.BfOffBits() + Environment.NewLine + "biSize: " + Soubor.BiSize() + Environment.NewLine + "biWidth: " + Soubor.BiWidth() + Environment.NewLine + "biHeight: " + Soubor.BiHeight() + Environment.NewLine + "biPlanes: " + Soubor.BiPlanes() + Environment.NewLine + "biBitCount: " + Soubor.BiBitCount() + Environment.NewLine + "biCompression: " + Soubor.BiCompression() + Environment.NewLine + "biSizeImage: " + Soubor.BiSizeImage() + Environment.NewLine + "biXPelsPerMeter: " + Soubor.BiXPelsPerMeter() + Environment.NewLine + "biYPelsPerMeter: " + Soubor.BiYPelsPerMeter() + Environment.NewLine + "biClrUsed: " + Soubor.BiClrUsed() + Environment.NewLine + "biClrImportant: " + Soubor.BiClrImportant();
-                picBx_hlavni.Refresh();
-            } 
+        { 
         }
 
         private void picBx_hlavni_Paint(object sender, PaintEventArgs e)
@@ -50,17 +43,11 @@ namespace BMPRozbor
 
         private void btn_SaveFile_Click(object sender, EventArgs e)
         {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                Soubor.SaveFile(saveFileDialog1.FileName);
-            }
 
         }
 
         private void btn_Invert_Click(object sender, EventArgs e)
         {
-            Soubor.Invert();
-            picBx_hlavni.Refresh();
         }
 
         private void btn_90Left_Click(object sender, EventArgs e)
@@ -94,7 +81,42 @@ namespace BMPRozbor
 
         private void btn_Grayscale_Click(object sender, EventArgs e)
         {
-            Soubor = OperaceSBMP.Grayscale(Soubor);
+        }
+
+        private void otevřítSouborToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Soubor = new BMP(openFileDialog1.FileName);
+                imgLoaded = true;
+                txtBx_info.Text = "bfType: " + Soubor.BfType() + Environment.NewLine + "bfSize: " + Soubor.BfSize() + Environment.NewLine + "bfOffBits: " + Soubor.BfOffBits() + Environment.NewLine + "biSize: " + Soubor.BiSize() + Environment.NewLine + "biWidth: " + Soubor.BiWidth() + Environment.NewLine + "biHeight: " + Soubor.BiHeight() + Environment.NewLine + "biPlanes: " + Soubor.BiPlanes() + Environment.NewLine + "biBitCount: " + Soubor.BiBitCount() + Environment.NewLine + "biCompression: " + Soubor.BiCompression() + Environment.NewLine + "biSizeImage: " + Soubor.BiSizeImage() + Environment.NewLine + "biXPelsPerMeter: " + Soubor.BiXPelsPerMeter() + Environment.NewLine + "biYPelsPerMeter: " + Soubor.BiYPelsPerMeter() + Environment.NewLine + "biClrUsed: " + Soubor.BiClrUsed() + Environment.NewLine + "biClrImportant: " + Soubor.BiClrImportant();
+                picBx_hlavni.Refresh();
+            }
+        }
+
+        private void uložitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Soubor.SaveFile(saveFileDialog1.FileName);
+            }
+        }
+
+        private void inverzeBarevToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Soubor.Invert();
+            picBx_hlavni.Refresh();
+        }
+
+        private void odstínyŠediPomocíPrůměruToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Soubor = OperaceSBMP.GrayscaleByAveraging(Soubor);
+            picBx_hlavni.Refresh();
+        }
+
+        private void empirickéOdstínyŠediToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Soubor = OperaceSBMP.GrayscaleEpirical(Soubor);
             picBx_hlavni.Refresh();
         }
     }

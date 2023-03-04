@@ -55,7 +55,7 @@ namespace BMPRozbor
             }
             return vystup;
         }
-        public static BMP Blur(BMP image, int blurSize)
+        public static BMP Blur(BMP image, int blurSize)//jenom  24bit bmp 
         {
             for (int imageY = 0; imageY < image.BiHeight(); imageY += image.BiHeight() / blurSize)
             {
@@ -132,7 +132,7 @@ namespace BMPRozbor
             }
             return mirroredImage;
         }
-        public static BMP Grayscale(BMP image)
+        public static BMP GrayscaleByAveraging(BMP image)
         {
             if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
             {
@@ -167,6 +167,39 @@ namespace BMPRozbor
                     int color = 0;
                     for (int k = 0; k < 3; k++) color += image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + k];
                     for (int k = 0; k < 3; k++) image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + k] = Convert.ToByte(color / 3);
+                }
+            }
+            return image;
+        }
+        public static BMP GrayscaleEpirical(BMP image)
+        {
+            if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
+            {
+                int curentByte = image.BfOffBits();
+                for (int i = image.BiHeight(); i > 0; i--)
+                {
+                    for (int j = 0; j < image.BiWidth(); j++)
+                    {
+                        int empir = (299 * image.byteArray[curentByte + 2] + 587 * image.byteArray[curentByte + 1] + 114 * image.byteArray[curentByte]) / 1000;
+                        for (int k = 0; k < 3; k++)
+                        {
+                            image.byteArray[curentByte]= (byte)empir;
+                            curentByte++;
+                        }
+
+                    }
+                    curentByte += image.ScanlineDoplnek() / 8;
+                }
+
+            }
+            else if (image.BiBitCount() == 1 || image.BiBitCount() == 4 || image.BiBitCount() == 8)
+            {
+                int curentByte = image.BfOffBits();
+                int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
+                for (int i = 0; i < pocetPalet; i++)
+                {
+                    int empir = (299 * image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2] + 587 * image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1] + 114 * image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)]) / 1000;
+                    for (int k = 0; k < 3; k++) image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + k] = (byte)empir;
                 }
             }
             return image;

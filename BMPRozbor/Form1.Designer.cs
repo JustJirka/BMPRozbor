@@ -29,24 +29,30 @@
         private void InitializeComponent()
         {
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.btn_openFile = new System.Windows.Forms.Button();
             this.txtBx_info = new System.Windows.Forms.TextBox();
             this.picBx_hlavni = new System.Windows.Forms.PictureBox();
             this.nuUpDo_imageScale = new System.Windows.Forms.NumericUpDown();
             this.btn_refresh = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.btn_SaveFile = new System.Windows.Forms.Button();
-            this.btn_Mirror = new System.Windows.Forms.Button();
             this.btn_90Left = new System.Windows.Forms.Button();
             this.btn_90Right = new System.Windows.Forms.Button();
             this.btn_ = new System.Windows.Forms.Button();
             this.bnt_Flip = new System.Windows.Forms.Button();
             this.btn_blur = new System.Windows.Forms.Button();
             this.nUpDo_Blur = new System.Windows.Forms.NumericUpDown();
-            this.btn_Grayscale = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.souborToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.otevřítSouborToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uložitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.úpravyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inverzeBarevToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.odstínyŠedéToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.odstínyŠediPomocíPrůměruToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.empirickéOdstínyŠediToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.picBx_hlavni)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuUpDo_imageScale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUpDo_Blur)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -54,17 +60,6 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "BMP Soubor (*.bmp)|*.bmp|All files (*.*)|*.*\"";
             this.openFileDialog1.Title = "Výběr souboru";
-            // 
-            // btn_openFile
-            // 
-            this.btn_openFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_openFile.Location = new System.Drawing.Point(1055, 12);
-            this.btn_openFile.Name = "btn_openFile";
-            this.btn_openFile.Size = new System.Drawing.Size(105, 23);
-            this.btn_openFile.TabIndex = 0;
-            this.btn_openFile.Text = "Otevři soubor";
-            this.btn_openFile.UseVisualStyleBackColor = true;
-            this.btn_openFile.Click += new System.EventHandler(this.btn_openFile_Click);
             // 
             // txtBx_info
             // 
@@ -82,9 +77,9 @@
             this.picBx_hlavni.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.picBx_hlavni.Location = new System.Drawing.Point(12, 12);
+            this.picBx_hlavni.Location = new System.Drawing.Point(12, 38);
             this.picBx_hlavni.Name = "picBx_hlavni";
-            this.picBx_hlavni.Size = new System.Drawing.Size(1037, 526);
+            this.picBx_hlavni.Size = new System.Drawing.Size(1037, 529);
             this.picBx_hlavni.TabIndex = 2;
             this.picBx_hlavni.TabStop = false;
             this.picBx_hlavni.Paint += new System.Windows.Forms.PaintEventHandler(this.picBx_hlavni_Paint);
@@ -128,28 +123,6 @@
             this.saveFileDialog1.FileName = "Soubor.bmp";
             this.saveFileDialog1.Filter = "BMP Soubor (*.bmp)|*.bmp|All files (*.*)|*.*\"";
             this.saveFileDialog1.Title = "Uložení souboru";
-            // 
-            // btn_SaveFile
-            // 
-            this.btn_SaveFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_SaveFile.Location = new System.Drawing.Point(1166, 12);
-            this.btn_SaveFile.Name = "btn_SaveFile";
-            this.btn_SaveFile.Size = new System.Drawing.Size(82, 23);
-            this.btn_SaveFile.TabIndex = 5;
-            this.btn_SaveFile.Text = "Ulož soubor";
-            this.btn_SaveFile.UseVisualStyleBackColor = true;
-            this.btn_SaveFile.Click += new System.EventHandler(this.btn_SaveFile_Click);
-            // 
-            // btn_Mirror
-            // 
-            this.btn_Mirror.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Mirror.Location = new System.Drawing.Point(1173, 128);
-            this.btn_Mirror.Name = "btn_Mirror";
-            this.btn_Mirror.Size = new System.Drawing.Size(75, 26);
-            this.btn_Mirror.TabIndex = 6;
-            this.btn_Mirror.Text = "Invertovat obrázek";
-            this.btn_Mirror.UseVisualStyleBackColor = true;
-            this.btn_Mirror.Click += new System.EventHandler(this.btn_Invert_Click);
             // 
             // btn_90Left
             // 
@@ -223,40 +196,102 @@
             0,
             0});
             // 
-            // btn_Grayscale
+            // menuStrip1
             // 
-            this.btn_Grayscale.Location = new System.Drawing.Point(1055, 131);
-            this.btn_Grayscale.Name = "btn_Grayscale";
-            this.btn_Grayscale.Size = new System.Drawing.Size(105, 23);
-            this.btn_Grayscale.TabIndex = 13;
-            this.btn_Grayscale.Text = "Grayscale by averaging";
-            this.btn_Grayscale.UseVisualStyleBackColor = true;
-            this.btn_Grayscale.Click += new System.EventHandler(this.btn_Grayscale_Click);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.souborToolStripMenuItem,
+            this.úpravyToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1260, 24);
+            this.menuStrip1.TabIndex = 14;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // souborToolStripMenuItem
+            // 
+            this.souborToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.otevřítSouborToolStripMenuItem,
+            this.uložitToolStripMenuItem});
+            this.souborToolStripMenuItem.Name = "souborToolStripMenuItem";
+            this.souborToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.souborToolStripMenuItem.Text = "Soubor";
+            // 
+            // otevřítSouborToolStripMenuItem
+            // 
+            this.otevřítSouborToolStripMenuItem.Name = "otevřítSouborToolStripMenuItem";
+            this.otevřítSouborToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.otevřítSouborToolStripMenuItem.Text = "Otevřít";
+            this.otevřítSouborToolStripMenuItem.Click += new System.EventHandler(this.otevřítSouborToolStripMenuItem_Click);
+            // 
+            // uložitToolStripMenuItem
+            // 
+            this.uložitToolStripMenuItem.Name = "uložitToolStripMenuItem";
+            this.uložitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.uložitToolStripMenuItem.Text = "Uložit ";
+            this.uložitToolStripMenuItem.Click += new System.EventHandler(this.uložitToolStripMenuItem_Click);
+            // 
+            // úpravyToolStripMenuItem
+            // 
+            this.úpravyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.inverzeBarevToolStripMenuItem,
+            this.odstínyŠedéToolStripMenuItem});
+            this.úpravyToolStripMenuItem.Name = "úpravyToolStripMenuItem";
+            this.úpravyToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.úpravyToolStripMenuItem.Text = "Barvy";
+            // 
+            // inverzeBarevToolStripMenuItem
+            // 
+            this.inverzeBarevToolStripMenuItem.Name = "inverzeBarevToolStripMenuItem";
+            this.inverzeBarevToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.inverzeBarevToolStripMenuItem.Text = "Inverze barev";
+            this.inverzeBarevToolStripMenuItem.Click += new System.EventHandler(this.inverzeBarevToolStripMenuItem_Click);
+            // 
+            // odstínyŠedéToolStripMenuItem
+            // 
+            this.odstínyŠedéToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.odstínyŠediPomocíPrůměruToolStripMenuItem,
+            this.empirickéOdstínyŠediToolStripMenuItem});
+            this.odstínyŠedéToolStripMenuItem.Name = "odstínyŠedéToolStripMenuItem";
+            this.odstínyŠedéToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.odstínyŠedéToolStripMenuItem.Text = "Odstíny šedé";
+            // 
+            // odstínyŠediPomocíPrůměruToolStripMenuItem
+            // 
+            this.odstínyŠediPomocíPrůměruToolStripMenuItem.Name = "odstínyŠediPomocíPrůměruToolStripMenuItem";
+            this.odstínyŠediPomocíPrůměruToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.odstínyŠediPomocíPrůměruToolStripMenuItem.Text = "Odstíny šedi pomocí průměru";
+            this.odstínyŠediPomocíPrůměruToolStripMenuItem.Click += new System.EventHandler(this.odstínyŠediPomocíPrůměruToolStripMenuItem_Click);
+            // 
+            // empirickéOdstínyŠediToolStripMenuItem
+            // 
+            this.empirickéOdstínyŠediToolStripMenuItem.Name = "empirickéOdstínyŠediToolStripMenuItem";
+            this.empirickéOdstínyŠediToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.empirickéOdstínyŠediToolStripMenuItem.Text = "Empirické odstíny šedi";
+            this.empirickéOdstínyŠediToolStripMenuItem.Click += new System.EventHandler(this.empirickéOdstínyŠediToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1260, 550);
-            this.Controls.Add(this.btn_Grayscale);
             this.Controls.Add(this.nUpDo_Blur);
             this.Controls.Add(this.btn_blur);
             this.Controls.Add(this.bnt_Flip);
             this.Controls.Add(this.btn_);
             this.Controls.Add(this.btn_90Right);
             this.Controls.Add(this.btn_90Left);
-            this.Controls.Add(this.btn_Mirror);
-            this.Controls.Add(this.btn_SaveFile);
             this.Controls.Add(this.btn_refresh);
             this.Controls.Add(this.nuUpDo_imageScale);
             this.Controls.Add(this.picBx_hlavni);
             this.Controls.Add(this.txtBx_info);
-            this.Controls.Add(this.btn_openFile);
+            this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
             this.Text = "BMP Image Manipulation Program";
             ((System.ComponentModel.ISupportInitialize)(this.picBx_hlavni)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuUpDo_imageScale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUpDo_Blur)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,21 +300,26 @@
         #endregion
 
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button btn_openFile;
         private System.Windows.Forms.TextBox txtBx_info;
         private System.Windows.Forms.PictureBox picBx_hlavni;
         private System.Windows.Forms.NumericUpDown nuUpDo_imageScale;
         private System.Windows.Forms.Button btn_refresh;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.Button btn_SaveFile;
-        private System.Windows.Forms.Button btn_Mirror;
         private System.Windows.Forms.Button btn_90Left;
         private System.Windows.Forms.Button btn_90Right;
         private System.Windows.Forms.Button btn_;
         private System.Windows.Forms.Button bnt_Flip;
         private System.Windows.Forms.Button btn_blur;
         private System.Windows.Forms.NumericUpDown nUpDo_Blur;
-        private System.Windows.Forms.Button btn_Grayscale;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem souborToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem otevřítSouborToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem uložitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem úpravyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inverzeBarevToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem odstínyŠedéToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem odstínyŠediPomocíPrůměruToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem empirickéOdstínyŠediToolStripMenuItem;
     }
 }
 
