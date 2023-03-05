@@ -12,6 +12,9 @@ namespace BMPRozbor
 {
     internal class OperaceSBMP
     {
+        //10.leave color
+        //11. Color Exchange
+        //13 rotate RGB
         public static T[] SubArray<T>(T[] array, int offset, int length)
         {
             T[] result = new T[length];
@@ -361,10 +364,54 @@ namespace BMPRozbor
                     for (int j = 0; j < image.BiWidth(); j++)
                     {
                         int empir = (299 * image.byteArray[curentByte + 2] + 587 * image.byteArray[curentByte + 1] + 114 * image.byteArray[curentByte]) / 1000;
-                        image.byteArray[curentByte++] = (byte)((image.byteArray[curentByte]*selectedColor.B)/255);
+                        image.byteArray[curentByte++] = (byte)((image.byteArray[curentByte] * selectedColor.B) / 255);
                         image.byteArray[curentByte++] = (byte)((image.byteArray[curentByte] * selectedColor.G) / 255);
                         image.byteArray[curentByte++] = (byte)((image.byteArray[curentByte] * selectedColor.R) / 255);
 
+                    }
+                    curentByte += image.ScanlineDoplnek() / 8;
+                }
+            }
+            else if (image.BiBitCount() == 1 || image.BiBitCount() == 4 || image.BiBitCount() == 8)
+            {
+                int curentByte = image.BfOffBits();
+                int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
+                for (int i = 0; i < pocetPalet; i++)
+                {
+                    int empir = (299 * image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2] + 587 * image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1] + 114 * image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)]) / 1000;
+                    image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)] = (byte)((image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)]) * selectedColor.B / 255);
+                    image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1] = (byte)((image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1]) * selectedColor.G / 255);
+                    image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2] = (byte)((image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2]) * selectedColor.R / 255);
+                }
+            }
+        }
+        public static void OnlyRGB(ref BMP image, int RGB)
+        {
+            if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
+            {
+                int curentByte = image.BfOffBits();
+                for (int i = image.BiHeight(); i > 0; i--)
+                {
+                    for (int j = 0; j < image.BiWidth(); j++)
+                    {
+                        if (RGB == 0)
+                        {
+                            image.byteArray[curentByte++] = 0;
+                            image.byteArray[curentByte++] = 0;
+                            curentByte++;
+                        }
+                        else if (RGB == 1)
+                        {
+                            image.byteArray[curentByte++] = 0;
+                            curentByte++;
+                            image.byteArray[curentByte++] = 0;
+                        }
+                        else if (RGB == 2)
+                        {
+                            curentByte++;
+                            image.byteArray[curentByte++] = 0;
+                            image.byteArray[curentByte++] = 0;
+                        }
                     }
                     curentByte += image.ScanlineDoplnek() / 8;
                 }
@@ -376,12 +423,83 @@ namespace BMPRozbor
                 int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
                 for (int i = 0; i < pocetPalet; i++)
                 {
-                    int empir = (299 * image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2] + 587 * image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1] + 114 * image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)]) / 1000;
-                    image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)] = (byte)((image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)])*selectedColor.B / 255);
-                    image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1] = (byte)((image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1]) * selectedColor.G / 255);
-                    image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2] = (byte)((image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2]) * selectedColor.R / 255);
+                    if (RGB == 0)
+                    {
+                        image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)] = 0;
+                        image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1] = 0;
+                    }
+                    else if (RGB == 1)
+                    {
+                        image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)] = 0;
+                        image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2] = 0;
+                    }
+                    else if (RGB == 2)
+                    {
+                        image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1] = 0;
+                        image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2] = 0;
+                    }
                 }
             }
         }
+        public static void MajorityColor(ref BMP image)
+        {
+            if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
+            {
+                int curentByte = image.BfOffBits();
+                for (int i = image.BiHeight(); i > 0; i--)
+                {
+                    for (int j = 0; j < image.BiWidth(); j++)
+                    {
+                        int R = image.byteArray[curentByte++];
+                        int G = image.byteArray[curentByte++];
+                        int B = image.byteArray[curentByte++];
+                        if (R > G && R > B)
+                        {
+                            image.byteArray[curentByte - 2] = 0;
+                            image.byteArray[curentByte - 1] = 0;
+                        }
+                        else if (G > B && G > R)
+                        {
+                            image.byteArray[curentByte] = 0;
+                            image.byteArray[curentByte - 1] = 0;
+                        }
+                        else if (G > B && G > R)
+                        {
+                            image.byteArray[curentByte - 2] = 0;
+                            image.byteArray[curentByte] = 0;
+                        }
+                    }
+                    curentByte += image.ScanlineDoplnek() / 8;
+                }
+
+            }
+            else if (image.BiBitCount() == 1 || image.BiBitCount() == 4 || image.BiBitCount() == 8)
+            {
+                int curentByte = image.BfOffBits();
+                int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
+                for (int i = 0; i < pocetPalet; i++)
+                {
+                    int R = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2];
+                    int G = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1];
+                    int B = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)];
+                    if (R > G && R > B)
+                    {
+                        image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)] = 0;
+                        image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1] = 0;
+                    }
+                    else if (G > B && G > R)
+                    {
+                        image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)] = 0;
+                        image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2] = 0;
+                    }
+                    else if (G > B && G > R)
+                    {
+                        image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1] = 0;
+                        image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2] = 0;
+                    }
+                }
+            }
+        }
+
     }
 }

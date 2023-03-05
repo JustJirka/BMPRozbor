@@ -15,11 +15,11 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace BMPRozbor
 {
-    public partial class Form1 : Form
+    public partial class MainWindow : Form
     {
         BMP Soubor;
         bool imgLoaded = false;
-        public Form1()
+        public MainWindow()
         {
             InitializeComponent();
         }
@@ -89,7 +89,7 @@ namespace BMPRozbor
             {
                 Soubor = new BMP(openFileDialog1.FileName);
                 imgLoaded = true;
-                txtBx_info.Text = "bfType: " + Soubor.BfType() + Environment.NewLine + "bfSize: " + Soubor.BfSize() + Environment.NewLine + "bfOffBits: " + Soubor.BfOffBits() + Environment.NewLine + "biSize: " + Soubor.BiSize() + Environment.NewLine + "biWidth: " + Soubor.BiWidth() + Environment.NewLine + "biHeight: " + Soubor.BiHeight() + Environment.NewLine + "biPlanes: " + Soubor.BiPlanes() + Environment.NewLine + "biBitCount: " + Soubor.BiBitCount() + Environment.NewLine + "biCompression: " + Soubor.BiCompression() + Environment.NewLine + "biSizeImage: " + Soubor.BiSizeImage() + Environment.NewLine + "biXPelsPerMeter: " + Soubor.BiXPelsPerMeter() + Environment.NewLine + "biYPelsPerMeter: " + Soubor.BiYPelsPerMeter() + Environment.NewLine + "biClrUsed: " + Soubor.BiClrUsed() + Environment.NewLine + "biClrImportant: " + Soubor.BiClrImportant();
+                txtBx_Informations.Text = "bfType: " + Soubor.BfType() + Environment.NewLine + "bfSize: " + Soubor.BfSize() + Environment.NewLine + "bfOffBits: " + Soubor.BfOffBits() + Environment.NewLine + "biSize: " + Soubor.BiSize() + Environment.NewLine + "biWidth: " + Soubor.BiWidth() + Environment.NewLine + "biHeight: " + Soubor.BiHeight() + Environment.NewLine + "biPlanes: " + Soubor.BiPlanes() + Environment.NewLine + "biBitCount: " + Soubor.BiBitCount() + Environment.NewLine + "biCompression: " + Soubor.BiCompression() + Environment.NewLine + "biSizeImage: " + Soubor.BiSizeImage() + Environment.NewLine + "biXPelsPerMeter: " + Soubor.BiXPelsPerMeter() + Environment.NewLine + "biYPelsPerMeter: " + Soubor.BiYPelsPerMeter() + Environment.NewLine + "biClrUsed: " + Soubor.BiClrUsed() + Environment.NewLine + "biClrImportant: " + Soubor.BiClrImportant();
                 picBx_hlavni.Refresh();
             }
         }
@@ -157,5 +157,41 @@ namespace BMPRozbor
             }
             picBx_hlavni.Refresh();
         }
-    }
+
+        private void pouzeRToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperaceSBMP.OnlyRGB(ref Soubor, 0);
+            picBx_hlavni.Refresh();
+        }
+
+        private void pouzeGToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperaceSBMP.OnlyRGB(ref Soubor, 1);
+            picBx_hlavni.Refresh();
+        }
+
+        private void pouzeBToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperaceSBMP.OnlyRGB(ref Soubor, 2);
+            picBx_hlavni.Refresh();
+        }
+
+        private void majoritníBarvaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperaceSBMP.MajorityColor(ref Soubor);
+            picBx_hlavni.Refresh();
+        }
+
+        private void vertikálněToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Soubor = OperaceSBMP.Mirror(Soubor);
+            picBx_hlavni.Refresh();
+        }
+
+        private void horizontálněToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Soubor.MirrorHorizontal();
+            picBx_hlavni.Refresh();
+        }
+    } 
 }
