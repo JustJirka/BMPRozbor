@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,7 +15,31 @@ namespace BMPRozbor
     {
         //10.leave color
         //11. Color Exchange
-        //13 rotate RGB
+        //13. rotate RGB
+        //16. Contrast
+        //17. Contrast stretching
+        //18. Spotlight
+        //19. Fill
+        //20. Borders
+        //21. Net
+        //22. Blinds
+        //23. Shift even/odd rows/columns (Posun sudých/lichých řádků/sloupců)
+        //24. Add ghosts
+        //28. Zoom with translation
+        //31. Smoothing
+        //32. Shift and subtract – emboss
+        //33. Color emboss
+        //34. Edge enhancement 
+        //35. Laplace sharpening
+        //36. Prewitt sharpening
+        //37. Sobel sharpening
+        //38. Inverted Laplace sharpening
+        //39. Laplacian of Gaussian
+        //40. Histogram
+        //41. Jitter
+        //42. Scatter
+        //43. Waves
+        //44. Pattern
         public static T[] SubArray<T>(T[] array, int offset, int length)
         {
             T[] result = new T[length];
@@ -59,7 +84,7 @@ namespace BMPRozbor
             }
             return vystup;
         }
-        public static BMP Blur(BMP image, int blurSize)//jenom  24bit bmp 
+        public static void Blur(ref BMP image, int blurSize)//jenom  24bit bmp 
         {
             for (int imageY = 0; imageY < image.BiHeight(); imageY += image.BiHeight() / blurSize)
             {
@@ -98,7 +123,6 @@ namespace BMPRozbor
 
                 }
             }
-            return image;
         }
         public static BMP Mirror(BMP image)
         {
@@ -500,6 +524,79 @@ namespace BMPRozbor
                 }
             }
         }
-
+        public static void ChangeBrightness(ref BMP image, int brightnessModifier)
+        {
+            if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
+            {
+                int curentByte = image.BfOffBits();
+                for (int i = image.BiHeight(); i > 0; i--)
+                {
+                    for (int j = 0; j < image.BiWidth(); j++)
+                    {
+                        for (int k = 0; k < 3; k++)
+                        {
+                            int newColor = image.byteArray[curentByte] + brightnessModifier;
+                            if (newColor > 255) newColor = 255;
+                            else if (newColor < 0) newColor = 0;
+                            image.byteArray[curentByte] = (byte)newColor;
+                            curentByte++;
+                        }
+                    }
+                    curentByte += image.ScanlineDoplnek() / 8;
+                }
+            }
+            else if (image.BiBitCount() == 1 || image.BiBitCount() == 4 || image.BiBitCount() == 8)
+            {
+                int curentByte = image.BfOffBits();
+                int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
+                for (int i = 0; i < pocetPalet; i++)
+                {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        int newColor = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + k] + brightnessModifier;
+                        if (newColor > 255) newColor = 255;
+                        else if (newColor < 0) newColor = 0;
+                        image.byteArray[curentByte] = (byte)newColor;
+                    }
+                }
+            }
+        }
+        public static void ChangeContrast(ref BMP image, decimal brightnessModifier)
+        {
+            if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
+            {
+                int curentByte = image.BfOffBits();
+                for (int i = image.BiHeight(); i > 0; i--)
+                {
+                    for (int j = 0; j < image.BiWidth(); j++)
+                    {
+                        for (int k = 0; k < 3; k++)
+                        {
+                            int newColor = (int)((image.byteArray[curentByte]-127)* brightnessModifier);
+                            if (newColor > 255) newColor = 255;
+                            else if (newColor < 0) newColor = 0;
+                            image.byteArray[curentByte] = (byte)newColor;
+                            curentByte++;
+                        }
+                    }
+                    curentByte += image.ScanlineDoplnek() / 8;
+                }
+            }
+            else if (image.BiBitCount() == 1 || image.BiBitCount() == 4 || image.BiBitCount() == 8)
+            {
+                int curentByte = image.BfOffBits();
+                int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
+                for (int i = 0; i < pocetPalet; i++)
+                {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        int newColor = (int)((image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + k] - 127) * brightnessModifier);
+                        if (newColor > 255) newColor = 255;
+                        else if (newColor < 0) newColor = 0;
+                        image.byteArray[curentByte] = (byte)newColor;
+                    }
+                }
+            }
+        }
     }
 }

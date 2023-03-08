@@ -18,6 +18,7 @@ namespace BMPRozbor
     public partial class MainWindow : Form
     {
         BMP Soubor;
+        int uprava = -1;
         bool imgLoaded = false;
         public MainWindow()
         {
@@ -25,7 +26,7 @@ namespace BMPRozbor
         }
 
         private void btn_openFile_Click(object sender, EventArgs e)
-        { 
+        {
         }
 
         private void picBx_hlavni_Paint(object sender, PaintEventArgs e)
@@ -73,11 +74,6 @@ namespace BMPRozbor
             picBx_hlavni.Refresh();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-           Soubor = OperaceSBMP.Blur(Soubor,(int)nUpDo_Blur.Value);
-           picBx_hlavni.Refresh();
-        }
 
         private void btn_Grayscale_Click(object sender, EventArgs e)
         {
@@ -126,10 +122,16 @@ namespace BMPRozbor
             picBx_hlavni.Refresh();
         }
 
-        private void prádhToolStripMenuItem_Click(object sender, EventArgs e)//přidat možnost nastavit threshold
+        private void prádhToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperaceSBMP.GrayscaleThreshold(ref Soubor,125);
-            picBx_hlavni.Refresh();
+            lbl_specific1.Text = "Zadejte práh:";
+            uprava = 2;//rozmazani
+            TbCont_RightTabs.SelectedIndex = 1;
+            tabPage2.Text = "Práh";
+            nuUpDo_specific1.Maximum = 255;
+            nuUpDo_specific1.Minimum = 0;
+            nuUpDo_specific1.Increment = 1;
+            nuUpDo_specific1.Value = 125;
         }
 
         private void sépieToolStripMenuItem_Click(object sender, EventArgs e)
@@ -193,5 +195,61 @@ namespace BMPRozbor
             Soubor.MirrorHorizontal();
             picBx_hlavni.Refresh();
         }
-    } 
+
+        private void rozmazáníToolStripMenuItem_Click(object sender, EventArgs e)//pridat nastavení maximální velikosti
+        {
+            lbl_specific1.Text = "Zadejte úroveň rozmazání:";
+            uprava = 1;//rozmazani
+            tabPage2.Text = "Rozmazání";
+            TbCont_RightTabs.SelectedIndex = 1;
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            if (uprava == 1)
+            {
+                OperaceSBMP.Blur(ref Soubor, (int)nuUpDo_specific1.Value);
+                picBx_hlavni.Refresh();
+            }
+            else if (uprava == 2)
+            {
+                OperaceSBMP.GrayscaleThreshold(ref Soubor, (int)nuUpDo_specific1.Value);
+                picBx_hlavni.Refresh();
+            }
+            else if (uprava == 3)
+            {
+                OperaceSBMP.ChangeBrightness(ref Soubor, (int)nuUpDo_specific1.Value);
+                picBx_hlavni.Refresh();
+            }
+            else if (uprava == 4)
+            {
+                OperaceSBMP.ChangeContrast(ref Soubor, nuUpDo_specific1.Value);
+                picBx_hlavni.Refresh();
+            }
+        }
+
+        private void úpravaJasuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lbl_specific1.Text = "Zadejte modifikátor Jasu";
+            uprava = 3;//jas
+            tabPage2.Text = "Jas";
+            nuUpDo_specific1.Maximum = 255;
+            nuUpDo_specific1.Minimum = -255;
+            nuUpDo_specific1.Value = 0;
+            nuUpDo_specific1.Increment = 1;
+            TbCont_RightTabs.SelectedIndex = 1;
+        }
+
+        private void úpravaKontrastuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lbl_specific1.Text = "Zadejte modifikátor Jasu";
+            uprava = 4;//kontrast
+            tabPage2.Text = "Kontrast";
+            nuUpDo_specific1.Maximum = 255;
+            nuUpDo_specific1.Minimum = 0;
+            nuUpDo_specific1.Increment = 0.01m;
+            nuUpDo_specific1.Value = 0;
+            TbCont_RightTabs.SelectedIndex = 1;
+        }
+    }
 }
