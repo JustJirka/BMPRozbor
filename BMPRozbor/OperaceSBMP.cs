@@ -16,14 +16,11 @@ namespace BMPRozbor
         //10.leave color
         //11. Color Exchange
         //13. rotate RGB
-        //16. Contrast
         //17. Contrast stretching
         //18. Spotlight
         //19. Fill
-        //20. Borders
         //21. Net
         //22. Blinds
-        //23. Shift even/odd rows/columns (Posun sudých/lichých řádků/sloupců)
         //24. Add ghosts
         //28. Zoom with translation
         //31. Smoothing
@@ -572,7 +569,7 @@ namespace BMPRozbor
                     {
                         for (int k = 0; k < 3; k++)
                         {
-                            int newColor = (int)((image.byteArray[curentByte]-127)* brightnessModifier);
+                            int newColor = (int)((image.byteArray[curentByte] - 127) * brightnessModifier);
                             if (newColor > 255) newColor = 255;
                             else if (newColor < 0) newColor = 0;
                             image.byteArray[curentByte] = (byte)newColor;
@@ -595,6 +592,42 @@ namespace BMPRozbor
                         else if (newColor < 0) newColor = 0;
                         image.byteArray[curentByte] = (byte)newColor;
                     }
+                }
+            }
+        }
+        public static void ShiftRow(ref BMP image, int shiftValue, int rowNumber)
+        {
+            byte[] orignalArray = new byte[image.byteArray.Length];
+            Array.Copy(image.byteArray, orignalArray, image.byteArray.Length);
+            BMP originalImage = new BMP(orignalArray);
+            for (int y = rowNumber; y < image.BiHeight(); y += 2)
+            {
+                int shiftedIndex = shiftValue;
+                for (int x = 0; x < image.BiWidth(); x++)
+                {
+                    if (shiftedIndex < 0) shiftedIndex += image.BiWidth();
+                    else if (shiftedIndex >= image.BiWidth()) shiftedIndex -= image.BiWidth();
+                    int[] value = originalImage.GetPixelAtPosition(shiftedIndex, y);
+                    image.SetPixelAtPosition(x, y, value);
+                    shiftedIndex++;
+                }
+            }
+        }
+        public static void ShiftColumn(ref BMP image, int shiftValue, int Column)
+        {
+            byte[] orignalArray = new byte[image.byteArray.Length];
+            Array.Copy(image.byteArray, orignalArray, image.byteArray.Length);
+            BMP originalImage = new BMP(orignalArray);
+            for (int x = Column; x < image.BiWidth(); x += 2)
+            {
+                int shiftedIndex = shiftValue;
+                for (int y = 0; y < image.BiHeight(); y++)
+                {
+                    if (shiftedIndex < 0) shiftedIndex += image.BiWidth();
+                    else if (shiftedIndex >= image.BiWidth()) shiftedIndex -= image.BiWidth();
+                    int[] value = originalImage.GetPixelAtPosition(x, shiftedIndex);
+                    image.SetPixelAtPosition(x, y, value);
+                    shiftedIndex++;
                 }
             }
         }

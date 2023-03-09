@@ -42,43 +42,6 @@ namespace BMPRozbor
             picBx_hlavni.Refresh();
         }
 
-        private void btn_SaveFile_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn_Invert_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btn_90Left_Click(object sender, EventArgs e)
-        {
-            Soubor.Rotate90Right();
-            picBx_hlavni.Refresh();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn__Click(object sender, EventArgs e)
-        {
-            Soubor = OperaceSBMP.Mirror(Soubor);
-            picBx_hlavni.Refresh();
-        }
-
-        private void bnt_Flip_Click(object sender, EventArgs e)
-        {
-            Soubor.MirrorHorizontal();
-            picBx_hlavni.Refresh();
-        }
-
-
-        private void btn_Grayscale_Click(object sender, EventArgs e)
-        {
-        }
-
         private void otevřítSouborToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -92,10 +55,7 @@ namespace BMPRozbor
 
         private void uložitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                Soubor.SaveFile(saveFileDialog1.FileName);
-            }
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK) Soubor.SaveFile(saveFileDialog1.FileName);
         }
 
         private void inverzeBarevToolStripMenuItem_Click(object sender, EventArgs e)
@@ -131,6 +91,7 @@ namespace BMPRozbor
             nuUpDo_specific1.Maximum = 255;
             nuUpDo_specific1.Minimum = 0;
             nuUpDo_specific1.Increment = 1;
+            nuUpDo_specific1.DecimalPlaces = 0;
             nuUpDo_specific1.Value = 125;
         }
 
@@ -143,20 +104,14 @@ namespace BMPRozbor
         private void odstínVybranéBarvyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             colorDialog1.FullOpen = true;
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                OperaceSBMP.OneColorShades(ref Soubor, colorDialog1.Color);
-            }
+            if (colorDialog1.ShowDialog() == DialogResult.OK) OperaceSBMP.OneColorShades(ref Soubor, colorDialog1.Color);
             picBx_hlavni.Refresh();
         }
 
         private void photoFiltrToolStripMenuItem_Click(object sender, EventArgs e)
         {
             colorDialog1.FullOpen = true;
-            if (colorDialog1.ShowDialog() == DialogResult.OK)
-            {
-                OperaceSBMP.PhotoFiltr(ref Soubor, colorDialog1.Color);
-            }
+            if (colorDialog1.ShowDialog() == DialogResult.OK) OperaceSBMP.PhotoFiltr(ref Soubor, colorDialog1.Color);
             picBx_hlavni.Refresh();
         }
 
@@ -206,26 +161,15 @@ namespace BMPRozbor
 
         private void button1_Click_2(object sender, EventArgs e)
         {
-            if (uprava == 1)
-            {
-                OperaceSBMP.Blur(ref Soubor, (int)nuUpDo_specific1.Value);
-                picBx_hlavni.Refresh();
-            }
-            else if (uprava == 2)
-            {
-                OperaceSBMP.GrayscaleThreshold(ref Soubor, (int)nuUpDo_specific1.Value);
-                picBx_hlavni.Refresh();
-            }
-            else if (uprava == 3)
-            {
-                OperaceSBMP.ChangeBrightness(ref Soubor, (int)nuUpDo_specific1.Value);
-                picBx_hlavni.Refresh();
-            }
-            else if (uprava == 4)
-            {
-                OperaceSBMP.ChangeContrast(ref Soubor, nuUpDo_specific1.Value);
-                picBx_hlavni.Refresh();
-            }
+            if (uprava == 1) OperaceSBMP.Blur(ref Soubor, (int)nuUpDo_specific1.Value);
+            else if (uprava == 2) OperaceSBMP.GrayscaleThreshold(ref Soubor, (int)nuUpDo_specific1.Value);
+            else if (uprava == 3) OperaceSBMP.ChangeBrightness(ref Soubor, (int)nuUpDo_specific1.Value);
+            else if (uprava == 4) OperaceSBMP.ChangeContrast(ref Soubor, nuUpDo_specific1.Value);
+            else if (uprava == 5) OperaceSBMP.ShiftRow(ref Soubor, (int)nuUpDo_specific1.Value,0);
+            else if (uprava == 6) OperaceSBMP.ShiftRow(ref Soubor, (int)nuUpDo_specific1.Value, 1);
+            else if (uprava == 7) OperaceSBMP.ShiftColumn(ref Soubor, (int)nuUpDo_specific1.Value, 0);
+            else if (uprava == 8) OperaceSBMP.ShiftColumn(ref Soubor, (int)nuUpDo_specific1.Value, 1);
+            picBx_hlavni.Refresh();
         }
 
         private void úpravaJasuToolStripMenuItem_Click(object sender, EventArgs e)
@@ -237,6 +181,7 @@ namespace BMPRozbor
             nuUpDo_specific1.Minimum = -255;
             nuUpDo_specific1.Value = 0;
             nuUpDo_specific1.Increment = 1;
+            nuUpDo_specific1.DecimalPlaces = 0;
             TbCont_RightTabs.SelectedIndex = 1;
         }
 
@@ -249,6 +194,60 @@ namespace BMPRozbor
             nuUpDo_specific1.Minimum = 0;
             nuUpDo_specific1.Increment = 0.01m;
             nuUpDo_specific1.Value = 0;
+            nuUpDo_specific1.DecimalPlaces = 2;
+            TbCont_RightTabs.SelectedIndex = 1;
+        }
+
+        private void posunSudýchŘádkůToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lbl_specific1.Text = "Zadejte posun řádku";
+            uprava = 5;//
+            tabPage2.Text = "Posun";
+            nuUpDo_specific1.Maximum = Soubor.BiWidth();
+            nuUpDo_specific1.Minimum = 0- Soubor.BiWidth();
+            nuUpDo_specific1.Increment =1;
+            nuUpDo_specific1.Value = 0;
+            nuUpDo_specific1.DecimalPlaces = 0;
+            TbCont_RightTabs.SelectedIndex = 1;
+        }
+
+        private void posunLichýchSloupcůToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            lbl_specific1.Text = "Zadejte posun řádku";
+            uprava = 6;//
+            tabPage2.Text = "Posun";
+            nuUpDo_specific1.Maximum = Soubor.BiWidth();
+            nuUpDo_specific1.Minimum = 0 - Soubor.BiWidth();
+            nuUpDo_specific1.Increment = 1;
+            nuUpDo_specific1.Value = 0;
+            nuUpDo_specific1.DecimalPlaces = 0;
+            TbCont_RightTabs.SelectedIndex = 1;
+        }
+
+        private void posunSudýchSloupcůToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lbl_specific1.Text = "Zadejte posun sloupce";
+            uprava = 7;//
+            tabPage2.Text = "Posun";
+            nuUpDo_specific1.Maximum = Soubor.BiHeight();
+            nuUpDo_specific1.Minimum = 0 - Soubor.BiHeight();
+            nuUpDo_specific1.Increment = 1;
+            nuUpDo_specific1.Value = 0;
+            nuUpDo_specific1.DecimalPlaces = 0;
+            TbCont_RightTabs.SelectedIndex = 1;
+
+        }
+
+        private void posunLichýchSloupcůToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lbl_specific1.Text = "Zadejte posun sloupce";
+            uprava = 8;//
+            tabPage2.Text = "Posun";
+            nuUpDo_specific1.Maximum = Soubor.BiHeight();
+            nuUpDo_specific1.Minimum = 0 - Soubor.BiHeight();
+            nuUpDo_specific1.Increment = 1;
+            nuUpDo_specific1.Value = 0;
+            nuUpDo_specific1.DecimalPlaces = 0;
             TbCont_RightTabs.SelectedIndex = 1;
         }
     }
