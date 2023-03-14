@@ -180,7 +180,7 @@ namespace BMPRozbor
                     }
                 }
             }
-            else if (BiBitCount() == 16 || BiBitCount() == 24 || BiBitCount() == 32)
+            else if (BiBitCount() == 24)
             {
                 int curentByte = BfOffBits();
                 for (int i = BiHeight(); i > 0; i--)
@@ -237,54 +237,6 @@ namespace BMPRozbor
             RotatedbyteArray[24] = byteArray[20];
             RotatedbyteArray[25] = byteArray[21];*/
             return RotatedbyteArray;
-        }
-        public void Rotate90Right()
-        {
-            if (BiBitCount() == 1 || BiBitCount() == 2 || BiBitCount() == 4 || BiBitCount() == 8)
-            {/*
-                int curentByte = BfOffBits();
-                for (int i = BiHeight(); i > 0; i--)
-                {
-                    for (int j = 0; j < BiWidth();)
-                    {
-                        string hodnoty = OperaceSBMP.IntToBinary(byteArray[curentByte]);
-                        for (int k = 0; k < 8; k += BiBitCount())
-                        {
-                            int indexPalety = 0;
-                            if (BiBitCount() == 1) indexPalety = (int)(hodnoty[k]) - 48;
-                            else if (BiBitCount() == 2) indexPalety = ((int)(hodnoty[k]) - 48) * 2 + ((int)(hodnoty[k + 1]) - 48);
-                            else if (BiBitCount() == 4) indexPalety = ((int)(hodnoty[k]) - 48) * 8 + ((int)(hodnoty[k + 1]) - 48) * 4 + ((int)(hodnoty[k + 2]) - 48) * 2 + ((int)(hodnoty[k + 3]) - 48);
-                            else if (BiBitCount() == 8) indexPalety = byteArray[curentByte];
-                            g.FillRectangle(paleta[indexPalety], j * imageScale, i * imageScale, imageScale, imageScale);
-                            j++;
-                            if (j > BiWidth() - 1)
-                            {
-                                curentByte += ScanlineDoplnek() / 8;
-                                break;
-                            }
-                        }
-                        curentByte++;
-                    }
-                }*/
-            }
-            else if (BiBitCount() == 16 || BiBitCount() == 24 || BiBitCount() == 32)
-            {
-                byte[] RotatedbyteArray = GenerateRotatedByteArrayHeader();
-                int curentByte = BfOffBits();
-                for (int i = BiHeight(); i > 0; i--)
-                {
-                    for (int j = 0; j < BiWidth(); j++)
-                    {
-                        RotatedbyteArray[curentByte] = byteArray[BfOffBits() + i + j * (BiWidth() + ScanlineDoplnek() / 8)];
-                        RotatedbyteArray[curentByte + 1] = byteArray[BfOffBits() + i + j * (BiWidth() + ScanlineDoplnek() / 8) + 1];
-                        RotatedbyteArray[curentByte + 2] = byteArray[BfOffBits() + i + j * (BiWidth() + ScanlineDoplnek() / 8) + 2];
-                        //RotatedbyteArray[curentByte + 3] = byteArray[BfOffBits() + i + j * (BiWidth() + ScanlineDoplnek()/8) + 3];
-                        curentByte += 3;
-                    }
-                    curentByte += RotatedScanlineDoplnek() / 8;
-                }
-                byteArray = RotatedbyteArray;
-            }
         }
         public void MirrorHorizontal()
         {

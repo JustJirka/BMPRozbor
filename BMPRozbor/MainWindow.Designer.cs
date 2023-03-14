@@ -54,6 +54,14 @@
             this.filtryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.photoFiltrToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rozmazáníToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.posunSloupcůřádkůToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.posunSloupcůToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.posunSudýchSloupcůToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.posunLichýchSloupcůToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.posunŘádkůToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.posunSudýchŘádkůToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.posunLichýchSloupcůToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.použíKonvelčníMaticiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.úpravyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.zrcadlitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vertikálněToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,13 +76,12 @@
             this.nuUpDo_specific1 = new System.Windows.Forms.NumericUpDown();
             this.lbl_specific1 = new System.Windows.Forms.Label();
             this.btn_OK = new System.Windows.Forms.Button();
-            this.posunSloupcůřádkůToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.posunSloupcůToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.posunSudýchSloupcůToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.posunLichýchSloupcůToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.posunŘádkůToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.posunSudýchŘádkůToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.posunLichýchSloupcůToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.konvertovatNaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.konvertovatNa1BitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.konvertovatNa4BitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.konvertovatNa8BitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.konvertovatNa24BitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.otočitOÚhelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.picBx_hlavni)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuUpDo_imageScale)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -159,7 +166,8 @@
             // 
             this.souborToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.otevřítSouborToolStripMenuItem,
-            this.uložitToolStripMenuItem});
+            this.uložitToolStripMenuItem,
+            this.konvertovatNaToolStripMenuItem});
             this.souborToolStripMenuItem.Name = "souborToolStripMenuItem";
             this.souborToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.souborToolStripMenuItem.Text = "Soubor";
@@ -167,14 +175,14 @@
             // otevřítSouborToolStripMenuItem
             // 
             this.otevřítSouborToolStripMenuItem.Name = "otevřítSouborToolStripMenuItem";
-            this.otevřítSouborToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.otevřítSouborToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.otevřítSouborToolStripMenuItem.Text = "Otevřít";
             this.otevřítSouborToolStripMenuItem.Click += new System.EventHandler(this.otevřítSouborToolStripMenuItem_Click);
             // 
             // uložitToolStripMenuItem
             // 
             this.uložitToolStripMenuItem.Name = "uložitToolStripMenuItem";
-            this.uložitToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.uložitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.uložitToolStripMenuItem.Text = "Uložit ";
             this.uložitToolStripMenuItem.Click += new System.EventHandler(this.uložitToolStripMenuItem_Click);
             // 
@@ -294,7 +302,8 @@
             this.filtryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.photoFiltrToolStripMenuItem,
             this.rozmazáníToolStripMenuItem,
-            this.posunSloupcůřádkůToolStripMenuItem});
+            this.posunSloupcůřádkůToolStripMenuItem,
+            this.použíKonvelčníMaticiToolStripMenuItem});
             this.filtryToolStripMenuItem.Name = "filtryToolStripMenuItem";
             this.filtryToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.filtryToolStripMenuItem.Text = "Filtry";
@@ -302,23 +311,86 @@
             // photoFiltrToolStripMenuItem
             // 
             this.photoFiltrToolStripMenuItem.Name = "photoFiltrToolStripMenuItem";
-            this.photoFiltrToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.photoFiltrToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.photoFiltrToolStripMenuItem.Text = "Photo filtr";
             this.photoFiltrToolStripMenuItem.Click += new System.EventHandler(this.photoFiltrToolStripMenuItem_Click);
             // 
             // rozmazáníToolStripMenuItem
             // 
             this.rozmazáníToolStripMenuItem.Name = "rozmazáníToolStripMenuItem";
-            this.rozmazáníToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.rozmazáníToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.rozmazáníToolStripMenuItem.Text = "Rozmazání";
             this.rozmazáníToolStripMenuItem.Click += new System.EventHandler(this.rozmazáníToolStripMenuItem_Click);
+            // 
+            // posunSloupcůřádkůToolStripMenuItem
+            // 
+            this.posunSloupcůřádkůToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.posunSloupcůToolStripMenuItem,
+            this.posunŘádkůToolStripMenuItem});
+            this.posunSloupcůřádkůToolStripMenuItem.Name = "posunSloupcůřádkůToolStripMenuItem";
+            this.posunSloupcůřádkůToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.posunSloupcůřádkůToolStripMenuItem.Text = "Posun sloupců/řádků";
+            // 
+            // posunSloupcůToolStripMenuItem
+            // 
+            this.posunSloupcůToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.posunSudýchSloupcůToolStripMenuItem,
+            this.posunLichýchSloupcůToolStripMenuItem});
+            this.posunSloupcůToolStripMenuItem.Name = "posunSloupcůToolStripMenuItem";
+            this.posunSloupcůToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.posunSloupcůToolStripMenuItem.Text = "Posun sloupců";
+            // 
+            // posunSudýchSloupcůToolStripMenuItem
+            // 
+            this.posunSudýchSloupcůToolStripMenuItem.Name = "posunSudýchSloupcůToolStripMenuItem";
+            this.posunSudýchSloupcůToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.posunSudýchSloupcůToolStripMenuItem.Text = "Posun sudých sloupců";
+            this.posunSudýchSloupcůToolStripMenuItem.Click += new System.EventHandler(this.posunSudýchSloupcůToolStripMenuItem_Click);
+            // 
+            // posunLichýchSloupcůToolStripMenuItem
+            // 
+            this.posunLichýchSloupcůToolStripMenuItem.Name = "posunLichýchSloupcůToolStripMenuItem";
+            this.posunLichýchSloupcůToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.posunLichýchSloupcůToolStripMenuItem.Text = "Posun lichých sloupců";
+            this.posunLichýchSloupcůToolStripMenuItem.Click += new System.EventHandler(this.posunLichýchSloupcůToolStripMenuItem_Click);
+            // 
+            // posunŘádkůToolStripMenuItem
+            // 
+            this.posunŘádkůToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.posunSudýchŘádkůToolStripMenuItem,
+            this.posunLichýchSloupcůToolStripMenuItem1});
+            this.posunŘádkůToolStripMenuItem.Name = "posunŘádkůToolStripMenuItem";
+            this.posunŘádkůToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.posunŘádkůToolStripMenuItem.Text = "Posun řádků";
+            // 
+            // posunSudýchŘádkůToolStripMenuItem
+            // 
+            this.posunSudýchŘádkůToolStripMenuItem.Name = "posunSudýchŘádkůToolStripMenuItem";
+            this.posunSudýchŘádkůToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.posunSudýchŘádkůToolStripMenuItem.Text = "Posun sudých řádků";
+            this.posunSudýchŘádkůToolStripMenuItem.Click += new System.EventHandler(this.posunSudýchŘádkůToolStripMenuItem_Click);
+            // 
+            // posunLichýchSloupcůToolStripMenuItem1
+            // 
+            this.posunLichýchSloupcůToolStripMenuItem1.Name = "posunLichýchSloupcůToolStripMenuItem1";
+            this.posunLichýchSloupcůToolStripMenuItem1.Size = new System.Drawing.Size(193, 22);
+            this.posunLichýchSloupcůToolStripMenuItem1.Text = "Posun lichých sloupců";
+            this.posunLichýchSloupcůToolStripMenuItem1.Click += new System.EventHandler(this.posunLichýchSloupcůToolStripMenuItem1_Click);
+            // 
+            // použíKonvelčníMaticiToolStripMenuItem
+            // 
+            this.použíKonvelčníMaticiToolStripMenuItem.Name = "použíKonvelčníMaticiToolStripMenuItem";
+            this.použíKonvelčníMaticiToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.použíKonvelčníMaticiToolStripMenuItem.Text = "Použí Konvelční matici";
+            this.použíKonvelčníMaticiToolStripMenuItem.Click += new System.EventHandler(this.použíKonvelčníMaticiToolStripMenuItem_Click);
             // 
             // úpravyToolStripMenuItem1
             // 
             this.úpravyToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.zrcadlitToolStripMenuItem,
             this.úpravaJasuToolStripMenuItem,
-            this.úpravaKontrastuToolStripMenuItem});
+            this.úpravaKontrastuToolStripMenuItem,
+            this.otočitOÚhelToolStripMenuItem});
             this.úpravyToolStripMenuItem1.Name = "úpravyToolStripMenuItem1";
             this.úpravyToolStripMenuItem1.Size = new System.Drawing.Size(56, 20);
             this.úpravyToolStripMenuItem1.Text = "Úpravy";
@@ -329,7 +401,7 @@
             this.vertikálněToolStripMenuItem,
             this.horizontálněToolStripMenuItem});
             this.zrcadlitToolStripMenuItem.Name = "zrcadlitToolStripMenuItem";
-            this.zrcadlitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zrcadlitToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.zrcadlitToolStripMenuItem.Text = "Zrcadlit";
             // 
             // vertikálněToolStripMenuItem
@@ -349,14 +421,14 @@
             // úpravaJasuToolStripMenuItem
             // 
             this.úpravaJasuToolStripMenuItem.Name = "úpravaJasuToolStripMenuItem";
-            this.úpravaJasuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.úpravaJasuToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.úpravaJasuToolStripMenuItem.Text = "Úprava Jasu";
             this.úpravaJasuToolStripMenuItem.Click += new System.EventHandler(this.úpravaJasuToolStripMenuItem_Click);
             // 
             // úpravaKontrastuToolStripMenuItem
             // 
             this.úpravaKontrastuToolStripMenuItem.Name = "úpravaKontrastuToolStripMenuItem";
-            this.úpravaKontrastuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.úpravaKontrastuToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.úpravaKontrastuToolStripMenuItem.Text = "Úprava Kontrastu";
             this.úpravaKontrastuToolStripMenuItem.Click += new System.EventHandler(this.úpravaKontrastuToolStripMenuItem_Click);
             // 
@@ -432,60 +504,48 @@
             this.btn_OK.UseVisualStyleBackColor = true;
             this.btn_OK.Click += new System.EventHandler(this.button1_Click_2);
             // 
-            // posunSloupcůřádkůToolStripMenuItem
+            // konvertovatNaToolStripMenuItem
             // 
-            this.posunSloupcůřádkůToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.posunSloupcůToolStripMenuItem,
-            this.posunŘádkůToolStripMenuItem});
-            this.posunSloupcůřádkůToolStripMenuItem.Name = "posunSloupcůřádkůToolStripMenuItem";
-            this.posunSloupcůřádkůToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.posunSloupcůřádkůToolStripMenuItem.Text = "Posun sloupců/řádků";
+            this.konvertovatNaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.konvertovatNa1BitToolStripMenuItem,
+            this.konvertovatNa4BitToolStripMenuItem,
+            this.konvertovatNa8BitToolStripMenuItem,
+            this.konvertovatNa24BitToolStripMenuItem});
+            this.konvertovatNaToolStripMenuItem.Name = "konvertovatNaToolStripMenuItem";
+            this.konvertovatNaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.konvertovatNaToolStripMenuItem.Text = "Konvertovat na";
             // 
-            // posunSloupcůToolStripMenuItem
+            // konvertovatNa1BitToolStripMenuItem
             // 
-            this.posunSloupcůToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.posunSudýchSloupcůToolStripMenuItem,
-            this.posunLichýchSloupcůToolStripMenuItem});
-            this.posunSloupcůToolStripMenuItem.Name = "posunSloupcůToolStripMenuItem";
-            this.posunSloupcůToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.posunSloupcůToolStripMenuItem.Text = "Posun sloupců";
+            this.konvertovatNa1BitToolStripMenuItem.Name = "konvertovatNa1BitToolStripMenuItem";
+            this.konvertovatNa1BitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.konvertovatNa1BitToolStripMenuItem.Text = "Konvertovat na 1 bit";
+            this.konvertovatNa1BitToolStripMenuItem.Click += new System.EventHandler(this.konvertovatNa1BitToolStripMenuItem_Click);
             // 
-            // posunSudýchSloupcůToolStripMenuItem
+            // konvertovatNa4BitToolStripMenuItem
             // 
-            this.posunSudýchSloupcůToolStripMenuItem.Name = "posunSudýchSloupcůToolStripMenuItem";
-            this.posunSudýchSloupcůToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.posunSudýchSloupcůToolStripMenuItem.Text = "Posun sudých sloupců";
-            this.posunSudýchSloupcůToolStripMenuItem.Click += new System.EventHandler(this.posunSudýchSloupcůToolStripMenuItem_Click);
+            this.konvertovatNa4BitToolStripMenuItem.Name = "konvertovatNa4BitToolStripMenuItem";
+            this.konvertovatNa4BitToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.konvertovatNa4BitToolStripMenuItem.Text = "Konvertovat na 4 bit";
             // 
-            // posunLichýchSloupcůToolStripMenuItem
+            // konvertovatNa8BitToolStripMenuItem
             // 
-            this.posunLichýchSloupcůToolStripMenuItem.Name = "posunLichýchSloupcůToolStripMenuItem";
-            this.posunLichýchSloupcůToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.posunLichýchSloupcůToolStripMenuItem.Text = "Posun lichých sloupců";
-            this.posunLichýchSloupcůToolStripMenuItem.Click += new System.EventHandler(this.posunLichýchSloupcůToolStripMenuItem_Click);
+            this.konvertovatNa8BitToolStripMenuItem.Name = "konvertovatNa8BitToolStripMenuItem";
+            this.konvertovatNa8BitToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.konvertovatNa8BitToolStripMenuItem.Text = "Konvertovat na 8 bit";
             // 
-            // posunŘádkůToolStripMenuItem
+            // konvertovatNa24BitToolStripMenuItem
             // 
-            this.posunŘádkůToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.posunSudýchŘádkůToolStripMenuItem,
-            this.posunLichýchSloupcůToolStripMenuItem1});
-            this.posunŘádkůToolStripMenuItem.Name = "posunŘádkůToolStripMenuItem";
-            this.posunŘádkůToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.posunŘádkůToolStripMenuItem.Text = "Posun řádků";
+            this.konvertovatNa24BitToolStripMenuItem.Name = "konvertovatNa24BitToolStripMenuItem";
+            this.konvertovatNa24BitToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.konvertovatNa24BitToolStripMenuItem.Text = "Konvertovat na 24 bit";
             // 
-            // posunSudýchŘádkůToolStripMenuItem
+            // otočitOÚhelToolStripMenuItem
             // 
-            this.posunSudýchŘádkůToolStripMenuItem.Name = "posunSudýchŘádkůToolStripMenuItem";
-            this.posunSudýchŘádkůToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.posunSudýchŘádkůToolStripMenuItem.Text = "Posun sudých řádků";
-            this.posunSudýchŘádkůToolStripMenuItem.Click += new System.EventHandler(this.posunSudýchŘádkůToolStripMenuItem_Click);
-            // 
-            // posunLichýchSloupcůToolStripMenuItem1
-            // 
-            this.posunLichýchSloupcůToolStripMenuItem1.Name = "posunLichýchSloupcůToolStripMenuItem1";
-            this.posunLichýchSloupcůToolStripMenuItem1.Size = new System.Drawing.Size(193, 22);
-            this.posunLichýchSloupcůToolStripMenuItem1.Text = "Posun lichých sloupců";
-            this.posunLichýchSloupcůToolStripMenuItem1.Click += new System.EventHandler(this.posunLichýchSloupcůToolStripMenuItem1_Click);
+            this.otočitOÚhelToolStripMenuItem.Name = "otočitOÚhelToolStripMenuItem";
+            this.otočitOÚhelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.otočitOÚhelToolStripMenuItem.Text = "Otočit o úhel";
+            this.otočitOÚhelToolStripMenuItem.Click += new System.EventHandler(this.otočitOÚhelToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -563,6 +623,13 @@
         private System.Windows.Forms.ToolStripMenuItem posunŘádkůToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem posunSudýchŘádkůToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem posunLichýchSloupcůToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem použíKonvelčníMaticiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem konvertovatNaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem konvertovatNa1BitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem konvertovatNa4BitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem konvertovatNa8BitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem konvertovatNa24BitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem otočitOÚhelToolStripMenuItem;
     }
 }
 

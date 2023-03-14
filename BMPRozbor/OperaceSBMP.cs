@@ -185,7 +185,6 @@ namespace BMPRozbor
             }
             else if (image.BiBitCount() == 1 || image.BiBitCount() == 4 || image.BiBitCount() == 8)
             {
-                int curentByte = image.BfOffBits();
                 int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
                 for (int i = 0; i < pocetPalet; i++)
                 {
@@ -218,7 +217,6 @@ namespace BMPRozbor
             }
             else if (image.BiBitCount() == 1 || image.BiBitCount() == 4 || image.BiBitCount() == 8)
             {
-                int curentByte = image.BfOffBits();
                 int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
                 for (int i = 0; i < pocetPalet; i++)
                 {
@@ -289,7 +287,6 @@ namespace BMPRozbor
             }
             else if (image.BiBitCount() == 1 || image.BiBitCount() == 4 || image.BiBitCount() == 8)
             {
-                int curentByte = image.BfOffBits();
                 int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
                 for (int i = 0; i < pocetPalet; i++)
                 {
@@ -327,7 +324,6 @@ namespace BMPRozbor
             }
             else if (image.BiBitCount() == 1 || image.BiBitCount() == 4 || image.BiBitCount() == 8)
             {
-                int curentByte = image.BfOffBits();
                 int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
                 for (int i = 0; i < pocetPalet; i++)
                 {
@@ -364,7 +360,6 @@ namespace BMPRozbor
             }
             else if (image.BiBitCount() == 1 || image.BiBitCount() == 4 || image.BiBitCount() == 8)
             {
-                int curentByte = image.BfOffBits();
                 int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
                 for (int i = 0; i < pocetPalet; i++)
                 {
@@ -384,7 +379,6 @@ namespace BMPRozbor
                 {
                     for (int j = 0; j < image.BiWidth(); j++)
                     {
-                        int empir = (299 * image.byteArray[curentByte + 2] + 587 * image.byteArray[curentByte + 1] + 114 * image.byteArray[curentByte]) / 1000;
                         image.byteArray[curentByte++] = (byte)((image.byteArray[curentByte] * selectedColor.B) / 255);
                         image.byteArray[curentByte++] = (byte)((image.byteArray[curentByte] * selectedColor.G) / 255);
                         image.byteArray[curentByte++] = (byte)((image.byteArray[curentByte] * selectedColor.R) / 255);
@@ -395,11 +389,9 @@ namespace BMPRozbor
             }
             else if (image.BiBitCount() == 1 || image.BiBitCount() == 4 || image.BiBitCount() == 8)
             {
-                int curentByte = image.BfOffBits();
                 int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
                 for (int i = 0; i < pocetPalet; i++)
                 {
-                    int empir = (299 * image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2] + 587 * image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1] + 114 * image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)]) / 1000;
                     image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)] = (byte)((image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)]) * selectedColor.B / 255);
                     image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1] = (byte)((image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1]) * selectedColor.G / 255);
                     image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2] = (byte)((image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2]) * selectedColor.R / 255);
@@ -440,7 +432,6 @@ namespace BMPRozbor
             }
             else if (image.BiBitCount() == 1 || image.BiBitCount() == 4 || image.BiBitCount() == 8)
             {
-                int curentByte = image.BfOffBits();
                 int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
                 for (int i = 0; i < pocetPalet; i++)
                 {
@@ -496,7 +487,6 @@ namespace BMPRozbor
             }
             else if (image.BiBitCount() == 1 || image.BiBitCount() == 4 || image.BiBitCount() == 8)
             {
-                int curentByte = image.BfOffBits();
                 int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
                 for (int i = 0; i < pocetPalet; i++)
                 {
@@ -628,6 +618,145 @@ namespace BMPRozbor
                     int[] value = originalImage.GetPixelAtPosition(x, shiftedIndex);
                     image.SetPixelAtPosition(x, y, value);
                     shiftedIndex++;
+                }
+            }
+        }
+        //trasformation matrix
+        public static void RotateAngle(ref BMP image, int angle)
+        {
+            byte[] orignalArray = new byte[image.byteArray.Length];
+            Array.Copy(image.byteArray, orignalArray, image.byteArray.Length);
+            BMP originalImage = new BMP(orignalArray);
+            for (int y = 0; y < image.BiHeight(); y++)
+            {
+                for (int x = 0; x < image.BiWidth(); x++)
+                {
+                    newX =
+                    image.SetPixelAtPosition(x, y, originalImage.GetPixelAtPosition(x,y));
+                }
+            }
+
+        }
+        public static void ApplyConvolutionMatrix(ref BMP image, int[,] matrix, int divider, int offset)
+        {
+            if (image.BiBitCount() == 24)
+            {
+                byte[] orignalArray = new byte[image.byteArray.Length];
+                Array.Copy(image.byteArray, orignalArray, image.byteArray.Length);
+                BMP originalImage = new BMP(orignalArray);
+                for (int y = 0; y < image.BiHeight(); y++)
+                {
+                    for (int x = 0; x < image.BiWidth(); x++)
+                    {
+                        int[] newPixel = new int[3];
+                        for (int i = 0; i < 3; i++)
+                        {
+                            for (int j = 0; j < 3; j++)
+                            {
+                                int newX = x - 1 + j, newY = y - 1 + i;
+                                if (newX < 0) newX = 0;
+                                if (newX >= image.BiWidth()) newX = image.BiWidth() - 1;
+                                if (newY < 0) newY = 0;
+                                if (newY >= image.BiWidth()) newY = image.BiHeight() - 1;
+                                int[] pixel = originalImage.GetPixelAtPosition(newX, newY);
+                                newPixel[0] += pixel[0] * matrix[j, i];
+                                newPixel[1] += pixel[1] * matrix[j, i];
+                                newPixel[2] += pixel[2] * matrix[j, i];
+                            }
+                        }
+                        for (int i = 0; i < 3; i++)
+                        {
+                            newPixel[i] /= divider;
+                            newPixel[i] += offset;
+                            if (newPixel[i] > 255) newPixel[i] = 255;
+                            else if (newPixel[i] < 0) newPixel[i] = 0;
+                        }
+                        image.SetPixelAtPosition(x, y, newPixel);
+                    }
+                }
+            }
+        }
+        public static BMP ConvertToXBit(BMP image, int newBitCount)
+        {
+            byte[] orignalArray = new byte[image.byteArray.Length];//TODO: Přepočítat velikost pole
+            Array.Copy(image.byteArray, orignalArray, image.byteArray.Length);
+            BMP newImage = new BMP(orignalArray);
+            int newScanlineDoplnek = Convert.ToInt32((Math.Ceiling(Convert.ToDouble(newBitCount * image.BiWidth()) / 32.0) * 32));
+            int curentByte = image.BfOffBits();
+            if (newBitCount == 1)
+            {
+                GrayscaleThreshold(ref image, 127);
+                if (image.BiBitCount() == 4 || image.BiBitCount() == 8)
+                {
+                    int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
+                    int[] paleta = new int[pocetPalet];
+                    for (int i = 0; i < pocetPalet; i++)
+                    {
+                        if (paleta[i] > 0) paleta[i] = 1;
+                        else paleta[i] = 0;
+                    }
+                    for (int i = image.BiHeight(); i > 0; i--)
+                    {
+                        string pixelbyte = "";
+                        for (int j = 0; j < image.BiWidth(); j++)
+                        {
+                            pixelbyte += paleta[image.GetPixelAtPosition(j, i)[0]] + "";
+                            if (pixelbyte.Length == 8)
+                            {
+                                newImage.byteArray[curentByte] = Convert.ToByte(BinaryToInt(pixelbyte));
+                                curentByte++;
+                                pixelbyte = "";
+                            }
+                            curentByte += newScanlineDoplnek;
+                        }
+                    }
+                }
+
+            }
+            return newImage;
+            if (BiBitCount() == 1 || BiBitCount() == 4 || BiBitCount() == 8)
+            {
+                int curentByte = BfOffBits();
+
+                Brush[] paleta = new Brush[pocetPalet];
+                for (int i = 0; i < pocetPalet; i++)
+                {
+                    paleta[i] = new SolidBrush(Color.FromArgb(byteArray[BfOffBits() - pocetPalet * 4 + (i * 4) + 2], byteArray[BfOffBits() - pocetPalet * 4 + (i * 4) + 1], byteArray[BfOffBits() - pocetPalet * 4 + (i * 4)]));
+                }
+                for (int i = BiHeight(); i > 0; i--)
+                {
+                    for (int j = 0; j < BiWidth();)
+                    {
+                        string hodnoty = OperaceSBMP.IntToBinary(byteArray[curentByte]);
+                        for (int k = 0; k < 8; k += BiBitCount())
+                        {
+                            int indexPalety = 0;
+                            if (BiBitCount() == 1) indexPalety = (int)(hodnoty[k]) - 48;
+                            else if (BiBitCount() == 4) indexPalety = ((int)(hodnoty[k]) - 48) * 8 + ((int)(hodnoty[k + 1]) - 48) * 4 + ((int)(hodnoty[k + 2]) - 48) * 2 + ((int)(hodnoty[k + 3]) - 48);
+                            else if (BiBitCount() == 8) indexPalety = byteArray[curentByte];
+                            g.FillRectangle(paleta[indexPalety], j * imageScale, i * imageScale, imageScale, imageScale);
+                            j++;
+                            if (j > BiWidth() - 1)
+                            {
+                                curentByte += ScanlineDoplnek() / 8;
+                                break;
+                            }
+                        }
+                        curentByte++;
+                    }
+                }
+            }
+            else if (BiBitCount() == 24)
+            {
+                int curentByte = BfOffBits();
+                for (int i = BiHeight(); i > 0; i--)
+                {
+                    for (int j = 0; j < BiWidth(); j++)
+                    {
+                        g.FillRectangle(new SolidBrush(Color.FromArgb(byteArray[curentByte + 2], byteArray[curentByte + 1], byteArray[curentByte])), j * imageScale, i * imageScale, imageScale, imageScale);
+                        curentByte += 3;
+                    }
+                    curentByte += ScanlineDoplnek() / 8;
                 }
             }
         }

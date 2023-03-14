@@ -250,5 +250,26 @@ namespace BMPRozbor
             nuUpDo_specific1.DecimalPlaces = 0;
             TbCont_RightTabs.SelectedIndex = 1;
         }
+
+        private void použíKonvelčníMaticiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int[,] matice = { 
+                {0,-1,0},
+                {-1,5,-1},
+                {0,-1,0}
+            };
+            OperaceSBMP.ApplyConvolutionMatrix(ref Soubor, matice,1,0);
+            picBx_hlavni.Refresh();
+        }
+
+        private void konvertovatNa1BitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void otočitOÚhelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
