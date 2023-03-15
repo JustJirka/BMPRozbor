@@ -169,6 +169,27 @@ namespace BMPRozbor
             else if (uprava == 6) OperaceSBMP.ShiftRow(ref Soubor, (int)nuUpDo_specific1.Value, 1);
             else if (uprava == 7) OperaceSBMP.ShiftColumn(ref Soubor, (int)nuUpDo_specific1.Value, 0);
             else if (uprava == 8) OperaceSBMP.ShiftColumn(ref Soubor, (int)nuUpDo_specific1.Value, 1);
+            /*else if (uprava == 9)
+            {
+                double angleRadians = (double)nuUpDo_specific1.Value * Math.PI / 180;
+                double[,] matrix = new double[2, 2];
+
+                matrix[0, 0] = Math.Cos(angleRadians);
+                matrix[1, 0] = Math.Sin(angleRadians);
+                matrix[0, 1] = -1 * Math.Sin(angleRadians);
+                matrix[1, 1] = Math.Cos(angleRadians);
+                OperaceSBMP.ApplyTrasformationMatrix(ref Soubor, matrix);
+            }*/
+            else if (uprava == 9)
+            {
+                double angleRadians = (double)nuUpDo_specific1.Value * Math.PI / 180;
+                double[,] matrix = {
+                {1,10,0 },
+                {0,1,0 },
+                {0,0,1 }
+                };
+                OperaceSBMP.ApplyTrasformationMatrix(ref Soubor, matrix);
+            }
             picBx_hlavni.Refresh();
         }
 
@@ -270,6 +291,63 @@ namespace BMPRozbor
         private void otočitOÚhelToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void gaussůvFiltrToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int[,] matice = {
+                {1,2,1},
+                {2,4,2},
+                {1,2,1}
+            };
+            OperaceSBMP.ApplyConvolutionMatrix(ref Soubor, matice, 16, 0);
+            picBx_hlavni.Refresh();
+        }
+
+        private void filtrZaostřeníToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int[,] matice = {
+                {0,-1,0},
+                {-1,5,-1},
+                {0,-1,0}
+            };
+            OperaceSBMP.ApplyConvolutionMatrix(ref Soubor, matice, 1, 0);
+            picBx_hlavni.Refresh();
+        }
+
+        private void detekceHranToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int[,] matice = {
+                {1,0,-1},
+                {0,0,0},
+                {-1,0,1}
+            };
+            OperaceSBMP.ApplyConvolutionMatrix(ref Soubor, matice, 1, 0);
+            picBx_hlavni.Refresh();
+        }
+
+        private void reliefToolStripMenuItem_Click(object sender, EventArgs e) //idk jestli nepadá
+        {
+            int[,] matice = {
+                {0,-1,0},
+                {0,0,0},
+                {0,1,0}
+            };
+            OperaceSBMP.ApplyConvolutionMatrix(ref Soubor, matice, 1, 128);
+            picBx_hlavni.Refresh();
+        }
+
+        private void otočitOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lbl_specific1.Text = "Zadejte úhel otočení";
+            uprava = 9;//
+            tabPage2.Text = "Otočení";
+            nuUpDo_specific1.Maximum = 360;
+            nuUpDo_specific1.Minimum = -360;
+            nuUpDo_specific1.Increment = 1;
+            nuUpDo_specific1.Value = 0;
+            nuUpDo_specific1.DecimalPlaces = 0;
+            TbCont_RightTabs.SelectedIndex = 1;
         }
     }
 }
