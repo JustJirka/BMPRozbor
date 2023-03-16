@@ -169,25 +169,15 @@ namespace BMPRozbor
             else if (uprava == 6) OperaceSBMP.ShiftRow(ref Soubor, (int)nuUpDo_specific1.Value, 1);
             else if (uprava == 7) OperaceSBMP.ShiftColumn(ref Soubor, (int)nuUpDo_specific1.Value, 0);
             else if (uprava == 8) OperaceSBMP.ShiftColumn(ref Soubor, (int)nuUpDo_specific1.Value, 1);
-            /*else if (uprava == 9)
+            else if (uprava == 9)
             {
                 double angleRadians = (double)nuUpDo_specific1.Value * Math.PI / 180;
                 double[,] matrix = new double[2, 2];
 
-                matrix[0, 0] = Math.Cos(angleRadians);
-                matrix[1, 0] = Math.Sin(angleRadians);
-                matrix[0, 1] = -1 * Math.Sin(angleRadians);
-                matrix[1, 1] = Math.Cos(angleRadians);
-                OperaceSBMP.ApplyTrasformationMatrix(ref Soubor, matrix);
-            }*/
-            else if (uprava == 9)
-            {
-                double angleRadians = (double)nuUpDo_specific1.Value * Math.PI / 180;
-                double[,] matrix = {
-                {1,10,0 },
-                {0,1,0 },
-                {0,0,1 }
-                };
+                 matrix[0, 0] = Math.Cos(angleRadians);
+                 matrix[1, 0] = Math.Sin(angleRadians);
+                 matrix[0, 1] = -1 * Math.Sin(angleRadians);
+                 matrix[1, 1] = Math.Cos(angleRadians);
                 OperaceSBMP.ApplyTrasformationMatrix(ref Soubor, matrix);
             }
             picBx_hlavni.Refresh();
@@ -285,7 +275,8 @@ namespace BMPRozbor
 
         private void konvertovatNa1BitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            OperaceSBMP.ConvertToXBit(ref Soubor, 1);
+            picBx_hlavni.Refresh();
         }
 
         private void otočitOÚhelToolStripMenuItem_Click(object sender, EventArgs e)

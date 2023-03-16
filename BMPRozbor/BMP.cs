@@ -94,11 +94,6 @@ namespace BMPRozbor
             double nasobek = Convert.ToDouble(BiBitCount() * BiWidth());
             return Convert.ToInt32((Math.Ceiling(nasobek / 32.0) * 32 - nasobek));
         }
-        public int RotatedScanlineDoplnek()
-        {
-            double nasobek = Convert.ToDouble(BiBitCount() * BiHeight());
-            return Convert.ToInt32((Math.Ceiling(nasobek / 32.0) * 32 - nasobek));
-        }
         public void SaveFile(string path)
         {
             File.WriteAllBytes(path, byteArray);
@@ -220,23 +215,6 @@ namespace BMPRozbor
                     byteArray[BfOffBits() - pocetPalet * 4 + (i * 4)] = Convert.ToByte(255 - Convert.ToInt32(byteArray[BfOffBits() - pocetPalet * 4 + (i * 4)]));
                 }
             }
-        }
-        public byte[] GenerateRotatedByteArrayHeader()
-        {
-            //pokud 24 tak se to musi násobit
-            int size = BfOffBits() + 4 * (BiWidth() * (BiHeight() + RotatedScanlineDoplnek() / 8));
-            byte[] RotatedbyteArray = new byte[size];
-            /*for (int i = 0; i < BfOffBits(); i++) RotatedbyteArray[i] = byteArray[i];
-            //TODO:Přepočítat velikost !!
-            RotatedbyteArray[18] = byteArray[22];
-            RotatedbyteArray[19] = byteArray[23];
-            RotatedbyteArray[20] = byteArray[24];
-            RotatedbyteArray[21] = byteArray[25];
-            RotatedbyteArray[22] = byteArray[18];
-            RotatedbyteArray[23] = byteArray[19];
-            RotatedbyteArray[24] = byteArray[20];
-            RotatedbyteArray[25] = byteArray[21];*/
-            return RotatedbyteArray;
         }
         public void MirrorHorizontal()
         {
