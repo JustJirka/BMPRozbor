@@ -192,7 +192,7 @@ namespace BMPRozbor
             }
             for (int i = 0; i < byteCount; i++)
             {
-                byteArray[byteCount - i - 1] = Convert.ToByte(OperaceSBMP.BinaryToInt(vystup.Substring(i * 8, 8)));
+                byteArray[byteCount - i - 1] = Convert.ToByte(BinaryToInt(vystup.Substring(i * 8, 8)));
             }
             return byteArray;
         }
@@ -221,6 +221,50 @@ namespace BMPRozbor
                 }
             }
             return jagedArray;
+        }
+        public static T[] SubArray<T>(T[] array, int offset, int length)
+        {
+            T[] result = new T[length];
+            Array.Copy(array, offset, result, 0, length);
+            return result;
+        }
+
+        public static int ByteArrayToWholeValue(byte[] ba)
+        {
+            StringBuilder hex = new StringBuilder(ba.Length * 2);
+            for (int i = ba.Length - 1; i >= 0; i--)
+            {
+                hex.AppendFormat("{0:x2}", ba[i]);
+            }
+            return int.Parse(hex.ToString(), System.Globalization.NumberStyles.HexNumber);
+        }
+        public static string IntToBinary(int vstup)
+        {
+            string vystup = "";
+            for (int i = 128; i > 0; i /= 2)
+            {
+                if (vstup - i >= 0)
+                {
+                    vstup -= i;
+                    vystup += 1;
+                }
+                else
+                {
+                    vystup += 0;
+                }
+            }
+            return vystup;
+        }
+        public static int BinaryToInt(string vstup)
+        {
+            int vystup = 0;
+            int nasobek = 1;
+            for (int i = 1; i <= vstup.Length; i++)
+            {
+                vystup += int.Parse(vstup[vstup.Length - i].ToString()) * nasobek;
+                nasobek *= 2;
+            }
+            return vystup;
         }
     }
 }

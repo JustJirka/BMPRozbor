@@ -340,5 +340,11 @@ namespace BMPRozbor
             nuUpDo_specific1.DecimalPlaces = 0;
             TbCont_RightTabs.SelectedIndex = 1;
         }
+
+        private void konvertovatNa24BitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperaceSBMP.ConvertToXBit(ref Soubor, 24);
+            picBx_hlavni.Refresh();
+        }
     }
 }

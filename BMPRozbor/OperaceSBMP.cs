@@ -13,50 +13,6 @@ namespace BMPRozbor
 {
     internal class OperaceSBMP
     {
-        public static T[] SubArray<T>(T[] array, int offset, int length)
-        {
-            T[] result = new T[length];
-            Array.Copy(array, offset, result, 0, length);
-            return result;
-        }
-
-        public static int ByteArrayToWholeValue(byte[] ba)
-        {
-            StringBuilder hex = new StringBuilder(ba.Length * 2);
-            for (int i = ba.Length - 1; i >= 0; i--)
-            {
-                hex.AppendFormat("{0:x2}", ba[i]);
-            }
-            return int.Parse(hex.ToString(), System.Globalization.NumberStyles.HexNumber);
-        }
-        public static string IntToBinary(int vstup)
-        {
-            string vystup = "";
-            for (int i = 128; i > 0; i /= 2)
-            {
-                if (vstup - i >= 0)
-                {
-                    vstup -= i;
-                    vystup += 1;
-                }
-                else
-                {
-                    vystup += 0;
-                }
-            }
-            return vystup;
-        }
-        public static int BinaryToInt(string vstup)
-        {
-            int vystup = 0;
-            int nasobek = 1;
-            for (int i = 1; i <= vstup.Length; i++)
-            {
-                vystup += int.Parse(vstup[vstup.Length - i].ToString()) * nasobek;
-                nasobek *= 2;
-            }
-            return vystup;
-        }
         public static void Blur(ref BMP image, int blurSize)//jenom  24bit bmp 
         {
             for (int imageY = 0; imageY < image.BiHeight(); imageY += image.BiHeight() / blurSize)
@@ -667,22 +623,14 @@ namespace BMPRozbor
             int[,,] newImage = new int[width, height, 3];
             // scanning points and applying transformations 
             for (int y = 0; y < height; y++)
-            { // row by row  
-                for (int x = 0; x < width ; x++)
-                { // column by column  
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    double[,] product = PomocneMetody.MultiplyMatrix(invertedMatrix, new double[,] { { x + minX }, { y + minY } });
 
-                    // applying the point transformations  
-                    double[,] product = PomocneMetody.MultiplyMatrix(invertedMatrix, new double[,] { { x +minX }, { y +minY} });
-
-                    int newX = (int) Math.Round( product[0, 0]);
+                    int newX = (int)Math.Round(product[0, 0]);
                     int newY = (int)Math.Round(product[1, 0]);
-                    if (newX > image.BiWidth() - 1 || newX < 0)
-                    {
-                        newImage[x, y, 0] = 255;
-                        newImage[x, y, 1] = 255;
-                        newImage[x, y, 2] = 255;
-                    }
-                    else if (newY > image.BiHeight() - 1 || newY < 0)
+                    if (newX > image.BiWidth() - 1 || newX < 0 || newY > image.BiHeight() - 1 || newY < 0)
                     {
                         newImage[x, y, 0] = 255;
                         newImage[x, y, 1] = 255;
@@ -720,35 +668,88 @@ namespace BMPRozbor
         public static void ConvertToXBit(ref BMP image, int newBitCount)
         {
             int newScanline = Convert.ToInt32((Math.Ceiling(Convert.ToDouble(newBitCount * image.BiWidth()) / 32.0) * 32));
-            byte[] newByteArray = new byte[image.BfOffBits() + (int)Math.Pow(2, newBitCount) * 4 + newScanline * image.BiHeight()];
-            Array.Copy(image.byteArray, newByteArray, image.BfOffBits());
+            byte[] newByteArray = new byte[(54 + (int)Math.Pow(2, newBitCount) * 4) + newScanline * image.BiHeight()];
+            Array.Copy(image.byteArray, newByteArray, 54);
             BMP newImage = new BMP(newByteArray);
             newImage.byteArray[28] = Convert.ToByte(newBitCount);
-            GrayscaleThreshold(ref image, 127);
-            byte[] bfOffBits = PomocneMetody.IntToByteArray((uint)(54 + (int)Math.Pow(2, image.BiBitCount()) * 4), 4);
+            byte[] bfOffBits = PomocneMetody.IntToByteArray((uint)(54 + (int)Math.Pow(2, newBitCount) * 4), 4);
             Array.Copy(bfOffBits, 0, newImage.byteArray, 10, 4);
             if (newBitCount == 1)
             {
-                for (int i = 0; i < 4; i++) newImage.byteArray[54 + i] = Convert.ToByte(255);
-                if (image.BiBitCount() == 4 || image.BiBitCount() == 8)
+                GrayscaleThreshold(ref image, 127);
+                for (int k = 0; k < 3; k++) newImage.byteArray[newImage.BfOffBits() - 2 * 4 + k] = 255;
+                int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
+                int[] paleta = new int[pocetPalet];
+                if (image.BiBitCount() < 24)
                 {
-                    int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
-                    int[] paleta = new int[pocetPalet];
                     for (int i = 0; i < pocetPalet; i++)
                     {
                         if (image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)] > 0) paleta[i] = 1;
                         else paleta[i] = 0;
                     }
+                }
+                for (int y = 0; y < newImage.BiHeight(); y++)
+                {
+                    for (int x = 0; x < newImage.BiWidth(); x++)
+                    {
+                        int indexColor;
+                        if (image.BiBitCount() < 24) indexColor = paleta[image.GetPixelAtPosition(x, y)[0]];
+                        else if (image.GetPixelAtPosition(x, y)[0] > 125) indexColor = 1;
+                        else indexColor = 0;
+                        int[] newBitValue = { indexColor };
+                        newImage.SetPixelAtPosition(x, y, newBitValue);
+                    }
+                }
+
+            }
+            else if (newBitCount == 4)
+            {
+                if (newBitCount < image.BiBitCount())
+                {
+
+                }
+                else
+                {
                     for (int y = 0; y < image.BiHeight(); y++)
                     {
                         for (int x = 0; x < image.BiWidth(); x++)
                         {
-                            int[] newBitValue = { paleta[image.GetPixelAtPosition(x, y)[0]] };
-                            newImage.SetPixelAtPosition(x, y, newBitValue);
+                            newImage.SetPixelAtPosition(x, y, image.GetPixelAtPosition(x, y));
                         }
                     }
                 }
 
+            }
+            else if (newBitCount == 8)
+            {
+                if (newBitCount < image.BiBitCount())
+                {
+
+                }
+                else
+                {
+                    for (int y = 0; y < image.BiHeight(); y++)
+                    {
+                        for (int x = 0; x < image.BiWidth(); x++)
+                        {
+                            newImage.SetPixelAtPosition(x, y, image.GetPixelAtPosition(x, y));
+                        }
+                    }
+                }
+
+            }
+            else if (newBitCount == 24)
+            {
+                int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
+                for (int y = 0; y < newImage.BiHeight(); y++)
+                {
+                    for (int x = 0; x < newImage.BiWidth(); x++)
+                    {
+                        int[] color = new int[3];
+                        for (int i = 0; i < 3; i++) color[2 - i] = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (image.GetPixelAtPosition(x, y)[0] * 4 + i)];
+                        newImage.SetPixelAtPosition(x, y, color);
+                    }
+                }
             }
             image = newImage;
         }
