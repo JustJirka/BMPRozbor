@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -265,6 +267,21 @@ namespace BMPRozbor
                 nasobek *= 2;
             }
             return vystup;
+        }
+        public static int GetClosestColor(List<Color> paleta, Color color)
+        {
+            int closestColor = 0;
+            int distance = 256 * 3;
+            for (int i = 0; i < paleta.Count; i++)
+            {
+                int currentDistance = Math.Abs(paleta[i].R - color.R) + Math.Abs(paleta[i].B - color.B) + Math.Abs(paleta[i].G - color.G);
+                if (currentDistance < distance)
+                {
+                    closestColor = i;
+                    distance = currentDistance;
+                }
+            }
+            return closestColor;
         }
     }
 }

@@ -215,12 +215,14 @@
             this.konvertovatNa4BitToolStripMenuItem.Name = "konvertovatNa4BitToolStripMenuItem";
             this.konvertovatNa4BitToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.konvertovatNa4BitToolStripMenuItem.Text = "Konvertovat na 4 bit";
+            this.konvertovatNa4BitToolStripMenuItem.Click += new System.EventHandler(this.konvertovatNa4BitToolStripMenuItem_Click);
             // 
             // konvertovatNa8BitToolStripMenuItem
             // 
             this.konvertovatNa8BitToolStripMenuItem.Name = "konvertovatNa8BitToolStripMenuItem";
             this.konvertovatNa8BitToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.konvertovatNa8BitToolStripMenuItem.Text = "Konvertovat na 8 bit";
+            this.konvertovatNa8BitToolStripMenuItem.Click += new System.EventHandler(this.konvertovatNa8BitToolStripMenuItem_Click);
             // 
             // konvertovatNa24BitToolStripMenuItem
             // 

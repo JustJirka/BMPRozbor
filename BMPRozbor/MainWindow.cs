@@ -346,5 +346,17 @@ namespace BMPRozbor
             OperaceSBMP.ConvertToXBit(ref Soubor, 24);
             picBx_hlavni.Refresh();
         }
+
+        private void konvertovatNa4BitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperaceSBMP.ConvertToXBit(ref Soubor, 4);
+            picBx_hlavni.Refresh();
+        }
+
+        private void konvertovatNa8BitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperaceSBMP.ConvertToXBit(ref Soubor, 8);
+            picBx_hlavni.Refresh();
+        }
     }
 }

@@ -47,14 +47,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BMP.cs" />
+    <Compile Include="IColorQuntizer.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="MedianCut.cs" />
+    <Compile Include="MedianCut2.cs" />
     <Compile Include="OperaceSBMP.cs" />
+    <Compile Include="PalleteQuantizer.cs" />
     <Compile Include="PomocneMetody.cs" />
+    <Compile Include="Popularity.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainWindow.resx">
