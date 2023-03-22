@@ -125,10 +125,13 @@ namespace BMPRozbor
                 string binaryValue = PomocneMetody.IntToBinary( byteArray[byteIndex]); // get the binary representation of the byte at byteIndex 
                 for (int i = 0; i < BiBitCount(); i++)
                 {
+                    int pos = bitOffset + i;
                     int setValueBit = (setValue[0] >> i) & 1; // get the i-th bit of the setValue
-                    if (bitOffset + i < 8)
+                    if (BiBitCount() == 4) pos = bitOffset + 3 - i;
+                    if (BiBitCount() == 8) pos = bitOffset + 7 - i;
+                    if (pos < 8)
                     {
-                        binaryValue = binaryValue.Remove(bitOffset + i, 1).Insert(bitOffset + i, setValueBit.ToString()); // set the bit value of the binary string
+                        binaryValue = binaryValue.Remove(pos, 1).Insert(pos, setValueBit.ToString()); // set the bit value of the binary string
                     }
                     else break;
                 }

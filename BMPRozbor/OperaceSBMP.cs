@@ -674,9 +674,9 @@ namespace BMPRozbor
             byte[] newByteArray = new byte[(54 + (int)Math.Pow(2, newBitCount) * 4) + newScanline * image.BiHeight()];
             Array.Copy(image.byteArray, newByteArray, 54);
             BMP newImage = new BMP(newByteArray);
-            //newImage.byteArray[28] = Convert.ToByte(newBitCount);
-            //byte[] bfOffBits = PomocneMetody.IntToByteArray((uint)(54 + (int)Math.Pow(2, newBitCount) * 4), 4);
-           // Array.Copy(bfOffBits, 0, newImage.byteArray, 10, 4);
+            newImage.byteArray[28] = Convert.ToByte(newBitCount);
+            byte[] bfOffBits = PomocneMetody.IntToByteArray((uint)(54 + (int)Math.Pow(2, newBitCount) * 4), 4);
+            Array.Copy(bfOffBits, 0, newImage.byteArray, 10, 4);
             if (newBitCount == 1)
             {
                 GrayscaleThreshold(ref image, 127);
@@ -706,14 +706,14 @@ namespace BMPRozbor
             }
             else if (newBitCount == 4)
             {
+                int newPocetPalet = (int)Math.Pow(2, newImage.BiBitCount());
                 if (newBitCount < image.BiBitCount())
                 {
+                    IColorQuantizer quantizer = new PaletteQuantizer(); ;
                     if (image.BiBitCount() == 8)
                     {
                         int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
-                        int newPocetPalet = (int)Math.Pow(2, newImage.BiBitCount());
                         Color[] Paleta = new Color[pocetPalet];
-                        IColorQuantizer quantizer = new PaletteQuantizer(); ;
                         for (int i = 0; i < pocetPalet; i++)
                         {
                             Paleta[i] = Color.FromArgb(image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2], image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1], image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)]);
@@ -726,60 +726,56 @@ namespace BMPRozbor
                                 quantizer.AddColor(Paleta[indexColor]);
                             }
                         }
-                        List<Color> adaptivePalet = quantizer.GetPalette((int)Math.Pow(2, newImage.BiBitCount()));
-                        string fd = string.Format("Original picture: {0} colors", quantizer.GetColorCount());
+                        List<Color> adaptivePalet = quantizer.GetPalette(newPocetPalet);
                         for (int i = 0; i < adaptivePalet.Count(); i++)
                         {
-                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4)] = Convert.ToByte(adaptivePalet[i].B);
-                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4) + 1] = Convert.ToByte(adaptivePalet[i].G);
-                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4) + 2] = Convert.ToByte(adaptivePalet[i].R);
+                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4)] = adaptivePalet[i].B;
+                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4) + 1] = adaptivePalet[i].G;
+                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4) + 2] = adaptivePalet[i].R;
                         }
                         for (int y = 0; y < image.BiHeight(); y++)
                         {
                             for (int x = 0; x < image.BiWidth(); x++)
                             {
                                 int indexColor = image.GetPixelAtPosition(x, y)[0];
-                                int[] newBitValue = { quantizer.GetPaletteIndex(Paleta[indexColor]) /*PomocneMetody.GetClosestColor(adaptivePalet, Paleta[indexColor]) */};
+                                int[] newBitValue = { quantizer.GetPaletteIndex(Paleta[indexColor]) };
                                 newImage.SetPixelAtPosition(x, y, newBitValue);
                             }
                         }
                     }
-                    else
+                    else//24 bit image
                     {
-                        int newPocetPalet = (int)Math.Pow(2, newImage.BiBitCount());
-                        IColorQuantizer quantizer = new PaletteQuantizer(); ;
                         for (int y = 0; y < image.BiHeight(); y++)
                         {
                             for (int x = 0; x < image.BiWidth(); x++)
                             {
-                                int b = image.GetPixelAtPosition(x, y)[0];
+                                int r = image.GetPixelAtPosition(x, y)[0];
                                 int g = image.GetPixelAtPosition(x, y)[1];
-                                int r = image.GetPixelAtPosition(x, y)[2];
+                                int b = image.GetPixelAtPosition(x, y)[2];
                                 quantizer.AddColor(Color.FromArgb(r, g, b));
                             }
                         }
-                        List<Color> adaptivePalet = quantizer.GetPalette((int)Math.Pow(2, newImage.BiBitCount()));
-                        string fd = string.Format("Original picture: {0} colors", quantizer.GetColorCount());
+                        List<Color> adaptivePalet = quantizer.GetPalette(newPocetPalet);
                         for (int i = 0; i < adaptivePalet.Count(); i++)
                         {
-                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4)] = Convert.ToByte(adaptivePalet[i].B);
-                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4) + 1] = Convert.ToByte(adaptivePalet[i].G);
-                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4) + 2] = Convert.ToByte(adaptivePalet[i].R);
+                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4)] = adaptivePalet[i].B;
+                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4) + 1] = adaptivePalet[i].G;
+                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4) + 2] = adaptivePalet[i].R;
                         }
                         for (int y = 0; y < image.BiHeight(); y++)
                         {
                             for (int x = 0; x < image.BiWidth(); x++)
                             {
-                                int b = image.GetPixelAtPosition(x, y)[0];
+                                int r = image.GetPixelAtPosition(x, y)[0];
                                 int g = image.GetPixelAtPosition(x, y)[1];
-                                int r = image.GetPixelAtPosition(x, y)[2];
-                                int[] newBitValue = { quantizer.GetPaletteIndex(Color.FromArgb(r, g, b)) /*PomocneMetody.GetClosestColor(adaptivePalet, Paleta[indexColor]) */};
+                                int b = image.GetPixelAtPosition(x, y)[2];
+                                int[] newBitValue = { quantizer.GetPaletteIndex(Color.FromArgb(r, g, b)) };
                                 newImage.SetPixelAtPosition(x, y, newBitValue);
                             }
                         }
                     }
                 }
-                else
+                else//1 bit image
                 {
                     for (int y = 0; y < image.BiHeight(); y++)
                     {
@@ -791,53 +787,52 @@ namespace BMPRozbor
                     int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
                     for (int i = 0; i < pocetPalet; i++)
                     {
-                        newImage.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2]= image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2];
-                        newImage.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1] = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1];
-                        newImage.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)] = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)];
+                        newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4) + 2] = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2];
+                        newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4) + 1] = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1];
+                        newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4)] = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)];
                     }
                 }
 
             }
             else if (newBitCount == 8)
             {
-                if (newBitCount < image.BiBitCount())
+                int newPocetPalet = (int)Math.Pow(2, newImage.BiBitCount());
+                if (newBitCount < image.BiBitCount())//jen 24
                 {
+                    IColorQuantizer quantizer = new PaletteQuantizer();
                     if (image.BiBitCount() == 24)
                     {
-                        int newPocetPalet = (int)Math.Pow(2, newImage.BiBitCount());
-                        IColorQuantizer quantizer = new PaletteQuantizer(); ;
                         for (int y = 0; y < image.BiHeight(); y++)
                         {
                             for (int x = 0; x < image.BiWidth(); x++)
                             {
-                                int b = image.GetPixelAtPosition(x, y)[0];
+                                int r = image.GetPixelAtPosition(x, y)[0];
                                 int g = image.GetPixelAtPosition(x, y)[1];
-                                int r = image.GetPixelAtPosition(x, y)[2];
+                                int b = image.GetPixelAtPosition(x, y)[2];
                                 quantizer.AddColor(Color.FromArgb(r, g, b));
                             }
                         }
-                        List<Color> adaptivePalet = quantizer.GetPalette((int)Math.Pow(2, newImage.BiBitCount()));
-                        string fd = string.Format("Original picture: {0} colors", quantizer.GetColorCount());
+                        List<Color> adaptivePalet = quantizer.GetPalette(newPocetPalet);
                         for (int i = 0; i < adaptivePalet.Count(); i++)
                         {
-                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4)] = Convert.ToByte(adaptivePalet[i].B);
-                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4) + 1] = Convert.ToByte(adaptivePalet[i].G);
-                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4) + 2] = Convert.ToByte(adaptivePalet[i].R);
+                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4)] = adaptivePalet[i].B;
+                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4) + 1] = adaptivePalet[i].G;
+                            newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4) + 2] = adaptivePalet[i].R;
                         }
                         for (int y = 0; y < image.BiHeight(); y++)
                         {
                             for (int x = 0; x < image.BiWidth(); x++)
                             {
-                                int b = image.GetPixelAtPosition(x, y)[0];
+                                int r = image.GetPixelAtPosition(x, y)[0];
                                 int g = image.GetPixelAtPosition(x, y)[1];
-                                int r = image.GetPixelAtPosition(x, y)[2];
-                                int[] newBitValue = { quantizer.GetPaletteIndex(Color.FromArgb(r, g, b)) /*PomocneMetody.GetClosestColor(adaptivePalet, Paleta[indexColor]) */};
+                                int b = image.GetPixelAtPosition(x, y)[2];
+                                int[] newBitValue = { quantizer.GetPaletteIndex(Color.FromArgb(r, g, b)) };
                                 newImage.SetPixelAtPosition(x, y, newBitValue);
                             }
                         }
                     }
                 }
-                else
+                else// 1,4
                 {
                     for (int y = 0; y < image.BiHeight(); y++)
                     {
@@ -846,19 +841,32 @@ namespace BMPRozbor
                             newImage.SetPixelAtPosition(x, y, image.GetPixelAtPosition(x, y));
                         }
                     }
+                    int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
+                    for (int i = 0; i < pocetPalet; i++)
+                    {
+                        newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4) + 2] = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2];
+                        newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4) + 1] = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1];
+                        newImage.byteArray[newImage.BfOffBits() - newPocetPalet * 4 + (i * 4)] = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)];
+                    }
                 }
 
             }
             else if (newBitCount == 24)
             {
                 int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
+                int[][] Paleta = new int[pocetPalet][];
+                for (int i = 0; i < pocetPalet; i++)
+                {
+                    Paleta[i] = new int[3];
+                    Paleta[i][0] = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2];
+                    Paleta[i][1] = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1];
+                    Paleta[i][2] = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)];
+                }
                 for (int y = 0; y < newImage.BiHeight(); y++)
                 {
                     for (int x = 0; x < newImage.BiWidth(); x++)
                     {
-                        int[] color = new int[3];
-                        for (int i = 0; i < 3; i++) color[2 - i] = image.byteArray[image.BfOffBits() - pocetPalet * 4 + (image.GetPixelAtPosition(x, y)[0] * 4 + i)];
-                        newImage.SetPixelAtPosition(x, y, color);
+                        newImage.SetPixelAtPosition(x, y, Paleta[image.GetPixelAtPosition(x,y)[0]]);
                     }
                 }
             }
