@@ -16,6 +16,11 @@ namespace BMPRozbor
 {
     internal class OperaceSBMP
     {
+        /// <summary>
+        /// This method blurs the suplied BMP image by averaging the color of inside of blocks
+        /// </summary>
+        /// <param name="image"> reference to 24bit image</param>
+        /// <param name="blurSize">Number of blocks per line</param>
         public static void Blur(ref BMP image, int blurSize)//jenom  24bit bmp 
         {
             for (int imageY = 0; imageY < image.BiHeight(); imageY += image.BiHeight() / blurSize)
@@ -160,9 +165,13 @@ namespace BMPRozbor
                 }
             }
         }
-        public static void GrayscaleTransition(ref BMP image)//24 bit
+        /// <summary>
+        /// Image trasition from full color to grayscale
+        /// </summary>
+        /// <param name="image">24bit bmp image</param>
+        public static void GrayscaleTransition(ref BMP image)
         {
-            if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
+            if (image.BiBitCount() == 24)
             {
                 int curentByte = image.BfOffBits();
                 for (int i = image.BiHeight(); i > 0; i--)
@@ -181,16 +190,7 @@ namespace BMPRozbor
                 }
 
             }
-            else if (image.BiBitCount() == 1 || image.BiBitCount() == 4 || image.BiBitCount() == 8)
-            {
-                /*int curentByte = image.BfOffBits();
-                int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
-                for (int i = 0; i < pocetPalet; i++)
-                {
-                    int empir = (299 * image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 2] + 587 * image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + 1] + 114 * image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4)]) / 1000;
-                    for (int k = 0; k < 3; k++) image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + k] = (byte)empir;
-                }*/
-            }
+            else  throw new InvalidOperationException("Image must be 24bit");
         }
         public static void GrayscaleThreshold(ref BMP image, int threshold)
         {
@@ -601,23 +601,14 @@ namespace BMPRozbor
             // saving some stats to adjust the image later  
             int minX = 0, minY = 0;
             int maxX = 0, maxY = 0;
-            minX = (int)Math.Min(minX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { 0 }, { 1 } })[0, 0]));
-            minY = (int)Math.Min(minY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { 0 }, { 1 } })[1, 0]));
-            minX = (int)Math.Min(minX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { 0 }, { 1 } })[0, 0]));
-            minY = (int)Math.Min(minY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { 0 }, { 1 } })[1, 0]));
-            minX = (int)Math.Min(minX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { image.BiHeight() - 1 }, { 1 } })[0, 0]));
-            minY = (int)Math.Min(minY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { image.BiHeight() - 1 }, { 1 } })[1, 0]));
-            minX = (int)Math.Min(minX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { image.BiHeight() - 1 }, { 1 } })[0, 0]));
-            minY = (int)Math.Min(minY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { image.BiHeight() - 1 }, { 1 } })[1, 0]));
-            maxX = (int)Math.Min(maxX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { 0 }, { 1 } })[0, 0]));
-            maxY = (int)Math.Max(maxY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { 0 }, { 1 } })[1, 0]));
-            maxX = (int)Math.Max(maxX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { 0 }, { 1 } })[0, 0]));
-            maxY = (int)Math.Max(maxY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { 0 }, { 1 } })[1, 0]));
-            maxX = (int)Math.Max(maxX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { image.BiHeight() - 1 }, { 1 } })[0, 0]));
-            maxY = (int)Math.Max(maxY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { image.BiHeight() - 1 }, { 1 } })[1, 0]));
-            maxX = (int)Math.Max(maxX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { image.BiHeight() - 1 }, { 1 } })[0, 0]));
-            maxY = (int)Math.Max(maxY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { image.BiHeight() - 1 }, { 1 } })[1, 0]));
-
+            double[,] edges = { { 0, 0 }, { image.BiWidth() - 1, 0 }, { image.BiWidth() - 1, image.BiHeight() - 1 }, { 0, image.BiHeight() - 1 } };
+            for (int i = 0; i < edges.GetLength(0); i++)
+            {
+                minX = (int)Math.Min(minX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { edges[i, 0] }, { edges[i, 1] }, { 1 } })[0, 0]));
+                maxX = (int)Math.Max(maxX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { edges[i, 0] }, { edges[i, 1] }, { 1 } })[0, 0]));
+                minY = (int)Math.Min(minY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { edges[i, 0] }, { edges[i, 1] }, { 1 } })[1, 0]));
+                maxY = (int)Math.Max(maxY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { edges[i, 0] }, { edges[i, 1] }, { 1 } })[1, 0]));
+            }
             int width = maxX - minX + 1;
             int height = maxY - minY + 1;
 
@@ -690,7 +681,7 @@ namespace BMPRozbor
                 int newPocetPalet = (int)Math.Pow(2, newImage.BiBitCount());
                 if (newBitCount < image.BiBitCount())
                 {
-                    IColorQuantizer quantizer = new PaletteQuantizer(); ;
+                    ColorQuantizer quantizer = new PaletteQuantizer(); ;
                     if (image.BiBitCount() == 8)
                     {
                         int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
@@ -780,7 +771,7 @@ namespace BMPRozbor
                 int newPocetPalet = (int)Math.Pow(2, newImage.BiBitCount());
                 if (newBitCount < image.BiBitCount())//jen 24
                 {
-                    IColorQuantizer quantizer = new PaletteQuantizer();
+                    ColorQuantizer quantizer = new PaletteQuantizer();
                     if (image.BiBitCount() == 24)
                     {
                         for (int y = 0; y < image.BiHeight(); y++)
