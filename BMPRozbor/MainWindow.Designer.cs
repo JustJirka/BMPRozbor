@@ -42,7 +42,6 @@
             this.konvertovatNa4BitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.konvertovatNa8BitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.konvertovatNa24BitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.otočitOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.úpravyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inverzeBarevToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.odstínyŠedéToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,6 +86,20 @@
             this.nuUpDo_specific1 = new System.Windows.Forms.NumericUpDown();
             this.lbl_specific1 = new System.Windows.Forms.Label();
             this.btn_OK = new System.Windows.Forms.Button();
+            this.tb_TransFiltry = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.nUpDo_Rotate = new System.Windows.Forms.NumericUpDown();
+            this.NuUpDo_scaleX = new System.Windows.Forms.NumericUpDown();
+            this.NuUpDo_scaleY = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.NuUpDo_zkosX = new System.Windows.Forms.NumericUpDown();
+            this.NuUpDo_zkosY = new System.Windows.Forms.NumericUpDown();
+            this.Btn_TransformMatrix = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBx_hlavni)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuUpDo_imageScale)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -94,6 +107,12 @@
             this.Informace.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nuUpDo_specific1)).BeginInit();
+            this.tb_TransFiltry.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_Rotate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NuUpDo_scaleX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NuUpDo_scaleY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NuUpDo_zkosX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NuUpDo_zkosY)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -144,7 +163,7 @@
             this.btn_refresh.Name = "btn_refresh";
             this.btn_refresh.Size = new System.Drawing.Size(82, 23);
             this.btn_refresh.TabIndex = 4;
-            this.btn_refresh.Text = "Refresh";
+            this.btn_refresh.Text = "Přiblížit";
             this.btn_refresh.UseVisualStyleBackColor = true;
             this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
             // 
@@ -172,8 +191,7 @@
             this.souborToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.otevřítSouborToolStripMenuItem,
             this.uložitToolStripMenuItem,
-            this.konvertovatNaToolStripMenuItem,
-            this.otočitOToolStripMenuItem});
+            this.konvertovatNaToolStripMenuItem});
             this.souborToolStripMenuItem.Name = "souborToolStripMenuItem";
             this.souborToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.souborToolStripMenuItem.Text = "Soubor";
@@ -181,14 +199,14 @@
             // otevřítSouborToolStripMenuItem
             // 
             this.otevřítSouborToolStripMenuItem.Name = "otevřítSouborToolStripMenuItem";
-            this.otevřítSouborToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.otevřítSouborToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.otevřítSouborToolStripMenuItem.Text = "Otevřít";
             this.otevřítSouborToolStripMenuItem.Click += new System.EventHandler(this.otevřítSouborToolStripMenuItem_Click);
             // 
             // uložitToolStripMenuItem
             // 
             this.uložitToolStripMenuItem.Name = "uložitToolStripMenuItem";
-            this.uložitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.uložitToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.uložitToolStripMenuItem.Text = "Uložit ";
             this.uložitToolStripMenuItem.Click += new System.EventHandler(this.uložitToolStripMenuItem_Click);
             // 
@@ -200,7 +218,7 @@
             this.konvertovatNa8BitToolStripMenuItem,
             this.konvertovatNa24BitToolStripMenuItem});
             this.konvertovatNaToolStripMenuItem.Name = "konvertovatNaToolStripMenuItem";
-            this.konvertovatNaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.konvertovatNaToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.konvertovatNaToolStripMenuItem.Text = "Konvertovat na";
             // 
             // konvertovatNa1BitToolStripMenuItem
@@ -230,13 +248,6 @@
             this.konvertovatNa24BitToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.konvertovatNa24BitToolStripMenuItem.Text = "Konvertovat na 24 bit";
             this.konvertovatNa24BitToolStripMenuItem.Click += new System.EventHandler(this.konvertovatNa24BitToolStripMenuItem_Click);
-            // 
-            // otočitOToolStripMenuItem
-            // 
-            this.otočitOToolStripMenuItem.Name = "otočitOToolStripMenuItem";
-            this.otočitOToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.otočitOToolStripMenuItem.Text = "Otočit o";
-            this.otočitOToolStripMenuItem.Click += new System.EventHandler(this.otočitOToolStripMenuItem_Click);
             // 
             // úpravyToolStripMenuItem
             // 
@@ -529,7 +540,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TbCont_RightTabs.Controls.Add(this.Informace);
             this.TbCont_RightTabs.Controls.Add(this.tabPage2);
-            this.TbCont_RightTabs.Location = new System.Drawing.Point(1054, 27);
+            this.TbCont_RightTabs.Controls.Add(this.tb_TransFiltry);
+            this.TbCont_RightTabs.Location = new System.Drawing.Point(1055, 27);
             this.TbCont_RightTabs.Name = "TbCont_RightTabs";
             this.TbCont_RightTabs.SelectedIndex = 0;
             this.TbCont_RightTabs.Size = new System.Drawing.Size(200, 485);
@@ -595,6 +607,179 @@
             this.btn_OK.UseVisualStyleBackColor = true;
             this.btn_OK.Click += new System.EventHandler(this.button1_Click_2);
             // 
+            // tb_TransFiltry
+            // 
+            this.tb_TransFiltry.Controls.Add(this.Btn_TransformMatrix);
+            this.tb_TransFiltry.Controls.Add(this.NuUpDo_zkosY);
+            this.tb_TransFiltry.Controls.Add(this.NuUpDo_zkosX);
+            this.tb_TransFiltry.Controls.Add(this.label7);
+            this.tb_TransFiltry.Controls.Add(this.label6);
+            this.tb_TransFiltry.Controls.Add(this.label5);
+            this.tb_TransFiltry.Controls.Add(this.label4);
+            this.tb_TransFiltry.Controls.Add(this.label3);
+            this.tb_TransFiltry.Controls.Add(this.NuUpDo_scaleY);
+            this.tb_TransFiltry.Controls.Add(this.NuUpDo_scaleX);
+            this.tb_TransFiltry.Controls.Add(this.nUpDo_Rotate);
+            this.tb_TransFiltry.Controls.Add(this.label2);
+            this.tb_TransFiltry.Controls.Add(this.label1);
+            this.tb_TransFiltry.Location = new System.Drawing.Point(4, 22);
+            this.tb_TransFiltry.Name = "tb_TransFiltry";
+            this.tb_TransFiltry.Padding = new System.Windows.Forms.Padding(3);
+            this.tb_TransFiltry.Size = new System.Drawing.Size(192, 459);
+            this.tb_TransFiltry.TabIndex = 2;
+            this.tb_TransFiltry.Text = "Transformace";
+            this.tb_TransFiltry.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(45, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Rotace:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 50);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Zkosení:";
+            // 
+            // nUpDo_Rotate
+            // 
+            this.nUpDo_Rotate.Location = new System.Drawing.Point(77, 15);
+            this.nUpDo_Rotate.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.nUpDo_Rotate.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.nUpDo_Rotate.Name = "nUpDo_Rotate";
+            this.nUpDo_Rotate.Size = new System.Drawing.Size(100, 20);
+            this.nUpDo_Rotate.TabIndex = 2;
+            // 
+            // NuUpDo_scaleX
+            // 
+            this.NuUpDo_scaleX.DecimalPlaces = 1;
+            this.NuUpDo_scaleX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.NuUpDo_scaleX.Location = new System.Drawing.Point(102, 148);
+            this.NuUpDo_scaleX.Name = "NuUpDo_scaleX";
+            this.NuUpDo_scaleX.Size = new System.Drawing.Size(75, 20);
+            this.NuUpDo_scaleX.TabIndex = 3;
+            this.NuUpDo_scaleX.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // NuUpDo_scaleY
+            // 
+            this.NuUpDo_scaleY.DecimalPlaces = 1;
+            this.NuUpDo_scaleY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.NuUpDo_scaleY.Location = new System.Drawing.Point(102, 174);
+            this.NuUpDo_scaleY.Name = "NuUpDo_scaleY";
+            this.NuUpDo_scaleY.Size = new System.Drawing.Size(75, 20);
+            this.NuUpDo_scaleY.TabIndex = 4;
+            this.NuUpDo_scaleY.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(32, 75);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Horizontální:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(41, 99);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(55, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Vertikální:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 125);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Zvětšení:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(32, 152);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Horizontální:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(41, 176);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(55, 13);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Vertikální:";
+            // 
+            // NuUpDo_zkosX
+            // 
+            this.NuUpDo_zkosX.Location = new System.Drawing.Point(102, 73);
+            this.NuUpDo_zkosX.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.NuUpDo_zkosX.Name = "NuUpDo_zkosX";
+            this.NuUpDo_zkosX.Size = new System.Drawing.Size(75, 20);
+            this.NuUpDo_zkosX.TabIndex = 10;
+            // 
+            // NuUpDo_zkosY
+            // 
+            this.NuUpDo_zkosY.Location = new System.Drawing.Point(102, 97);
+            this.NuUpDo_zkosY.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.NuUpDo_zkosY.Name = "NuUpDo_zkosY";
+            this.NuUpDo_zkosY.Size = new System.Drawing.Size(75, 20);
+            this.NuUpDo_zkosY.TabIndex = 11;
+            // 
+            // Btn_TransformMatrix
+            // 
+            this.Btn_TransformMatrix.Location = new System.Drawing.Point(9, 200);
+            this.Btn_TransformMatrix.Name = "Btn_TransformMatrix";
+            this.Btn_TransformMatrix.Size = new System.Drawing.Size(168, 23);
+            this.Btn_TransformMatrix.TabIndex = 12;
+            this.Btn_TransformMatrix.Text = "Použít";
+            this.Btn_TransformMatrix.UseVisualStyleBackColor = true;
+            this.Btn_TransformMatrix.Click += new System.EventHandler(this.Btn_TransformMatrix_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -617,6 +802,13 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nuUpDo_specific1)).EndInit();
+            this.tb_TransFiltry.ResumeLayout(false);
+            this.tb_TransFiltry.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_Rotate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NuUpDo_scaleX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NuUpDo_scaleY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NuUpDo_zkosX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NuUpDo_zkosY)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -682,7 +874,20 @@
         private System.Windows.Forms.ToolStripMenuItem filtrZaostřeníToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem detekceHranToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reliefToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem otočitOToolStripMenuItem;
+        private System.Windows.Forms.TabPage tb_TransFiltry;
+        private System.Windows.Forms.Button Btn_TransformMatrix;
+        private System.Windows.Forms.NumericUpDown NuUpDo_zkosY;
+        private System.Windows.Forms.NumericUpDown NuUpDo_zkosX;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown NuUpDo_scaleY;
+        private System.Windows.Forms.NumericUpDown NuUpDo_scaleX;
+        private System.Windows.Forms.NumericUpDown nUpDo_Rotate;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
 

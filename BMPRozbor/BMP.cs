@@ -34,55 +34,55 @@ namespace BMPRozbor
         }
         public int BfSize()
         {
-            return PomocneMetody.ByteArrayToWholeValue(PomocneMetody.SubArray(byteArray, 2, 4)); //Tyto 4 bajty určují celkovou velikost souboru s obrazovými údaji.
+            return Helpers.ByteArrayToWholeValue(Helpers.SubArray(byteArray, 2, 4)); //Tyto 4 bajty určují celkovou velikost souboru s obrazovými údaji.
         }
         public int BfOffBits()
         {
-            return PomocneMetody.ByteArrayToWholeValue(PomocneMetody.SubArray(byteArray, 10, 4));//Posun struktury BMP File Header od začátku vlastních obrazových dat
+            return Helpers.ByteArrayToWholeValue(Helpers.SubArray(byteArray, 10, 4));//Posun struktury BMP File Header od začátku vlastních obrazových dat
         }
         public int BiSize()
         {
-            return PomocneMetody.ByteArrayToWholeValue(PomocneMetody.SubArray(byteArray, 14, 4)); //Tato položka specifikuje celkovou velikost datové struktury Bitmap Information.
+            return Helpers.ByteArrayToWholeValue(Helpers.SubArray(byteArray, 14, 4)); //Tato položka specifikuje celkovou velikost datové struktury Bitmap Information.
         }
         public int BiWidth()
         {
-            return PomocneMetody.ByteArrayToWholeValue(PomocneMetody.SubArray(byteArray, 18, 4));  //Tato položka udává šířku obrazu zadávanou v pixelech.
+            return Helpers.ByteArrayToWholeValue(Helpers.SubArray(byteArray, 18, 4));  //Tato položka udává šířku obrazu zadávanou v pixelech.
         }
         public int BiHeight()
         {
-            return PomocneMetody.ByteArrayToWholeValue(PomocneMetody.SubArray(byteArray, 22, 4)); //Tato položka udává výšku obrazu zadávanou taktéž v pixelech
+            return Helpers.ByteArrayToWholeValue(Helpers.SubArray(byteArray, 22, 4)); //Tato položka udává výšku obrazu zadávanou taktéž v pixelech
         }
         public int BiPlanes()
         {
-            return PomocneMetody.ByteArrayToWholeValue(PomocneMetody.SubArray(byteArray, 26, 2)); //V této položce je zadaný počet bitových rovin pro výstupní zařízení.V BMP, jakožto formátu nezávislého na zařízení, je zde vždy hodnota 1
+            return Helpers.ByteArrayToWholeValue(Helpers.SubArray(byteArray, 26, 2)); //V této položce je zadaný počet bitových rovin pro výstupní zařízení.V BMP, jakožto formátu nezávislého na zařízení, je zde vždy hodnota 1
         }
         public int BiBitCount()
         {
-            return PomocneMetody.ByteArrayToWholeValue(PomocneMetody.SubArray(byteArray, 28, 2)); //Tato položka udává počet bitů na pixel. V BMP jsou povoleny pouze hodnoty 1, 4, 8, 16, 24 a 32.
+            return Helpers.ByteArrayToWholeValue(Helpers.SubArray(byteArray, 28, 2)); //Tato položka udává počet bitů na pixel. V BMP jsou povoleny pouze hodnoty 1, 4, 8, 16, 24 a 32.
         }
         public int BiCompression()
         {
-            return PomocneMetody.ByteArrayToWholeValue(PomocneMetody.SubArray(byteArray, 30, 4)); //Tato položka určuje typ komprese použitého pro uložení obrazových dat. V BMP jsou povoleny pouze hodnoty 0, 1, 2 a 3.
+            return Helpers.ByteArrayToWholeValue(Helpers.SubArray(byteArray, 30, 4)); //Tato položka určuje typ komprese použitého pro uložení obrazových dat. V BMP jsou povoleny pouze hodnoty 0, 1, 2 a 3.
         }
         public int BiSizeImage()
         {
-            return PomocneMetody.ByteArrayToWholeValue(PomocneMetody.SubArray(byteArray, 34, 4)); //Tato položka udává velikost obrazových dat v bajtech. Pokud je hodnota 0, pak je velikost obrazových dat určena způsobem, který je popsán v této stránce.
+            return Helpers.ByteArrayToWholeValue(Helpers.SubArray(byteArray, 34, 4)); //Tato položka udává velikost obrazových dat v bajtech. Pokud je hodnota 0, pak je velikost obrazových dat určena způsobem, který je popsán v této stránce.
         }
         public int BiXPelsPerMeter()
         {
-            return PomocneMetody.ByteArrayToWholeValue(PomocneMetody.SubArray(byteArray, 38, 4)); //Udává horizontální rozlišení výstupního zařízení v pixelech na metr. Tato hodnota může být použita například pro výběr obrazu ze skupiny obrazů, který nejlépe odpovídá rozlišení daného výstupního zařízení. Většina aplikací však nemá potřebné informace o výstupním zařízení, a proto do této položky vkládá hodnotu 0.
+            return Helpers.ByteArrayToWholeValue(Helpers.SubArray(byteArray, 38, 4)); //Udává horizontální rozlišení výstupního zařízení v pixelech na metr. Tato hodnota může být použita například pro výběr obrazu ze skupiny obrazů, který nejlépe odpovídá rozlišení daného výstupního zařízení. Většina aplikací však nemá potřebné informace o výstupním zařízení, a proto do této položky vkládá hodnotu 0.
         }
         public int BiYPelsPerMeter()
         {
-            return PomocneMetody.ByteArrayToWholeValue(PomocneMetody.SubArray(byteArray, 42, 4)); //dává vertikální rozlišení výstupního zařízení v pixelech na metr.Opět, jako u předchozí položky, zde většina programů zapisuje hodnotu 0.
+            return Helpers.ByteArrayToWholeValue(Helpers.SubArray(byteArray, 42, 4)); //dává vertikální rozlišení výstupního zařízení v pixelech na metr.Opět, jako u předchozí položky, zde většina programů zapisuje hodnotu 0.
         }
         public int BiClrUsed()
         {
-            return PomocneMetody.ByteArrayToWholeValue(PomocneMetody.SubArray(byteArray, 46, 4)); //Udává celkový počet barev, které jsou použité v dané bitmapě.Jestliže je tato hodnota nastavena na nulu, znamená to, že bitmapa používá maximální počet barev.Tento počet lze jednoduše zjistit z položky biBitCount. Nenulová hodnota může být použita například při optimalizacích zobrazování.
+            return Helpers.ByteArrayToWholeValue(Helpers.SubArray(byteArray, 46, 4)); //Udává celkový počet barev, které jsou použité v dané bitmapě.Jestliže je tato hodnota nastavena na nulu, znamená to, že bitmapa používá maximální počet barev.Tento počet lze jednoduše zjistit z položky biBitCount. Nenulová hodnota může být použita například při optimalizacích zobrazování.
         }
         public int BiClrImportant()
         {
-            return PomocneMetody.ByteArrayToWholeValue(PomocneMetody.SubArray(byteArray, 50, 4));//dává počet barev, které jsou důležité pro vykreslení bitmapy.Pokud je tato hodnota nulová, jsou všechny barvy důležité.Tento údaj je používán při zobrazování na zařízeních, které mají omezený počet současně zobrazitelných barev. Ovladač displeje může upravit systémovou paletu tak, aby zobrazil daný obrázek co nejvěrněji.Také je vhodné upravit paletu metodou seřazení jednotlivých barev podle důležitosti
+            return Helpers.ByteArrayToWholeValue(Helpers.SubArray(byteArray, 50, 4));//dává počet barev, které jsou důležité pro vykreslení bitmapy.Pokud je tato hodnota nulová, jsou všechny barvy důležité.Tento údaj je používán při zobrazování na zařízeních, které mají omezený počet současně zobrazitelných barev. Ovladač displeje může upravit systémovou paletu tak, aby zobrazil daný obrázek co nejvěrněji.Také je vhodné upravit paletu metodou seřazení jednotlivých barev podle důležitosti
         }
         public int Scanline()
         {
@@ -103,10 +103,10 @@ namespace BMPRozbor
             int byteOffset = BfOffBits()*8 + y * Scanline()+ x * BiBitCount(); // calculate the byte offset for the pixel
             if (BiBitCount() == 1 || BiBitCount() == 4 || BiBitCount() == 8 || BiBitCount() == 16)
             {
-                string hodnota = PomocneMetody.IntToBinary(byteArray[byteOffset / 8]);
+                string hodnota = Helpers.IntToBinary(byteArray[byteOffset / 8]);
                 StringBuilder hodnota2 = new StringBuilder();
                 for (int i = 0; i < BiBitCount(); i++) hodnota2.Append(hodnota[x*BiBitCount() % 8 + i]);
-                int[] vystup = { PomocneMetody.BinaryToInt(hodnota2.ToString()) };
+                int[] vystup = { Helpers.BinaryToInt(hodnota2.ToString()) };
                 return vystup;
             }
             else
@@ -122,7 +122,7 @@ namespace BMPRozbor
             {
                 int byteIndex = byteOffset/8;
                 int bitOffset = BiBitCount()*x % 8;
-                string binaryValue = PomocneMetody.IntToBinary( byteArray[byteIndex]); // get the binary representation of the byte at byteIndex 
+                string binaryValue = Helpers.IntToBinary( byteArray[byteIndex]); // get the binary representation of the byte at byteIndex 
                 for (int i = 0; i < BiBitCount(); i++)
                 {
                     int pos = bitOffset + i;
@@ -135,7 +135,7 @@ namespace BMPRozbor
                     }
                     else break;
                 }
-                byteArray[byteIndex] = (byte)PomocneMetody.BinaryToInt(binaryValue); //convert the binary string back to byte and update the byte array
+                byteArray[byteIndex] = (byte)Helpers.BinaryToInt(binaryValue); //convert the binary string back to byte and update the byte array
             }
             else
             {
@@ -159,7 +159,7 @@ namespace BMPRozbor
                 {
                     for (int j = 0; j < BiWidth();)
                     {
-                        string hodnoty = PomocneMetody.IntToBinary(byteArray[curentByte]);
+                        string hodnoty = Helpers.IntToBinary(byteArray[curentByte]);
                         for (int k = 0; k < 8; k += BiBitCount())
                         {
                             int indexPalety = 0;

@@ -66,19 +66,19 @@ namespace BMPRozbor
 
         private void odstínyŠediPomocíPrůměruToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperaceSBMP.GrayscaleByAveraging(ref Soubor);
+            OperatinsBMP.GrayscaleByAveraging(ref Soubor);
             picBx_hlavni.Refresh();
         }
 
         private void empirickéOdstínyŠediToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperaceSBMP.GrayscaleEpirical(ref Soubor);
+            OperatinsBMP.GrayscaleEpirical(ref Soubor);
             picBx_hlavni.Refresh();
         }
 
         private void přechodBarevšedáToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperaceSBMP.GrayscaleTransition(ref Soubor);
+            OperatinsBMP.GrayscaleTransition(ref Soubor);
             picBx_hlavni.Refresh();
         }
 
@@ -97,51 +97,51 @@ namespace BMPRozbor
 
         private void sépieToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperaceSBMP.Sepie(ref Soubor);
+            OperatinsBMP.Sepie(ref Soubor);
             picBx_hlavni.Refresh();
         }
 
         private void odstínVybranéBarvyToolStripMenuItem_Click(object sender, EventArgs e)
         {
             colorDialog1.FullOpen = true;
-            if (colorDialog1.ShowDialog() == DialogResult.OK) OperaceSBMP.OneColorShades(ref Soubor, colorDialog1.Color);
+            if (colorDialog1.ShowDialog() == DialogResult.OK) OperatinsBMP.OneColorShades(ref Soubor, colorDialog1.Color);
             picBx_hlavni.Refresh();
         }
 
         private void photoFiltrToolStripMenuItem_Click(object sender, EventArgs e)
         {
             colorDialog1.FullOpen = true;
-            if (colorDialog1.ShowDialog() == DialogResult.OK) OperaceSBMP.PhotoFiltr(ref Soubor, colorDialog1.Color);
+            if (colorDialog1.ShowDialog() == DialogResult.OK) OperatinsBMP.PhotoFiltr(ref Soubor, colorDialog1.Color);
             picBx_hlavni.Refresh();
         }
 
         private void pouzeRToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperaceSBMP.OnlyRGB(ref Soubor, 0);
+            OperatinsBMP.OnlyRGB(ref Soubor, 0);
             picBx_hlavni.Refresh();
         }
 
         private void pouzeGToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperaceSBMP.OnlyRGB(ref Soubor, 1);
+            OperatinsBMP.OnlyRGB(ref Soubor, 1);
             picBx_hlavni.Refresh();
         }
 
         private void pouzeBToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperaceSBMP.OnlyRGB(ref Soubor, 2);
+            OperatinsBMP.OnlyRGB(ref Soubor, 2);
             picBx_hlavni.Refresh();
         }
 
         private void majoritníBarvaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperaceSBMP.MajorityColor(ref Soubor);
+            OperatinsBMP.MajorityColor(ref Soubor);
             picBx_hlavni.Refresh();
         }
 
         private void vertikálněToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Soubor = OperaceSBMP.Mirror(Soubor);
+            Soubor = OperatinsBMP.Mirror(Soubor);
             picBx_hlavni.Refresh();
         }
 
@@ -161,36 +161,14 @@ namespace BMPRozbor
 
         private void button1_Click_2(object sender, EventArgs e)
         {
-            if (uprava == 1) OperaceSBMP.Blur(ref Soubor, (int)nuUpDo_specific1.Value);
-            else if (uprava == 2) OperaceSBMP.GrayscaleThreshold(ref Soubor, (int)nuUpDo_specific1.Value);
-            else if (uprava == 3) OperaceSBMP.ChangeBrightness(ref Soubor, (int)nuUpDo_specific1.Value);
-            else if (uprava == 4) OperaceSBMP.ChangeContrast(ref Soubor, nuUpDo_specific1.Value);
-            else if (uprava == 5) OperaceSBMP.ShiftRow(ref Soubor, (int)nuUpDo_specific1.Value, 0);
-            else if (uprava == 6) OperaceSBMP.ShiftRow(ref Soubor, (int)nuUpDo_specific1.Value, 1);
-            else if (uprava == 7) OperaceSBMP.ShiftColumn(ref Soubor, (int)nuUpDo_specific1.Value, 0);
-            else if (uprava == 8) OperaceSBMP.ShiftColumn(ref Soubor, (int)nuUpDo_specific1.Value, 1);
-            else if (uprava == 9)
-            {
-                double angleRadians = (double)nuUpDo_specific1.Value * Math.PI / 180;
-                double[,] matrix =
-                {
-                    {Math.Cos(angleRadians),-1* Math.Sin(angleRadians),0},
-                    {Math.Sin(angleRadians),Math.Cos(angleRadians),0},
-                    {0,0,1 }
-                };
-                OperaceSBMP.ApplyTrasformationMatrix(ref Soubor, matrix);
-            }
-            else if (uprava == 94)
-            {
-                double angleRadians = (double)nuUpDo_specific1.Value * Math.PI / 180;
-                double[,] matrix =
-                {
-                    {1,30,0},
-                    {30,1,0},
-                    {0,0,1 }
-                };
-                OperaceSBMP.ApplyTrasformationMatrix(ref Soubor, matrix);
-            }
+            if (uprava == 1) OperatinsBMP.Blur(ref Soubor, (int)nuUpDo_specific1.Value);
+            else if (uprava == 2) OperatinsBMP.GrayscaleThreshold(ref Soubor, (int)nuUpDo_specific1.Value);
+            else if (uprava == 3) OperatinsBMP.ChangeBrightness(ref Soubor, (int)nuUpDo_specific1.Value);
+            else if (uprava == 4) OperatinsBMP.ChangeContrast(ref Soubor, nuUpDo_specific1.Value);
+            else if (uprava == 5) OperatinsBMP.ShiftRow(ref Soubor, (int)nuUpDo_specific1.Value, 0);
+            else if (uprava == 6) OperatinsBMP.ShiftRow(ref Soubor, (int)nuUpDo_specific1.Value, 1);
+            else if (uprava == 7) OperatinsBMP.ShiftColumn(ref Soubor, (int)nuUpDo_specific1.Value, 0);
+            else if (uprava == 8) OperatinsBMP.ShiftColumn(ref Soubor, (int)nuUpDo_specific1.Value, 1);
             picBx_hlavni.Refresh();
         }
 
@@ -280,13 +258,13 @@ namespace BMPRozbor
                 {-1,5,-1},
                 {0,-1,0}
             };
-            OperaceSBMP.ApplyConvolutionMatrix(ref Soubor, matice, 1, 0);
+            OperatinsBMP.ApplyConvolutionMatrix(ref Soubor, matice, 1, 0);
             picBx_hlavni.Refresh();
         }
 
         private void konvertovatNa1BitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperaceSBMP.ConvertToXBit(ref Soubor, 1);
+            OperatinsBMP.ConvertToXBit(ref Soubor, 1);
             picBx_hlavni.Refresh();
         }
 
@@ -302,7 +280,7 @@ namespace BMPRozbor
                 {2,4,2},
                 {1,2,1}
             };
-            OperaceSBMP.ApplyConvolutionMatrix(ref Soubor, matice, 16, 0);
+            OperatinsBMP.ApplyConvolutionMatrix(ref Soubor, matice, 16, 0);
             picBx_hlavni.Refresh();
         }
 
@@ -313,7 +291,7 @@ namespace BMPRozbor
                 {-1,5,-1},
                 {0,-1,0}
             };
-            OperaceSBMP.ApplyConvolutionMatrix(ref Soubor, matice, 1, 0);
+            OperatinsBMP.ApplyConvolutionMatrix(ref Soubor, matice, 1, 0);
             picBx_hlavni.Refresh();
         }
 
@@ -324,7 +302,7 @@ namespace BMPRozbor
                 {0,0,0},
                 {-1,0,1}
             };
-            OperaceSBMP.ApplyConvolutionMatrix(ref Soubor, matice, 1, 0);
+            OperatinsBMP.ApplyConvolutionMatrix(ref Soubor, matice, 1, 0);
             picBx_hlavni.Refresh();
         }
 
@@ -335,7 +313,7 @@ namespace BMPRozbor
                 {0,0,0},
                 {0,1,0}
             };
-            OperaceSBMP.ApplyConvolutionMatrix(ref Soubor, matice, 1, 128);
+            OperatinsBMP.ApplyConvolutionMatrix(ref Soubor, matice, 1, 128);
             picBx_hlavni.Refresh();
         }
 
@@ -354,20 +332,48 @@ namespace BMPRozbor
 
         private void konvertovatNa24BitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperaceSBMP.ConvertToXBit(ref Soubor, 24);
+            OperatinsBMP.ConvertToXBit(ref Soubor, 24);
             picBx_hlavni.Refresh();
         }
 
         private void konvertovatNa4BitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperaceSBMP.ConvertToXBit(ref Soubor, 4);
+            OperatinsBMP.ConvertToXBit(ref Soubor, 4);
             picBx_hlavni.Refresh();
         }
 
         private void konvertovatNa8BitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperaceSBMP.ConvertToXBit(ref Soubor, 8);
+            OperatinsBMP.ConvertToXBit(ref Soubor, 8);
             picBx_hlavni.Refresh();
+        }
+
+        private void Btn_TransformMatrix_Click(object sender, EventArgs e)
+        {
+            double angleRadians = (double)nUpDo_Rotate.Value * Math.PI / 180;
+            double[,] matrixRotate =
+            {
+                {Math.Cos(angleRadians),-1* Math.Sin(angleRadians),0},
+                {Math.Sin(angleRadians),Math.Cos(angleRadians),0},
+                {0,0,1 }
+            };
+            double[,] matrixScale =
+            {
+                {(double)NuUpDo_scaleX.Value,0,0},
+                {0,(double)NuUpDo_scaleY.Value,0},
+                {0,0,1 }
+            };
+            double[,] transformations = Helpers.MultiplyMatrix(matrixRotate, matrixScale);
+            double[,] matrixZkos =
+            {
+                {1, (double)NuUpDo_zkosY.Value,0},
+                {(double)NuUpDo_zkosX.Value,1,0},
+                {0,0,1 }
+            };
+            transformations = Helpers.MultiplyMatrix(transformations, matrixZkos);
+            OperatinsBMP.ApplyTrasformationMatrix(ref Soubor,transformations);
+            picBx_hlavni.Refresh();
+
         }
     }
 }

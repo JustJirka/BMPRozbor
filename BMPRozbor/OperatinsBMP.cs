@@ -14,7 +14,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace BMPRozbor
 {
-    internal class OperaceSBMP
+    internal class OperatinsBMP
     {
         /// <summary>
         /// This method blurs the suplied BMP image by averaging the color of inside of blocks
@@ -604,24 +604,24 @@ namespace BMPRozbor
             double[,] edges = { { 0, 0 }, { image.BiWidth() - 1, 0 }, { image.BiWidth() - 1, image.BiHeight() - 1 }, { 0, image.BiHeight() - 1 } };
             for (int i = 0; i < edges.GetLength(0); i++)
             {
-                minX = (int)Math.Min(minX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { edges[i, 0] }, { edges[i, 1] }, { 1 } })[0, 0]));
-                maxX = (int)Math.Max(maxX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { edges[i, 0] }, { edges[i, 1] }, { 1 } })[0, 0]));
-                minY = (int)Math.Min(minY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { edges[i, 0] }, { edges[i, 1] }, { 1 } })[1, 0]));
-                maxY = (int)Math.Max(maxY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { edges[i, 0] }, { edges[i, 1] }, { 1 } })[1, 0]));
+                minX = (int)Math.Min(minX, Math.Round(Helpers.MultiplyMatrix(transformationMatrix, new double[,] { { edges[i, 0] }, { edges[i, 1] }, { 1 } })[0, 0]));
+                maxX = (int)Math.Max(maxX, Math.Round(Helpers.MultiplyMatrix(transformationMatrix, new double[,] { { edges[i, 0] }, { edges[i, 1] }, { 1 } })[0, 0]));
+                minY = (int)Math.Min(minY, Math.Round(Helpers.MultiplyMatrix(transformationMatrix, new double[,] { { edges[i, 0] }, { edges[i, 1] }, { 1 } })[1, 0]));
+                maxY = (int)Math.Max(maxY, Math.Round(Helpers.MultiplyMatrix(transformationMatrix, new double[,] { { edges[i, 0] }, { edges[i, 1] }, { 1 } })[1, 0]));
             }
             int width = maxX - minX + 1;
             int height = maxY - minY + 1;
 
-            double[,] invertedMatrix = PomocneMetody.ConvertJagedToMultidimensional(PomocneMetody.MatrixInverse(PomocneMetody.ConvertMultidimensionalToJagedTo(transformationMatrix)));
+            double[,] invertedMatrix = Helpers.ConvertJagedToMultidimensional(Helpers.MatrixInverse(Helpers.ConvertMultidimensionalToJagedTo(transformationMatrix)));
 
             //create new image BMP
             double nasobek = Convert.ToDouble(image.BiBitCount() * width);
             int scanline = Convert.ToInt32((Math.Ceiling(nasobek / 32.0) * 32));
             byte[] newByteArray = new byte[image.BfOffBits() + scanline / 8 * height];
             Array.Copy(image.byteArray, 0, newByteArray, 0, image.BfOffBits());
-            byte[] biWidth = PomocneMetody.IntToByteArray((uint)width, 4);
+            byte[] biWidth = Helpers.IntToByteArray((uint)width, 4);
             Array.Copy(biWidth, 0, newByteArray, 18, 4);
-            byte[] biHeight = PomocneMetody.IntToByteArray((uint)height, 4);
+            byte[] biHeight = Helpers.IntToByteArray((uint)height, 4);
             Array.Copy(biHeight, 0, newByteArray, 22, 4);
             BMP newImageBMP = new BMP(newByteArray);
 
@@ -630,7 +630,7 @@ namespace BMPRozbor
             {
                 for (int x = 0; x < width; x++)
                 {
-                    double[,] product = PomocneMetody.MultiplyMatrix(invertedMatrix, new double[,] { { x + minX }, { y + minY }, { 1 } });
+                    double[,] product = Helpers.MultiplyMatrix(invertedMatrix, new double[,] { { x + minX }, { y + minY }, { 1 } });
                     int newX = (int)Math.Round(product[0, 0]);
                     int newY = (int)Math.Round(product[1, 0]);
                     if (newX > image.BiWidth() - 1 || newX < 0 || newY > image.BiHeight() - 1 || newY < 0) newImageBMP.SetPixelAtPosition(x, y, image.GetPixelAtPosition(0, 0));
@@ -647,7 +647,7 @@ namespace BMPRozbor
             Array.Copy(image.byteArray, newByteArray, 54);
             BMP newImage = new BMP(newByteArray);
             newImage.byteArray[28] = Convert.ToByte(newBitCount);
-            byte[] bfOffBits = PomocneMetody.IntToByteArray((uint)(54 + (int)Math.Pow(2, newBitCount) * 4), 4);
+            byte[] bfOffBits = Helpers.IntToByteArray((uint)(54 + (int)Math.Pow(2, newBitCount) * 4), 4);
             Array.Copy(bfOffBits, 0, newImage.byteArray, 10, 4);
             if (newBitCount == 1)
             {
