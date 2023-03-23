@@ -204,7 +204,7 @@ namespace BMPRozbor
         private static Int32 GetNearestColor(Color color, IList<Color> palette)
         {
             Int32 bestIndex = 0;
-            Int32 bestFactor = Int32.MaxValue;
+            double bestFactor = double.MaxValue;
 
             for (Int32 index = 0; index < palette.Count; index++)
             {
@@ -220,7 +220,7 @@ namespace BMPRozbor
                 Int32 factorG = deltaG * deltaG;
                 Int32 factorB = deltaB * deltaB;
 
-                Int32 factor = factorA + factorR + factorG + factorB;
+                double factor =Math.Sqrt( Convert.ToDouble(factorA + factorR + factorG + factorB));
 
                 if (factor == 0) return index;
 

@@ -601,71 +601,52 @@ namespace BMPRozbor
             // saving some stats to adjust the image later  
             int minX = 0, minY = 0;
             int maxX = 0, maxY = 0;
-            minX = (int)Math.Min(minX, Math.Floor(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { 0 } })[0, 0]));
-            minY = (int)Math.Min(minY, Math.Floor(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { 0 } })[1, 0]));
-            minX = (int)Math.Min(minX, Math.Floor(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { 0 } })[0, 0]));
-            minY = (int)Math.Min(minY, Math.Floor(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { 0 } })[1, 0]));
-            minX = (int)Math.Min(minX, Math.Floor(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { image.BiHeight() - 1 } })[0, 0]));
-            minY = (int)Math.Min(minY, Math.Floor(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { image.BiHeight() - 1 } })[1, 0]));
-            minX = (int)Math.Min(minX, Math.Floor(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { image.BiHeight() - 1 } })[0, 0]));
-            minY = (int)Math.Min(minY, Math.Floor(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { image.BiHeight() - 1 } })[1, 0]));
-            maxX = (int)Math.Min(maxX, Math.Floor(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { 0 } })[0, 0]));
-            maxY = (int)Math.Max(maxY, Math.Floor(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { 0 } })[1, 0]));
-            maxX = (int)Math.Max(maxX, Math.Floor(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { 0 } })[0, 0]));
-            maxY = (int)Math.Max(maxY, Math.Floor(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { 0 } })[1, 0]));
-            maxX = (int)Math.Max(maxX, Math.Floor(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { image.BiHeight() - 1 } })[0, 0]));
-            maxY = (int)Math.Max(maxY, Math.Floor(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { image.BiHeight() - 1 } })[1, 0]));
-            maxX = (int)Math.Max(maxX, Math.Floor(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { image.BiHeight() - 1 } })[0, 0]));
-            maxY = (int)Math.Max(maxY, Math.Floor(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { image.BiHeight() - 1 } })[1, 0]));
+            minX = (int)Math.Min(minX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { 0 }, { 1 } })[0, 0]));
+            minY = (int)Math.Min(minY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { 0 }, { 1 } })[1, 0]));
+            minX = (int)Math.Min(minX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { 0 }, { 1 } })[0, 0]));
+            minY = (int)Math.Min(minY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { 0 }, { 1 } })[1, 0]));
+            minX = (int)Math.Min(minX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { image.BiHeight() - 1 }, { 1 } })[0, 0]));
+            minY = (int)Math.Min(minY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { image.BiHeight() - 1 }, { 1 } })[1, 0]));
+            minX = (int)Math.Min(minX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { image.BiHeight() - 1 }, { 1 } })[0, 0]));
+            minY = (int)Math.Min(minY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { image.BiHeight() - 1 }, { 1 } })[1, 0]));
+            maxX = (int)Math.Min(maxX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { 0 }, { 1 } })[0, 0]));
+            maxY = (int)Math.Max(maxY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { 0 }, { 1 } })[1, 0]));
+            maxX = (int)Math.Max(maxX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { 0 }, { 1 } })[0, 0]));
+            maxY = (int)Math.Max(maxY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { 0 }, { 1 } })[1, 0]));
+            maxX = (int)Math.Max(maxX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { image.BiHeight() - 1 }, { 1 } })[0, 0]));
+            maxY = (int)Math.Max(maxY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { image.BiWidth() - 1 }, { image.BiHeight() - 1 }, { 1 } })[1, 0]));
+            maxX = (int)Math.Max(maxX, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { image.BiHeight() - 1 }, { 1 } })[0, 0]));
+            maxY = (int)Math.Max(maxY, Math.Round(PomocneMetody.MultiplyMatrix(transformationMatrix, new double[,] { { 0 }, { image.BiHeight() - 1 }, { 1 } })[1, 0]));
 
             int width = maxX - minX + 1;
             int height = maxY - minY + 1;
 
             double[,] invertedMatrix = PomocneMetody.ConvertJagedToMultidimensional(PomocneMetody.MatrixInverse(PomocneMetody.ConvertMultidimensionalToJagedTo(transformationMatrix)));
 
-            int[,,] newImage = new int[width, height, 3];
-            // scanning points and applying transformations 
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    double[,] product = PomocneMetody.MultiplyMatrix(invertedMatrix, new double[,] { { x + minX }, { y + minY } });
-
-                    int newX = (int)Math.Round(product[0, 0]);
-                    int newY = (int)Math.Round(product[1, 0]);
-                    if (newX > image.BiWidth() - 1 || newX < 0 || newY > image.BiHeight() - 1 || newY < 0)
-                    {
-                        newImage[x, y, 0] = 255;
-                        newImage[x, y, 1] = 255;
-                        newImage[x, y, 2] = 255;
-                    }
-                    else
-                    {
-                        newImage[x, y, 0] = image.byteArray[image.BfOffBits() + (newY * image.Scanline() / 8 + newX * 3)];
-                        newImage[x, y, 1] = image.byteArray[image.BfOffBits() + (newY * image.Scanline() / 8 + newX * 3) + 1];
-                        newImage[x, y, 2] = image.byteArray[image.BfOffBits() + (newY * image.Scanline() / 8 + newX * 3) + 2];
-                    }
-                }
-            }
+            //create new image BMP
             double nasobek = Convert.ToDouble(image.BiBitCount() * width);
             int scanline = Convert.ToInt32((Math.Ceiling(nasobek / 32.0) * 32));
-            int scanlineDoplnek = Convert.ToInt32(scanline - nasobek);
             byte[] newByteArray = new byte[image.BfOffBits() + scanline / 8 * height];
             Array.Copy(image.byteArray, 0, newByteArray, 0, image.BfOffBits());
             byte[] biWidth = PomocneMetody.IntToByteArray((uint)width, 4);
             Array.Copy(biWidth, 0, newByteArray, 18, 4);
             byte[] biHeight = PomocneMetody.IntToByteArray((uint)height, 4);
             Array.Copy(biHeight, 0, newByteArray, 22, 4);
+            BMP newImageBMP = new BMP(newByteArray);
+
+            // scanning points and applying transformations 
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
                 {
-                    newByteArray[image.BfOffBits() + (y * scanline / 8 + x * 3)] = Convert.ToByte(newImage[x, y, 0]);
-                    newByteArray[image.BfOffBits() + (y * scanline / 8 + x * 3) + 1] = Convert.ToByte(newImage[x, y, 1]);
-                    newByteArray[image.BfOffBits() + (y * scanline / 8 + x * 3) + 2] = Convert.ToByte(newImage[x, y, 2]);
+                    double[,] product = PomocneMetody.MultiplyMatrix(invertedMatrix, new double[,] { { x + minX }, { y + minY }, { 1 } });
+                    int newX = (int)Math.Round(product[0, 0]);
+                    int newY = (int)Math.Round(product[1, 0]);
+                    if (newX > image.BiWidth() - 1 || newX < 0 || newY > image.BiHeight() - 1 || newY < 0) newImageBMP.SetPixelAtPosition(x, y, image.GetPixelAtPosition(0, 0));
+                    else newImageBMP.SetPixelAtPosition(x, y, image.GetPixelAtPosition(newX, newY));
                 }
             }
-            image.byteArray = newByteArray;
+            image = newImageBMP;
 
         }
         public static void ConvertToXBit(ref BMP image, int newBitCount)
@@ -866,7 +847,7 @@ namespace BMPRozbor
                 {
                     for (int x = 0; x < newImage.BiWidth(); x++)
                     {
-                        newImage.SetPixelAtPosition(x, y, Paleta[image.GetPixelAtPosition(x,y)[0]]);
+                        newImage.SetPixelAtPosition(x, y, Paleta[image.GetPixelAtPosition(x, y)[0]]);
                     }
                 }
             }
