@@ -23,6 +23,7 @@ namespace BMPRozbor
         /// <param name="blurSize">Number of blocks per line</param>
         public static void Blur(ref BMP image, int blurSize)//jenom  24bit bmp 
         {
+            if (image.BiBitCount()!=24) ConvertToXBit(ref image, 24);
             for (int imageY = 0; imageY < image.BiHeight(); imageY += image.BiHeight() / blurSize)
             {
                 for (int imageX = 0; imageX < image.BiHeight(); imageX += image.BiWidth() / blurSize)
@@ -49,9 +50,9 @@ namespace BMPRozbor
                     int[] setValue = { avgB, avgG, avgR };
 
                     //  set each pixel to that color
-                    for (int blurX = imageX; blurX < imageX + (image.BiHeight() / blurSize); blurX++)
+                    for (int blurX = imageX; blurX < imageX + (image.BiWidth() / blurSize); blurX++)
                     {
-                        for (int blurY = imageY; blurY < imageY + (image.BiWidth() / blurSize); blurY++)
+                        for (int blurY = imageY; blurY < imageY + (image.BiHeight() / blurSize); blurY++)
                         {
                             image.SetPixelAtPosition(blurX, blurY, setValue);
                         }
