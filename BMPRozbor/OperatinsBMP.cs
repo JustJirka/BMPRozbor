@@ -171,26 +171,21 @@ namespace BMPRozbor
         /// <param name="image">24bit bmp image</param>
         public static void GrayscaleTransition(ref BMP image)
         {
-            if (image.BiBitCount() == 24)
+            if (image.BiBitCount() != 24) ConvertToXBit(ref image, 24);
+            int curentByte = image.BfOffBits();
+            for (int i = image.BiHeight(); i > 0; i--)
             {
-                int curentByte = image.BfOffBits();
-                for (int i = image.BiHeight(); i > 0; i--)
+                for (int j = 0; j < image.BiWidth(); j++)
                 {
-                    for (int j = 0; j < image.BiWidth(); j++)
+                    int s = (299 * image.byteArray[curentByte + 2] + 587 * image.byteArray[curentByte + 1] + 114 * image.byteArray[curentByte]) / 1000;
+                    for (int k = 0; k < 3; k++)
                     {
-                        int s = (299 * image.byteArray[curentByte + 2] + 587 * image.byteArray[curentByte + 1] + 114 * image.byteArray[curentByte]) / 1000;
-                        for (int k = 0; k < 3; k++)
-                        {
-                            image.byteArray[curentByte] = (byte)(((image.BiWidth() - 1 - j) * s + j * image.byteArray[curentByte]) / image.BiWidth());
-                            curentByte++;
-                        }
-
+                        image.byteArray[curentByte] = (byte)(((image.BiWidth() - 1 - j) * s + j * image.byteArray[curentByte]) / image.BiWidth());
+                        curentByte++;
                     }
-                    curentByte += image.ScanlineDoplnek() / 8;
                 }
-
+                curentByte += image.ScanlineDoplnek() / 8;
             }
-            else  throw new InvalidOperationException("Image must be 24bit");
         }
         public static void GrayscaleThreshold(ref BMP image, int threshold)
         {
@@ -207,8 +202,8 @@ namespace BMPRozbor
                             color += image.byteArray[curentByte];
                             curentByte++;
                         }
-                        if (color / 3 < threshold) color = 255;
-                        else color = 0;
+                        if (color / 3 < threshold) color = 0;
+                        else color = 255;
                         curentByte -= 3;
                         for (int k = 0; k < 3; k++)
                         {
@@ -227,8 +222,8 @@ namespace BMPRozbor
                 {
                     int color = 0;
                     for (int k = 0; k < 3; k++) color += image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + k];
-                    if (color / 3 < threshold) color = 255;
-                    else color = 0;
+                    if (color / 3 < threshold) color = 0;
+                    else color = 255;
                     for (int k = 0; k < 3; k++) image.byteArray[image.BfOffBits() - pocetPalet * 4 + (i * 4) + k] = Convert.ToByte(color / 3);
                 }
             }
@@ -310,7 +305,7 @@ namespace BMPRozbor
             if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
             {
                 int curentByte = image.BfOffBits();
-                for (int i = image.BiHeight(); i > 0; i--)
+                for (int i = image.BiHeight()-1; i > 0; i--)
                 {
                     for (int j = 0; j < image.BiWidth(); j++)
                     {
@@ -393,7 +388,7 @@ namespace BMPRozbor
             if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
             {
                 int curentByte = image.BfOffBits();
-                for (int i = image.BiHeight(); i > 0; i--)
+                for (int i = image.BiHeight()-1; i > 0; i--)
                 {
                     for (int j = 0; j < image.BiWidth(); j++)
                     {
@@ -410,7 +405,7 @@ namespace BMPRozbor
                             image.byteArray[curentByte] = 0;
                             image.byteArray[curentByte - 1] = 0;
                         }
-                        else if (G > B && G > R)
+                        else if (B > R && B > G)
                         {
                             image.byteArray[curentByte - 2] = 0;
                             image.byteArray[curentByte] = 0;
@@ -558,40 +553,38 @@ namespace BMPRozbor
         }
         public static void ApplyConvolutionMatrix(ref BMP image, int[,] matrix, int divider, int offset)
         {
-            if (image.BiBitCount() == 24)
+            if (image.BiBitCount() != 24) ConvertToXBit(ref image, 24);
+            byte[] orignalArray = new byte[image.byteArray.Length];
+            Array.Copy(image.byteArray, orignalArray, image.byteArray.Length);
+            BMP originalImage = new BMP(orignalArray);
+            for (int y = 0; y < image.BiHeight(); y++)
             {
-                byte[] orignalArray = new byte[image.byteArray.Length];
-                Array.Copy(image.byteArray, orignalArray, image.byteArray.Length);
-                BMP originalImage = new BMP(orignalArray);
-                for (int y = 0; y < image.BiHeight(); y++)
+                for (int x = 0; x < image.BiWidth(); x++)
                 {
-                    for (int x = 0; x < image.BiWidth(); x++)
+                    int[] newPixel = new int[3];
+                    for (int i = 0; i < 3; i++)
                     {
-                        int[] newPixel = new int[3];
-                        for (int i = 0; i < 3; i++)
+                        for (int j = 0; j < 3; j++)
                         {
-                            for (int j = 0; j < 3; j++)
-                            {
-                                int newX = x - 1 + j, newY = y - 1 + i;
-                                if (newX < 0) newX = 0;
-                                if (newX >= image.BiWidth()) newX = image.BiWidth() - 1;
-                                if (newY < 0) newY = 0;
-                                if (newY >= image.BiWidth()) newY = image.BiHeight() - 1;
-                                int[] pixel = originalImage.GetPixelAtPosition(newX, newY);
-                                newPixel[0] += pixel[0] * matrix[j, i];
-                                newPixel[1] += pixel[1] * matrix[j, i];
-                                newPixel[2] += pixel[2] * matrix[j, i];
-                            }
+                            int newX = x - 1 + j, newY = y - 1 + i;
+                            if (newX < 0) newX = 0;
+                            if (newX >= image.BiWidth()) newX = image.BiWidth() - 1;
+                            if (newY < 0) newY = 0;
+                            if (newY >= image.BiHeight()) newY = image.BiHeight() - 1;
+                            int[] pixel = originalImage.GetPixelAtPosition(newX, newY);
+                            newPixel[0] += pixel[0] * matrix[j, i];
+                            newPixel[1] += pixel[1] * matrix[j, i];
+                            newPixel[2] += pixel[2] * matrix[j, i];
                         }
-                        for (int i = 0; i < 3; i++)
-                        {
-                            newPixel[i] /= divider;
-                            newPixel[i] += offset;
-                            if (newPixel[i] > 255) newPixel[i] = 255;
-                            else if (newPixel[i] < 0) newPixel[i] = 0;
-                        }
-                        image.SetPixelAtPosition(x, y, newPixel);
                     }
+                    for (int i = 0; i < 3; i++)
+                    {
+                        newPixel[i] /= divider;
+                        newPixel[i] += offset;
+                        if (newPixel[i] > 255) newPixel[i] = 255;
+                        else if (newPixel[i] < 0) newPixel[i] = 0;
+                    }
+                    image.SetPixelAtPosition(x, y, newPixel);
                 }
             }
         }
@@ -681,7 +674,7 @@ namespace BMPRozbor
                 int newPocetPalet = (int)Math.Pow(2, newImage.BiBitCount());
                 if (newBitCount < image.BiBitCount())
                 {
-                    ColorQuantizer quantizer = new PaletteQuantizer(); ;
+                    IColorQuantizer quantizer = new PaletteQuantizer(); ;
                     if (image.BiBitCount() == 8)
                     {
                         int pocetPalet = (int)Math.Pow(2, image.BiBitCount());
@@ -771,7 +764,7 @@ namespace BMPRozbor
                 int newPocetPalet = (int)Math.Pow(2, newImage.BiBitCount());
                 if (newBitCount < image.BiBitCount())//jen 24
                 {
-                    ColorQuantizer quantizer = new PaletteQuantizer();
+                    IColorQuantizer quantizer = new PaletteQuantizer();
                     if (image.BiBitCount() == 24)
                     {
                         for (int y = 0; y < image.BiHeight(); y++)

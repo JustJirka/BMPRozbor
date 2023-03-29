@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BMPRozbor
 {
-    public class PaletteQuantizer : ColorQuantizer
+    public class PaletteQuantizer : IColorQuantizer
     {
         private readonly List<Color> palette;
         private readonly Dictionary<Color, Byte> cache;

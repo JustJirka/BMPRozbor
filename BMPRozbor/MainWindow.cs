@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,72 +18,62 @@ namespace BMPRozbor
 {
     public partial class MainWindow : Form
     {
-        BMP Soubor;
+        BMP Soubor= new BMP();
         int uprava = -1;
-        bool imgLoaded = false;
         public MainWindow()
         {
             InitializeComponent();
         }
-
-        private void btn_openFile_Click(object sender, EventArgs e)
+        private void PicBx_hlavni_Paint(object sender, PaintEventArgs e)
         {
+            Soubor.DrawImage(e.Graphics, (int)nuUpDo_imageScale.Value);
         }
 
-        private void picBx_hlavni_Paint(object sender, PaintEventArgs e)
-        {
-            if (imgLoaded)
-            {
-                Soubor.DrawImage(e.Graphics, (int)nuUpDo_imageScale.Value);
-            }
-        }
-
-        private void btn_refresh_Click(object sender, EventArgs e)
+        private void Btn_refresh_Click(object sender, EventArgs e)
         {
             picBx_hlavni.Refresh();
         }
 
-        private void otevřítSouborToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenFileToolStripMenu_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+           if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Soubor = new BMP(openFileDialog1.FileName);
-                imgLoaded = true;
                 txtBx_Informations.Text = "bfType: " + Soubor.BfType() + Environment.NewLine + "bfSize: " + Soubor.BfSize() + Environment.NewLine + "bfOffBits: " + Soubor.BfOffBits() + Environment.NewLine + "biSize: " + Soubor.BiSize() + Environment.NewLine + "biWidth: " + Soubor.BiWidth() + Environment.NewLine + "biHeight: " + Soubor.BiHeight() + Environment.NewLine + "biPlanes: " + Soubor.BiPlanes() + Environment.NewLine + "biBitCount: " + Soubor.BiBitCount() + Environment.NewLine + "biCompression: " + Soubor.BiCompression() + Environment.NewLine + "biSizeImage: " + Soubor.BiSizeImage() + Environment.NewLine + "biXPelsPerMeter: " + Soubor.BiXPelsPerMeter() + Environment.NewLine + "biYPelsPerMeter: " + Soubor.BiYPelsPerMeter() + Environment.NewLine + "biClrUsed: " + Soubor.BiClrUsed() + Environment.NewLine + "biClrImportant: " + Soubor.BiClrImportant();
                 picBx_hlavni.Refresh();
             }
         }
 
-        private void uložitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveToolStripMenu_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK) Soubor.SaveFile(saveFileDialog1.FileName);
         }
 
-        private void inverzeBarevToolStripMenuItem_Click(object sender, EventArgs e)
+        private void InvetColorToolStripMenu_Click(object sender, EventArgs e)
         {
             Soubor.Invert();
             picBx_hlavni.Refresh();
         }
 
-        private void odstínyŠediPomocíPrůměruToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GrayscaleByAvaregingToolStripMenu_Click(object sender, EventArgs e)
         {
             OperatinsBMP.GrayscaleByAveraging(ref Soubor);
             picBx_hlavni.Refresh();
         }
 
-        private void empirickéOdstínyŠediToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EpiricGrayscaleToolStripMenu_Click(object sender, EventArgs e)
         {
             OperatinsBMP.GrayscaleEpirical(ref Soubor);
             picBx_hlavni.Refresh();
         }
 
-        private void přechodBarevšedáToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GrayscaleColorTransitionToolStripMenu_Click(object sender, EventArgs e)
         {
             OperatinsBMP.GrayscaleTransition(ref Soubor);
             picBx_hlavni.Refresh();
         }
 
-        private void prádhToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ThresholdGrayscaleToolStripMenu_Click(object sender, EventArgs e)
         {
             lbl_specific1.Text = "Zadejte práh:";
             uprava = 2;//rozmazani
@@ -95,63 +86,63 @@ namespace BMPRozbor
             nuUpDo_specific1.Value = 125;
         }
 
-        private void sépieToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SepieToolStripMenu_Click(object sender, EventArgs e)
         {
             OperatinsBMP.Sepie(ref Soubor);
             picBx_hlavni.Refresh();
         }
 
-        private void odstínVybranéBarvyToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OneColorShadeToolStripMenu_Click(object sender, EventArgs e)
         {
             colorDialog1.FullOpen = true;
             if (colorDialog1.ShowDialog() == DialogResult.OK) OperatinsBMP.OneColorShades(ref Soubor, colorDialog1.Color);
             picBx_hlavni.Refresh();
         }
 
-        private void photoFiltrToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PhotoFiltrToolStripMenuItem_Click(object sender, EventArgs e)
         {
             colorDialog1.FullOpen = true;
             if (colorDialog1.ShowDialog() == DialogResult.OK) OperatinsBMP.PhotoFiltr(ref Soubor, colorDialog1.Color);
             picBx_hlavni.Refresh();
         }
 
-        private void pouzeRToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OnlyRedToolStripMenu_Click(object sender, EventArgs e)
         {
             OperatinsBMP.OnlyRGB(ref Soubor, 0);
             picBx_hlavni.Refresh();
         }
 
-        private void pouzeGToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OnlyGreenToolStripMenu_Click(object sender, EventArgs e)
         {
             OperatinsBMP.OnlyRGB(ref Soubor, 1);
             picBx_hlavni.Refresh();
         }
 
-        private void pouzeBToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OnlyBlueToolStripMenu_Click(object sender, EventArgs e)
         {
             OperatinsBMP.OnlyRGB(ref Soubor, 2);
             picBx_hlavni.Refresh();
         }
 
-        private void majoritníBarvaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MajorityColorToolStripMenu_Click(object sender, EventArgs e)
         {
             OperatinsBMP.MajorityColor(ref Soubor);
             picBx_hlavni.Refresh();
         }
 
-        private void vertikálněToolStripMenuItem_Click(object sender, EventArgs e)
+        private void VerticalMirrorToolStripMenu_Click(object sender, EventArgs e)
         {
             Soubor = OperatinsBMP.Mirror(Soubor);
             picBx_hlavni.Refresh();
         }
 
-        private void horizontálněToolStripMenuItem_Click(object sender, EventArgs e)
+        private void HorizontalMirrorToolStripMenu_Click(object sender, EventArgs e)
         {
             Soubor.MirrorHorizontal();
             picBx_hlavni.Refresh();
         }
 
-        private void rozmazáníToolStripMenuItem_Click(object sender, EventArgs e)//pridat nastavení maximální velikosti
+        private void BlurToolStripMenu_Click(object sender, EventArgs e)//pridat nastavení maximální velikosti
         {
             lbl_specific1.Text = "Zadejte úroveň rozmazání:";
             uprava = 1;//rozmazani
@@ -159,7 +150,7 @@ namespace BMPRozbor
             TbCont_RightTabs.SelectedIndex = 1;
         }
 
-        private void button1_Click_2(object sender, EventArgs e)
+        private void BtnApplyTrasnformation(object sender, EventArgs e)
         {
             if (uprava == 1) OperatinsBMP.Blur(ref Soubor, (int)nuUpDo_specific1.Value);
             else if (uprava == 2) OperatinsBMP.GrayscaleThreshold(ref Soubor, (int)nuUpDo_specific1.Value);
@@ -172,7 +163,7 @@ namespace BMPRozbor
             picBx_hlavni.Refresh();
         }
 
-        private void úpravaJasuToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ChangeBrightnessToolStripMenu_Click(object sender, EventArgs e)
         {
             lbl_specific1.Text = "Zadejte modifikátor Jasu";
             uprava = 3;//jas
@@ -185,7 +176,7 @@ namespace BMPRozbor
             TbCont_RightTabs.SelectedIndex = 1;
         }
 
-        private void úpravaKontrastuToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ChangeContrastToolStripMenu_Click(object sender, EventArgs e)
         {
             lbl_specific1.Text = "Zadejte modifikátor Jasu";
             uprava = 4;//kontrast
@@ -198,7 +189,7 @@ namespace BMPRozbor
             TbCont_RightTabs.SelectedIndex = 1;
         }
 
-        private void posunSudýchŘádkůToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MoveEvenRowsToolStripMenu_Click(object sender, EventArgs e)
         {
             lbl_specific1.Text = "Zadejte posun řádku";
             uprava = 5;//
@@ -211,7 +202,7 @@ namespace BMPRozbor
             TbCont_RightTabs.SelectedIndex = 1;
         }
 
-        private void posunLichýchSloupcůToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void MovedOddColumsToolStripMenu_Click(object sender, EventArgs e)
         {
             lbl_specific1.Text = "Zadejte posun řádku";
             uprava = 6;//
@@ -224,7 +215,7 @@ namespace BMPRozbor
             TbCont_RightTabs.SelectedIndex = 1;
         }
 
-        private void posunSudýchSloupcůToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MoveEvenColumnsToolStripMenu_Click(object sender, EventArgs e)
         {
             lbl_specific1.Text = "Zadejte posun sloupce";
             uprava = 7;//
@@ -238,7 +229,7 @@ namespace BMPRozbor
 
         }
 
-        private void posunLichýchSloupcůToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MoveOddColumsToolStripMenu_Click(object sender, EventArgs e)
         {
             lbl_specific1.Text = "Zadejte posun sloupce";
             uprava = 8;//
@@ -251,29 +242,13 @@ namespace BMPRozbor
             TbCont_RightTabs.SelectedIndex = 1;
         }
 
-        private void použíKonvelčníMaticiToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            int[,] matice = {
-                {0,-1,0},
-                {-1,5,-1},
-                {0,-1,0}
-            };
-            OperatinsBMP.ApplyConvolutionMatrix(ref Soubor, matice, 1, 0);
-            picBx_hlavni.Refresh();
-        }
-
-        private void konvertovatNa1BitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ConvertTo1bitToolStripMenu_Click(object sender, EventArgs e)
         {
             OperatinsBMP.ConvertToXBit(ref Soubor, 1);
             picBx_hlavni.Refresh();
         }
 
-        private void otočitOÚhelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gaussůvFiltrToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GauseanFiltrToolStripMenu_Click(object sender, EventArgs e)
         {
             int[,] matice = {
                 {1,2,1},
@@ -284,7 +259,7 @@ namespace BMPRozbor
             picBx_hlavni.Refresh();
         }
 
-        private void filtrZaostřeníToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FilterSharpenToolStripMenu_Click(object sender, EventArgs e)
         {
             int[,] matice = {
                 {0,-1,0},
@@ -295,7 +270,7 @@ namespace BMPRozbor
             picBx_hlavni.Refresh();
         }
 
-        private void detekceHranToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DetectEdgesToolStripMenu_Click(object sender, EventArgs e)
         {
             int[,] matice = {
                 {1,0,-1},
@@ -306,7 +281,7 @@ namespace BMPRozbor
             picBx_hlavni.Refresh();
         }
 
-        private void reliefToolStripMenuItem_Click(object sender, EventArgs e) //idk jestli nepadá
+        private void EmbosToolStripMenu_Click(object sender, EventArgs e)
         {
             int[,] matice = {
                 {0,-1,0},
@@ -317,32 +292,19 @@ namespace BMPRozbor
             picBx_hlavni.Refresh();
         }
 
-        private void otočitOToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            lbl_specific1.Text = "Zadejte úhel otočení";
-            uprava = 9;//
-            tabPage2.Text = "Otočení";
-            nuUpDo_specific1.Maximum = 360;
-            nuUpDo_specific1.Minimum = -360;
-            nuUpDo_specific1.Increment = 1;
-            nuUpDo_specific1.Value = 0;
-            nuUpDo_specific1.DecimalPlaces = 0;
-            TbCont_RightTabs.SelectedIndex = 1;
-        }
-
-        private void konvertovatNa24BitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ConvertTo24bitToolStripMenu_Click(object sender, EventArgs e)
         {
             OperatinsBMP.ConvertToXBit(ref Soubor, 24);
             picBx_hlavni.Refresh();
         }
 
-        private void konvertovatNa4BitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ConvertTo4bitToolStripMenu_Click(object sender, EventArgs e)
         {
             OperatinsBMP.ConvertToXBit(ref Soubor, 4);
             picBx_hlavni.Refresh();
         }
 
-        private void konvertovatNa8BitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ConvertTo8bitToolStripMenu_Click(object sender, EventArgs e)
         {
             OperatinsBMP.ConvertToXBit(ref Soubor, 8);
             picBx_hlavni.Refresh();
@@ -371,7 +333,7 @@ namespace BMPRozbor
                 {0,0,1 }
             };
             transformations = Helpers.MultiplyMatrix(transformations, matrixZkos);
-            OperatinsBMP.ApplyTrasformationMatrix(ref Soubor,transformations);
+            OperatinsBMP.ApplyTrasformationMatrix(ref Soubor, transformations);
             picBx_hlavni.Refresh();
 
         }

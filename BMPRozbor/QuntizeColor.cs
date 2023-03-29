@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BMPRozbor
 {
-    public interface ColorQuantizer
+    public interface IColorQuantizer
     {
         /// <summary>
         /// Adds the color to quantizer.

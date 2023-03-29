@@ -54,10 +54,8 @@ namespace BMPRozbor
                 for (int j = 0; j < n; ++j)
                     result[i][j] = matrix[i][j];
 
-            double[][] lum; // combined lower & upper
-            int[] perm;
-            int toggle;
-            toggle = MatrixDecompose(matrix, out lum, out perm);
+            // combined lower & upper
+            int _1 = MatrixDecompose(matrix, out double[][] lum, out int[] perm);
 
             double[] b = new double[n];
             for (int i = 0; i < n; ++i)
@@ -115,13 +113,9 @@ namespace BMPRozbor
 
                 if (piv != j)
                 {
-                    double[] tmp = lum[piv]; // swap rows j, piv
-                    lum[piv] = lum[j];
-                    lum[j] = tmp;
+                    (lum[j], lum[piv]) = (lum[piv], lum[j]); // swap rows j, piv
 
-                    int t = perm[piv]; // swap perm elements
-                    perm[piv] = perm[j];
-                    perm[j] = t;
+                    (perm[j], perm[piv]) = (perm[piv], perm[j]); // swap perm elements
 
                     toggle = -toggle;
                 }
