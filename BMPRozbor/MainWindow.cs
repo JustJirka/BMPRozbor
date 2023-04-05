@@ -19,13 +19,15 @@ namespace BMPRozbor
     public partial class MainWindow : Form
     {
         BMP Soubor= new BMP();
-        int uprava = -1;
+        int uprava = 3;
         public MainWindow()
         {
             InitializeComponent();
+            CoBox_Order.DropDownStyle = ComboBoxStyle.DropDownList;
         }
         private void PicBx_hlavni_Paint(object sender, PaintEventArgs e)
         {
+            txtBx_Informations.Text = "bfType: " + Soubor.BfType() + Environment.NewLine + "bfSize: " + Soubor.BfSize() + Environment.NewLine + "bfOffBits: " + Soubor.BfOffBits() + Environment.NewLine + "biSize: " + Soubor.BiSize() + Environment.NewLine + "biWidth: " + Soubor.BiWidth() + Environment.NewLine + "biHeight: " + Soubor.BiHeight() + Environment.NewLine + "biPlanes: " + Soubor.BiPlanes() + Environment.NewLine + "biBitCount: " + Soubor.BiBitCount() + Environment.NewLine + "biCompression: " + Soubor.BiCompression() + Environment.NewLine + "biSizeImage: " + Soubor.BiSizeImage() + Environment.NewLine + "biXPelsPerMeter: " + Soubor.BiXPelsPerMeter() + Environment.NewLine + "biYPelsPerMeter: " + Soubor.BiYPelsPerMeter() + Environment.NewLine + "biClrUsed: " + Soubor.BiClrUsed() + Environment.NewLine + "biClrImportant: " + Soubor.BiClrImportant();
             Soubor.DrawImage(e.Graphics, (int)nuUpDo_imageScale.Value);
         }
 
@@ -39,7 +41,6 @@ namespace BMPRozbor
            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 Soubor = new BMP(openFileDialog1.FileName);
-                txtBx_Informations.Text = "bfType: " + Soubor.BfType() + Environment.NewLine + "bfSize: " + Soubor.BfSize() + Environment.NewLine + "bfOffBits: " + Soubor.BfOffBits() + Environment.NewLine + "biSize: " + Soubor.BiSize() + Environment.NewLine + "biWidth: " + Soubor.BiWidth() + Environment.NewLine + "biHeight: " + Soubor.BiHeight() + Environment.NewLine + "biPlanes: " + Soubor.BiPlanes() + Environment.NewLine + "biBitCount: " + Soubor.BiBitCount() + Environment.NewLine + "biCompression: " + Soubor.BiCompression() + Environment.NewLine + "biSizeImage: " + Soubor.BiSizeImage() + Environment.NewLine + "biXPelsPerMeter: " + Soubor.BiXPelsPerMeter() + Environment.NewLine + "biYPelsPerMeter: " + Soubor.BiYPelsPerMeter() + Environment.NewLine + "biClrUsed: " + Soubor.BiClrUsed() + Environment.NewLine + "biClrImportant: " + Soubor.BiClrImportant();
                 picBx_hlavni.Refresh();
             }
         }
@@ -325,15 +326,70 @@ namespace BMPRozbor
                 {0,(double)NuUpDo_scaleY.Value,0},
                 {0,0,1 }
             };
-            double[,] transformations = Helpers.MultiplyMatrix(matrixRotate, matrixScale);
             double[,] matrixZkos =
             {
                 {1, (double)NuUpDo_zkosY.Value,0},
                 {(double)NuUpDo_zkosX.Value,1,0},
                 {0,0,1 }
             };
-            transformations = Helpers.MultiplyMatrix(transformations, matrixZkos);
+            double[,] transformations= new double[3,3];
+            if (CoBox_Order.Text == "Rotace, Zkosení, Zvětšení")
+            {
+                transformations = Helpers.MultiplyMatrix(matrixRotate, matrixZkos );
+                transformations = Helpers.MultiplyMatrix(transformations, matrixScale);
+            }
+            else if (CoBox_Order.Text == "Rotace, Zvětšení, Zkosení")
+            {
+                transformations = Helpers.MultiplyMatrix(matrixRotate, matrixScale);
+                transformations = Helpers.MultiplyMatrix(transformations, matrixZkos);
+            }
+            else if (CoBox_Order.Text == "Zkosení, Zvětšení, Rotace")
+            {
+                transformations = Helpers.MultiplyMatrix(matrixZkos, matrixScale);
+                transformations = Helpers.MultiplyMatrix(transformations, matrixRotate);
+            }
+            else if (CoBox_Order.Text == "Zkosení, Rotace, Zvětšení")
+            {
+                transformations = Helpers.MultiplyMatrix(matrixZkos, matrixRotate);
+                transformations = Helpers.MultiplyMatrix(transformations, matrixScale);
+            }
+            else if (CoBox_Order.Text == "Zvětšení, Zkosení, Rotace")
+            {
+                transformations = Helpers.MultiplyMatrix(matrixScale, matrixZkos);
+                transformations = Helpers.MultiplyMatrix(transformations, matrixRotate);
+            }
+            else if (CoBox_Order.Text == "Zvětšení, Rotace, Zkosení")
+            {
+                transformations = Helpers.MultiplyMatrix(matrixScale, matrixRotate);
+                transformations = Helpers.MultiplyMatrix(transformations, matrixZkos);
+            }
             OperatinsBMP.ApplyTrasformationMatrix(ref Soubor, transformations);
+            Helpers.CalculateCorrectHeader(ref Soubor);
+            picBx_hlavni.Refresh();
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            double[,] matrixCustom =
+{
+                {(double)nUpDo_Matrix0_0.Value,(double)nUpDo_Matrix0_1.Value,(double)nUpDo_Matrix0_2.Value},
+                {(double)nUpDo_Matrix1_0.Value,(double)nUpDo_Matrix1_1.Value,(double)nUpDo_Matrix1_2.Value},
+                {(double)nUpDo_Matrix2_0.Value,(double)nUpDo_Matrix2_1.Value,(double)nUpDo_Matrix2_2.Value},
+            };
+            OperatinsBMP.ApplyTrasformationMatrix(ref Soubor, matrixCustom);
+            Helpers.CalculateCorrectHeader(ref Soubor);
+            picBx_hlavni.Refresh();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int[,] matice = {
+                {(int)nUpDo_KonMatrix0_0.Value,(int)nUpDo_KonMatrix0_1.Value,(int)nUpDo_KonMatrix0_2.Value},
+                {(int)nUpDo_KonMatrix1_0.Value,(int)nUpDo_KonMatrix1_1.Value,(int)nUpDo_KonMatrix1_2.Value},
+                {(int)nUpDo_KonMatrix2_0.Value,(int)nUpDo_KonMatrix2_1.Value,(int)nUpDo_KonMatrix2_2.Value}
+            };
+            OperatinsBMP.ApplyConvolutionMatrix(ref Soubor, matice, (int)nUpDo_KonMatrixDivider.Value, (int)nUpDo_KonMatrixOffset.Value);
             picBx_hlavni.Refresh();
 
         }

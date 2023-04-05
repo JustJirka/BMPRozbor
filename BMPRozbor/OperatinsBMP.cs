@@ -78,7 +78,7 @@ namespace BMPRozbor
                     }
                 }
             }
-            else if (image.BiBitCount() == 16 || image.BiBitCount() == 24 || image.BiBitCount() == 32)
+            else if (image.BiBitCount() == 24)
             {
                 for (int i = 0; i < image.BiHeight(); i++)
                 {
@@ -100,7 +100,7 @@ namespace BMPRozbor
         }
         public static void GrayscaleByAveraging(ref BMP image)
         {
-            if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
+            if (image.BiBitCount() == 24)
             {
                 int curentByte = image.BfOffBits();
                 for (int i = image.BiHeight(); i > 0; i--)
@@ -137,7 +137,7 @@ namespace BMPRozbor
         }
         public static void GrayscaleEpirical(ref BMP image)
         {
-            if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
+            if (image.BiBitCount() == 24)
             {
                 int curentByte = image.BfOffBits();
                 for (int i = image.BiHeight(); i > 0; i--)
@@ -190,7 +190,7 @@ namespace BMPRozbor
         }
         public static void GrayscaleThreshold(ref BMP image, int threshold)
         {
-            if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
+            if (image.BiBitCount() == 24)
             {
                 int curentByte = image.BfOffBits();
                 for (int i = image.BiHeight(); i > 0; i--)
@@ -231,7 +231,7 @@ namespace BMPRozbor
         }
         public static void Sepie(ref BMP image)
         {
-            if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
+            if (image.BiBitCount() == 24)
             {
                 int curentByte = image.BfOffBits();
                 for (int i = image.BiHeight(); i > 0; i--)
@@ -272,7 +272,7 @@ namespace BMPRozbor
         }
         public static void OneColorShades(ref BMP image, Color selectedColor)
         {
-            if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
+            if (image.BiBitCount() == 24)
             {
                 int curentByte = image.BfOffBits();
                 for (int i = image.BiHeight(); i > 0; i--)
@@ -303,7 +303,7 @@ namespace BMPRozbor
         }
         public static void PhotoFiltr(ref BMP image, Color selectedColor)
         {
-            if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
+            if (image.BiBitCount() == 24)
             {
                 int curentByte = image.BfOffBits();
                 for (int i = image.BiHeight()-1; i > 0; i--)
@@ -331,7 +331,7 @@ namespace BMPRozbor
         }
         public static void OnlyRGB(ref BMP image, int RGB)
         {
-            if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
+            if (image.BiBitCount() == 24)
             {
                 int curentByte = image.BfOffBits();
                 for (int i = image.BiHeight(); i > 0; i--)
@@ -386,7 +386,7 @@ namespace BMPRozbor
         }
         public static void MajorityColor(ref BMP image)
         {
-            if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
+            if (image.BiBitCount() == 24)
             {
                 int curentByte = image.BfOffBits();
                 for (int i = image.BiHeight()-1; i > 0; i--)
@@ -444,7 +444,7 @@ namespace BMPRozbor
         }
         public static void ChangeBrightness(ref BMP image, int brightnessModifier)
         {
-            if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
+            if (image.BiBitCount() == 24)
             {
                 int curentByte = image.BfOffBits();
                 for (int i = image.BiHeight(); i > 0; i--)
@@ -481,7 +481,7 @@ namespace BMPRozbor
         }
         public static void ChangeContrast(ref BMP image, decimal brightnessModifier)
         {
-            if (image.BiBitCount() == 24 || image.BiBitCount() == 32 || image.BiBitCount() == 16)
+            if (image.BiBitCount() == 24)
             {
                 int curentByte = image.BfOffBits();
                 for (int i = image.BiHeight(); i > 0; i--)
@@ -637,7 +637,7 @@ namespace BMPRozbor
         public static void ConvertToXBit(ref BMP image, int newBitCount)
         {
             int newScanline = Convert.ToInt32((Math.Ceiling(Convert.ToDouble(newBitCount * image.BiWidth()) / 32.0) * 32));
-            byte[] newByteArray = new byte[(54 + (int)Math.Pow(2, newBitCount) * 4) + newScanline * image.BiHeight()];
+            byte[] newByteArray = new byte[54 + (int)Math.Pow(2, newBitCount) * 4 + newScanline/8 * image.BiHeight()];
             Array.Copy(image.byteArray, newByteArray, 54);
             BMP newImage = new BMP(newByteArray);
             newImage.byteArray[28] = Convert.ToByte(newBitCount);
@@ -836,6 +836,7 @@ namespace BMPRozbor
                     }
                 }
             }
+            Helpers.CalculateCorrectHeader(ref newImage);
             image = newImage;
         }
     }

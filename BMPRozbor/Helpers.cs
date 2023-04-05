@@ -262,5 +262,10 @@ namespace BMPRozbor
             }
             return vystup;
         }
+        public static void CalculateCorrectHeader(ref BMP image)
+        {
+            byte[] bfOffBits = Helpers.IntToByteArray((uint)image.byteArray.Length, 4);
+            Array.Copy(bfOffBits, 0, image.byteArray, 2, 4);
+        }
     }
 }
