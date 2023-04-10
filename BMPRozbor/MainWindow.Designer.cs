@@ -81,6 +81,21 @@
             this.Informace = new System.Windows.Forms.TabPage();
             this.txtBx_Informations = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.nUpDo_KonMatrixOffset = new System.Windows.Forms.NumericUpDown();
+            this.nUpDo_KonMatrixDivider = new System.Windows.Forms.NumericUpDown();
+            this.button2 = new System.Windows.Forms.Button();
+            this.nUpDo_KonMatrix2_2 = new System.Windows.Forms.NumericUpDown();
+            this.nUpDo_KonMatrix2_1 = new System.Windows.Forms.NumericUpDown();
+            this.nUpDo_KonMatrix2_0 = new System.Windows.Forms.NumericUpDown();
+            this.nUpDo_KonMatrix1_2 = new System.Windows.Forms.NumericUpDown();
+            this.nUpDo_KonMatrix1_1 = new System.Windows.Forms.NumericUpDown();
+            this.nUpDo_KonMatrix1_0 = new System.Windows.Forms.NumericUpDown();
+            this.nUpDo_KonMatrix0_2 = new System.Windows.Forms.NumericUpDown();
+            this.nUpDo_KonMatrix0_1 = new System.Windows.Forms.NumericUpDown();
+            this.nUpDo_KonMatrix0_0 = new System.Windows.Forms.NumericUpDown();
             this.nuUpDo_specific1 = new System.Windows.Forms.NumericUpDown();
             this.lbl_specific1 = new System.Windows.Forms.Label();
             this.btn_OK = new System.Windows.Forms.Button();
@@ -110,27 +125,23 @@
             this.nUpDo_Rotate = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.nUpDo_KonMatrix2_2 = new System.Windows.Forms.NumericUpDown();
-            this.nUpDo_KonMatrix2_1 = new System.Windows.Forms.NumericUpDown();
-            this.nUpDo_KonMatrix2_0 = new System.Windows.Forms.NumericUpDown();
-            this.nUpDo_KonMatrix1_2 = new System.Windows.Forms.NumericUpDown();
-            this.nUpDo_KonMatrix1_1 = new System.Windows.Forms.NumericUpDown();
-            this.nUpDo_KonMatrix1_0 = new System.Windows.Forms.NumericUpDown();
-            this.nUpDo_KonMatrix0_2 = new System.Windows.Forms.NumericUpDown();
-            this.nUpDo_KonMatrix0_1 = new System.Windows.Forms.NumericUpDown();
-            this.nUpDo_KonMatrix0_0 = new System.Windows.Forms.NumericUpDown();
-            this.nUpDo_KonMatrixOffset = new System.Windows.Forms.NumericUpDown();
-            this.nUpDo_KonMatrixDivider = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picBx_hlavni)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuUpDo_imageScale)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.TbCont_RightTabs.SuspendLayout();
             this.Informace.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrixOffset)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrixDivider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix2_2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix2_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix2_0)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix1_2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix1_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix1_0)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix0_2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix0_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix0_0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuUpDo_specific1)).BeginInit();
             this.tb_TransFiltry.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUpDo_Matrix2_2)).BeginInit();
@@ -147,17 +158,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.NuUpDo_scaleY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NuUpDo_scaleX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUpDo_Rotate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix2_2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix2_1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix2_0)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix1_2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix1_1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix1_0)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix0_2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix0_1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix0_0)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrixOffset)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrixDivider)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -430,7 +430,7 @@
             // 
             this.rozmazáníToolStripMenuItem.Name = "rozmazáníToolStripMenuItem";
             this.rozmazáníToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.rozmazáníToolStripMenuItem.Text = "Rozmazání";
+            this.rozmazáníToolStripMenuItem.Text = "Zvětšení pixelů";
             this.rozmazáníToolStripMenuItem.Click += new System.EventHandler(this.BlurToolStripMenu_Click);
             // 
             // posunSloupcůřádkůToolStripMenuItem
@@ -624,423 +624,72 @@
             this.tabPage2.Text = "  ";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // nuUpDo_specific1
+            // label11
             // 
-            this.nuUpDo_specific1.Location = new System.Drawing.Point(5, 37);
-            this.nuUpDo_specific1.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.nuUpDo_specific1.Minimum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            -2147483648});
-            this.nuUpDo_specific1.Name = "nuUpDo_specific1";
-            this.nuUpDo_specific1.Size = new System.Drawing.Size(89, 20);
-            this.nuUpDo_specific1.TabIndex = 2;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(21, 206);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(38, 13);
+            this.label11.TabIndex = 36;
+            this.label11.Text = "Offset:";
             // 
-            // lbl_specific1
+            // label10
             // 
-            this.lbl_specific1.AutoSize = true;
-            this.lbl_specific1.Location = new System.Drawing.Point(6, 18);
-            this.lbl_specific1.Name = "lbl_specific1";
-            this.lbl_specific1.Size = new System.Drawing.Size(116, 13);
-            this.lbl_specific1.TabIndex = 1;
-            this.lbl_specific1.Text = "Zadejte modifikátor Jas";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(19, 185);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(43, 13);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "Divider:";
             // 
-            // btn_OK
+            // label9
             // 
-            this.btn_OK.Location = new System.Drawing.Point(98, 37);
-            this.btn_OK.Name = "btn_OK";
-            this.btn_OK.Size = new System.Drawing.Size(75, 23);
-            this.btn_OK.TabIndex = 0;
-            this.btn_OK.Text = "Provést";
-            this.btn_OK.UseVisualStyleBackColor = true;
-            this.btn_OK.Click += new System.EventHandler(this.BtnApplyTrasnformation);
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(12, 84);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(160, 13);
+            this.label9.TabIndex = 34;
+            this.label9.Text = "Použít vlastní kovoluční matici: ";
             // 
-            // tb_TransFiltry
+            // nUpDo_KonMatrixOffset
             // 
-            this.tb_TransFiltry.Controls.Add(this.label8);
-            this.tb_TransFiltry.Controls.Add(this.CoBox_Order);
-            this.tb_TransFiltry.Controls.Add(this.button1);
-            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix2_2);
-            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix2_1);
-            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix2_0);
-            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix1_2);
-            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix1_1);
-            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix1_0);
-            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix0_2);
-            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix0_1);
-            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix0_0);
-            this.tb_TransFiltry.Controls.Add(this.Btn_TransformMatrix);
-            this.tb_TransFiltry.Controls.Add(this.NuUpDo_zkosY);
-            this.tb_TransFiltry.Controls.Add(this.NuUpDo_zkosX);
-            this.tb_TransFiltry.Controls.Add(this.label7);
-            this.tb_TransFiltry.Controls.Add(this.label6);
-            this.tb_TransFiltry.Controls.Add(this.label5);
-            this.tb_TransFiltry.Controls.Add(this.label4);
-            this.tb_TransFiltry.Controls.Add(this.label3);
-            this.tb_TransFiltry.Controls.Add(this.NuUpDo_scaleY);
-            this.tb_TransFiltry.Controls.Add(this.NuUpDo_scaleX);
-            this.tb_TransFiltry.Controls.Add(this.nUpDo_Rotate);
-            this.tb_TransFiltry.Controls.Add(this.label2);
-            this.tb_TransFiltry.Controls.Add(this.label1);
-            this.tb_TransFiltry.Location = new System.Drawing.Point(4, 22);
-            this.tb_TransFiltry.Name = "tb_TransFiltry";
-            this.tb_TransFiltry.Padding = new System.Windows.Forms.Padding(3);
-            this.tb_TransFiltry.Size = new System.Drawing.Size(192, 459);
-            this.tb_TransFiltry.TabIndex = 2;
-            this.tb_TransFiltry.Text = "Transformace";
-            this.tb_TransFiltry.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 202);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(111, 13);
-            this.label8.TabIndex = 23;
-            this.label8.Text = "Zadejte pořadí úprav:";
-            // 
-            // CoBox_Order
-            // 
-            this.CoBox_Order.FormattingEnabled = true;
-            this.CoBox_Order.Items.AddRange(new object[] {
-            "Rotace, Zkosení, Zvětšení",
-            "Rotace, Zvětšení, Zkosení",
-            "Zkosení, Zvětšení, Rotace",
-            "Zkosení, Rotace, Zvětšení",
-            "Zvětšení, Zkosení, Rotace",
-            "Zvětšení, Rotace, Zkosení"});
-            this.CoBox_Order.Location = new System.Drawing.Point(3, 218);
-            this.CoBox_Order.Name = "CoBox_Order";
-            this.CoBox_Order.Size = new System.Drawing.Size(174, 21);
-            this.CoBox_Order.TabIndex = 22;
-            this.CoBox_Order.Text = "Rotace, Zkosení, Zvětšení";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(24, 366);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 23);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Použít vlastní matici";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // nUpDo_Matrix2_2
-            // 
-            this.nUpDo_Matrix2_2.DecimalPlaces = 10;
-            this.nUpDo_Matrix2_2.Location = new System.Drawing.Point(127, 340);
-            this.nUpDo_Matrix2_2.Maximum = new decimal(new int[] {
+            this.nUpDo_KonMatrixOffset.Location = new System.Drawing.Point(65, 204);
+            this.nUpDo_KonMatrixOffset.Maximum = new decimal(new int[] {
             -159383552,
             46653770,
             5421,
             0});
-            this.nUpDo_Matrix2_2.Minimum = new decimal(new int[] {
+            this.nUpDo_KonMatrixOffset.Minimum = new decimal(new int[] {
             -159383552,
             46653770,
             5421,
             -2147483648});
-            this.nUpDo_Matrix2_2.Name = "nUpDo_Matrix2_2";
-            this.nUpDo_Matrix2_2.Size = new System.Drawing.Size(44, 20);
-            this.nUpDo_Matrix2_2.TabIndex = 21;
+            this.nUpDo_KonMatrixOffset.Name = "nUpDo_KonMatrixOffset";
+            this.nUpDo_KonMatrixOffset.Size = new System.Drawing.Size(47, 20);
+            this.nUpDo_KonMatrixOffset.TabIndex = 33;
             // 
-            // nUpDo_Matrix2_1
+            // nUpDo_KonMatrixDivider
             // 
-            this.nUpDo_Matrix2_1.DecimalPlaces = 10;
-            this.nUpDo_Matrix2_1.Location = new System.Drawing.Point(77, 340);
-            this.nUpDo_Matrix2_1.Maximum = new decimal(new int[] {
+            this.nUpDo_KonMatrixDivider.Location = new System.Drawing.Point(65, 178);
+            this.nUpDo_KonMatrixDivider.Maximum = new decimal(new int[] {
             -159383552,
             46653770,
             5421,
             0});
-            this.nUpDo_Matrix2_1.Minimum = new decimal(new int[] {
+            this.nUpDo_KonMatrixDivider.Minimum = new decimal(new int[] {
             -159383552,
             46653770,
             5421,
             -2147483648});
-            this.nUpDo_Matrix2_1.Name = "nUpDo_Matrix2_1";
-            this.nUpDo_Matrix2_1.Size = new System.Drawing.Size(44, 20);
-            this.nUpDo_Matrix2_1.TabIndex = 20;
-            // 
-            // nUpDo_Matrix2_0
-            // 
-            this.nUpDo_Matrix2_0.DecimalPlaces = 10;
-            this.nUpDo_Matrix2_0.Location = new System.Drawing.Point(24, 340);
-            this.nUpDo_Matrix2_0.Maximum = new decimal(new int[] {
-            -159383552,
-            46653770,
-            5421,
-            0});
-            this.nUpDo_Matrix2_0.Minimum = new decimal(new int[] {
-            -159383552,
-            46653770,
-            5421,
-            -2147483648});
-            this.nUpDo_Matrix2_0.Name = "nUpDo_Matrix2_0";
-            this.nUpDo_Matrix2_0.Size = new System.Drawing.Size(47, 20);
-            this.nUpDo_Matrix2_0.TabIndex = 19;
-            // 
-            // nUpDo_Matrix1_2
-            // 
-            this.nUpDo_Matrix1_2.DecimalPlaces = 10;
-            this.nUpDo_Matrix1_2.Location = new System.Drawing.Point(127, 314);
-            this.nUpDo_Matrix1_2.Maximum = new decimal(new int[] {
-            -159383552,
-            46653770,
-            5421,
-            0});
-            this.nUpDo_Matrix1_2.Minimum = new decimal(new int[] {
-            -159383552,
-            46653770,
-            5421,
-            -2147483648});
-            this.nUpDo_Matrix1_2.Name = "nUpDo_Matrix1_2";
-            this.nUpDo_Matrix1_2.Size = new System.Drawing.Size(44, 20);
-            this.nUpDo_Matrix1_2.TabIndex = 18;
-            // 
-            // nUpDo_Matrix1_1
-            // 
-            this.nUpDo_Matrix1_1.DecimalPlaces = 10;
-            this.nUpDo_Matrix1_1.Location = new System.Drawing.Point(77, 314);
-            this.nUpDo_Matrix1_1.Maximum = new decimal(new int[] {
-            -159383552,
-            46653770,
-            5421,
-            0});
-            this.nUpDo_Matrix1_1.Minimum = new decimal(new int[] {
-            -159383552,
-            46653770,
-            5421,
-            -2147483648});
-            this.nUpDo_Matrix1_1.Name = "nUpDo_Matrix1_1";
-            this.nUpDo_Matrix1_1.Size = new System.Drawing.Size(44, 20);
-            this.nUpDo_Matrix1_1.TabIndex = 17;
-            // 
-            // nUpDo_Matrix1_0
-            // 
-            this.nUpDo_Matrix1_0.DecimalPlaces = 10;
-            this.nUpDo_Matrix1_0.Location = new System.Drawing.Point(24, 314);
-            this.nUpDo_Matrix1_0.Maximum = new decimal(new int[] {
-            -159383552,
-            46653770,
-            5421,
-            0});
-            this.nUpDo_Matrix1_0.Minimum = new decimal(new int[] {
-            -159383552,
-            46653770,
-            5421,
-            -2147483648});
-            this.nUpDo_Matrix1_0.Name = "nUpDo_Matrix1_0";
-            this.nUpDo_Matrix1_0.Size = new System.Drawing.Size(47, 20);
-            this.nUpDo_Matrix1_0.TabIndex = 16;
-            // 
-            // nUpDo_Matrix0_2
-            // 
-            this.nUpDo_Matrix0_2.DecimalPlaces = 10;
-            this.nUpDo_Matrix0_2.Location = new System.Drawing.Point(127, 288);
-            this.nUpDo_Matrix0_2.Maximum = new decimal(new int[] {
-            -159383552,
-            46653770,
-            5421,
-            0});
-            this.nUpDo_Matrix0_2.Minimum = new decimal(new int[] {
-            -159383552,
-            46653770,
-            5421,
-            -2147483648});
-            this.nUpDo_Matrix0_2.Name = "nUpDo_Matrix0_2";
-            this.nUpDo_Matrix0_2.Size = new System.Drawing.Size(44, 20);
-            this.nUpDo_Matrix0_2.TabIndex = 15;
-            // 
-            // nUpDo_Matrix0_1
-            // 
-            this.nUpDo_Matrix0_1.DecimalPlaces = 10;
-            this.nUpDo_Matrix0_1.Location = new System.Drawing.Point(77, 288);
-            this.nUpDo_Matrix0_1.Maximum = new decimal(new int[] {
-            -159383552,
-            46653770,
-            5421,
-            0});
-            this.nUpDo_Matrix0_1.Minimum = new decimal(new int[] {
-            -159383552,
-            46653770,
-            5421,
-            -2147483648});
-            this.nUpDo_Matrix0_1.Name = "nUpDo_Matrix0_1";
-            this.nUpDo_Matrix0_1.Size = new System.Drawing.Size(44, 20);
-            this.nUpDo_Matrix0_1.TabIndex = 14;
-            // 
-            // nUpDo_Matrix0_0
-            // 
-            this.nUpDo_Matrix0_0.DecimalPlaces = 10;
-            this.nUpDo_Matrix0_0.Location = new System.Drawing.Point(24, 288);
-            this.nUpDo_Matrix0_0.Maximum = new decimal(new int[] {
-            -159383552,
-            46653770,
-            5421,
-            0});
-            this.nUpDo_Matrix0_0.Minimum = new decimal(new int[] {
-            -159383552,
-            46653770,
-            5421,
-            -2147483648});
-            this.nUpDo_Matrix0_0.Name = "nUpDo_Matrix0_0";
-            this.nUpDo_Matrix0_0.Size = new System.Drawing.Size(47, 20);
-            this.nUpDo_Matrix0_0.TabIndex = 13;
-            // 
-            // Btn_TransformMatrix
-            // 
-            this.Btn_TransformMatrix.Location = new System.Drawing.Point(9, 245);
-            this.Btn_TransformMatrix.Name = "Btn_TransformMatrix";
-            this.Btn_TransformMatrix.Size = new System.Drawing.Size(168, 23);
-            this.Btn_TransformMatrix.TabIndex = 12;
-            this.Btn_TransformMatrix.Text = "Použít";
-            this.Btn_TransformMatrix.UseVisualStyleBackColor = true;
-            this.Btn_TransformMatrix.Click += new System.EventHandler(this.Btn_TransformMatrix_Click);
-            // 
-            // NuUpDo_zkosY
-            // 
-            this.NuUpDo_zkosY.Location = new System.Drawing.Point(102, 97);
-            this.NuUpDo_zkosY.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.NuUpDo_zkosY.Name = "NuUpDo_zkosY";
-            this.NuUpDo_zkosY.Size = new System.Drawing.Size(75, 20);
-            this.NuUpDo_zkosY.TabIndex = 11;
-            // 
-            // NuUpDo_zkosX
-            // 
-            this.NuUpDo_zkosX.Location = new System.Drawing.Point(102, 73);
-            this.NuUpDo_zkosX.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.NuUpDo_zkosX.Name = "NuUpDo_zkosX";
-            this.NuUpDo_zkosX.Size = new System.Drawing.Size(75, 20);
-            this.NuUpDo_zkosX.TabIndex = 10;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(41, 176);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 13);
-            this.label7.TabIndex = 9;
-            this.label7.Text = "Vertikální:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(32, 152);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 13);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Horizontální:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 125);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Zvětšení:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(41, 99);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Vertikální:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(32, 75);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Horizontální:";
-            // 
-            // NuUpDo_scaleY
-            // 
-            this.NuUpDo_scaleY.DecimalPlaces = 1;
-            this.NuUpDo_scaleY.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.NuUpDo_scaleY.Location = new System.Drawing.Point(102, 174);
-            this.NuUpDo_scaleY.Name = "NuUpDo_scaleY";
-            this.NuUpDo_scaleY.Size = new System.Drawing.Size(75, 20);
-            this.NuUpDo_scaleY.TabIndex = 4;
-            this.NuUpDo_scaleY.Value = new decimal(new int[] {
+            this.nUpDo_KonMatrixDivider.Name = "nUpDo_KonMatrixDivider";
+            this.nUpDo_KonMatrixDivider.Size = new System.Drawing.Size(47, 20);
+            this.nUpDo_KonMatrixDivider.TabIndex = 32;
+            this.nUpDo_KonMatrixDivider.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            // 
-            // NuUpDo_scaleX
-            // 
-            this.NuUpDo_scaleX.DecimalPlaces = 1;
-            this.NuUpDo_scaleX.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.NuUpDo_scaleX.Location = new System.Drawing.Point(102, 148);
-            this.NuUpDo_scaleX.Name = "NuUpDo_scaleX";
-            this.NuUpDo_scaleX.Size = new System.Drawing.Size(75, 20);
-            this.NuUpDo_scaleX.TabIndex = 3;
-            this.NuUpDo_scaleX.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // nUpDo_Rotate
-            // 
-            this.nUpDo_Rotate.Location = new System.Drawing.Point(77, 15);
-            this.nUpDo_Rotate.Maximum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            0});
-            this.nUpDo_Rotate.Minimum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            -2147483648});
-            this.nUpDo_Rotate.Name = "nUpDo_Rotate";
-            this.nUpDo_Rotate.Size = new System.Drawing.Size(100, 20);
-            this.nUpDo_Rotate.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 50);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Zkosení:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Rotace:";
+            this.nUpDo_KonMatrixDivider.ValueChanged += new System.EventHandler(this.nUpDo_KonMatrixDivider_ValueChanged);
             // 
             // button2
             // 
@@ -1205,66 +854,438 @@
             this.nUpDo_KonMatrix0_0.Size = new System.Drawing.Size(47, 20);
             this.nUpDo_KonMatrix0_0.TabIndex = 22;
             // 
-            // nUpDo_KonMatrixOffset
+            // nuUpDo_specific1
             // 
-            this.nUpDo_KonMatrixOffset.Location = new System.Drawing.Point(65, 204);
-            this.nUpDo_KonMatrixOffset.Maximum = new decimal(new int[] {
+            this.nuUpDo_specific1.Location = new System.Drawing.Point(5, 37);
+            this.nuUpDo_specific1.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nuUpDo_specific1.Minimum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            -2147483648});
+            this.nuUpDo_specific1.Name = "nuUpDo_specific1";
+            this.nuUpDo_specific1.Size = new System.Drawing.Size(89, 20);
+            this.nuUpDo_specific1.TabIndex = 2;
+            // 
+            // lbl_specific1
+            // 
+            this.lbl_specific1.AutoSize = true;
+            this.lbl_specific1.Location = new System.Drawing.Point(6, 18);
+            this.lbl_specific1.Name = "lbl_specific1";
+            this.lbl_specific1.Size = new System.Drawing.Size(116, 13);
+            this.lbl_specific1.TabIndex = 1;
+            this.lbl_specific1.Text = "Zadejte modifikátor Jas";
+            // 
+            // btn_OK
+            // 
+            this.btn_OK.Location = new System.Drawing.Point(98, 37);
+            this.btn_OK.Name = "btn_OK";
+            this.btn_OK.Size = new System.Drawing.Size(75, 23);
+            this.btn_OK.TabIndex = 0;
+            this.btn_OK.Text = "Provést";
+            this.btn_OK.UseVisualStyleBackColor = true;
+            this.btn_OK.Click += new System.EventHandler(this.BtnApplyTrasnformation);
+            // 
+            // tb_TransFiltry
+            // 
+            this.tb_TransFiltry.Controls.Add(this.label8);
+            this.tb_TransFiltry.Controls.Add(this.CoBox_Order);
+            this.tb_TransFiltry.Controls.Add(this.button1);
+            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix2_2);
+            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix2_1);
+            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix2_0);
+            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix1_2);
+            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix1_1);
+            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix1_0);
+            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix0_2);
+            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix0_1);
+            this.tb_TransFiltry.Controls.Add(this.nUpDo_Matrix0_0);
+            this.tb_TransFiltry.Controls.Add(this.Btn_TransformMatrix);
+            this.tb_TransFiltry.Controls.Add(this.NuUpDo_zkosY);
+            this.tb_TransFiltry.Controls.Add(this.NuUpDo_zkosX);
+            this.tb_TransFiltry.Controls.Add(this.label7);
+            this.tb_TransFiltry.Controls.Add(this.label6);
+            this.tb_TransFiltry.Controls.Add(this.label5);
+            this.tb_TransFiltry.Controls.Add(this.label4);
+            this.tb_TransFiltry.Controls.Add(this.label3);
+            this.tb_TransFiltry.Controls.Add(this.NuUpDo_scaleY);
+            this.tb_TransFiltry.Controls.Add(this.NuUpDo_scaleX);
+            this.tb_TransFiltry.Controls.Add(this.nUpDo_Rotate);
+            this.tb_TransFiltry.Controls.Add(this.label2);
+            this.tb_TransFiltry.Controls.Add(this.label1);
+            this.tb_TransFiltry.Location = new System.Drawing.Point(4, 22);
+            this.tb_TransFiltry.Name = "tb_TransFiltry";
+            this.tb_TransFiltry.Padding = new System.Windows.Forms.Padding(3);
+            this.tb_TransFiltry.Size = new System.Drawing.Size(192, 459);
+            this.tb_TransFiltry.TabIndex = 2;
+            this.tb_TransFiltry.Text = "Transformace";
+            this.tb_TransFiltry.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 202);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(111, 13);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "Zadejte pořadí úprav:";
+            // 
+            // CoBox_Order
+            // 
+            this.CoBox_Order.FormattingEnabled = true;
+            this.CoBox_Order.Items.AddRange(new object[] {
+            "Rotace, Zkosení, Zvětšení",
+            "Rotace, Zvětšení, Zkosení",
+            "Zkosení, Zvětšení, Rotace",
+            "Zkosení, Rotace, Zvětšení",
+            "Zvětšení, Zkosení, Rotace",
+            "Zvětšení, Rotace, Zkosení"});
+            this.CoBox_Order.Location = new System.Drawing.Point(3, 218);
+            this.CoBox_Order.Name = "CoBox_Order";
+            this.CoBox_Order.Size = new System.Drawing.Size(174, 21);
+            this.CoBox_Order.TabIndex = 22;
+            this.CoBox_Order.Text = "Rotace, Zkosení, Zvětšení";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(24, 366);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(147, 23);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "Použít vlastní matici";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // nUpDo_Matrix2_2
+            // 
+            this.nUpDo_Matrix2_2.DecimalPlaces = 10;
+            this.nUpDo_Matrix2_2.Location = new System.Drawing.Point(127, 340);
+            this.nUpDo_Matrix2_2.Maximum = new decimal(new int[] {
             -159383552,
             46653770,
             5421,
             0});
-            this.nUpDo_KonMatrixOffset.Minimum = new decimal(new int[] {
+            this.nUpDo_Matrix2_2.Minimum = new decimal(new int[] {
             -159383552,
             46653770,
             5421,
             -2147483648});
-            this.nUpDo_KonMatrixOffset.Name = "nUpDo_KonMatrixOffset";
-            this.nUpDo_KonMatrixOffset.Size = new System.Drawing.Size(47, 20);
-            this.nUpDo_KonMatrixOffset.TabIndex = 33;
+            this.nUpDo_Matrix2_2.Name = "nUpDo_Matrix2_2";
+            this.nUpDo_Matrix2_2.Size = new System.Drawing.Size(44, 20);
+            this.nUpDo_Matrix2_2.TabIndex = 21;
+            this.nUpDo_Matrix2_2.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // nUpDo_KonMatrixDivider
+            // nUpDo_Matrix2_1
             // 
-            this.nUpDo_KonMatrixDivider.Location = new System.Drawing.Point(65, 178);
-            this.nUpDo_KonMatrixDivider.Maximum = new decimal(new int[] {
+            this.nUpDo_Matrix2_1.DecimalPlaces = 10;
+            this.nUpDo_Matrix2_1.Location = new System.Drawing.Point(77, 340);
+            this.nUpDo_Matrix2_1.Maximum = new decimal(new int[] {
             -159383552,
             46653770,
             5421,
             0});
-            this.nUpDo_KonMatrixDivider.Minimum = new decimal(new int[] {
+            this.nUpDo_Matrix2_1.Minimum = new decimal(new int[] {
             -159383552,
             46653770,
             5421,
             -2147483648});
-            this.nUpDo_KonMatrixDivider.Name = "nUpDo_KonMatrixDivider";
-            this.nUpDo_KonMatrixDivider.Size = new System.Drawing.Size(47, 20);
-            this.nUpDo_KonMatrixDivider.TabIndex = 32;
+            this.nUpDo_Matrix2_1.Name = "nUpDo_Matrix2_1";
+            this.nUpDo_Matrix2_1.Size = new System.Drawing.Size(44, 20);
+            this.nUpDo_Matrix2_1.TabIndex = 20;
             // 
-            // label9
+            // nUpDo_Matrix2_0
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 84);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(160, 13);
-            this.label9.TabIndex = 34;
-            this.label9.Text = "Použít vlastní kovoluční matici: ";
+            this.nUpDo_Matrix2_0.DecimalPlaces = 10;
+            this.nUpDo_Matrix2_0.Location = new System.Drawing.Point(24, 340);
+            this.nUpDo_Matrix2_0.Maximum = new decimal(new int[] {
+            -159383552,
+            46653770,
+            5421,
+            0});
+            this.nUpDo_Matrix2_0.Minimum = new decimal(new int[] {
+            -159383552,
+            46653770,
+            5421,
+            -2147483648});
+            this.nUpDo_Matrix2_0.Name = "nUpDo_Matrix2_0";
+            this.nUpDo_Matrix2_0.Size = new System.Drawing.Size(47, 20);
+            this.nUpDo_Matrix2_0.TabIndex = 19;
             // 
-            // label10
+            // nUpDo_Matrix1_2
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(19, 185);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(43, 13);
-            this.label10.TabIndex = 35;
-            this.label10.Text = "Divider:";
+            this.nUpDo_Matrix1_2.DecimalPlaces = 10;
+            this.nUpDo_Matrix1_2.Location = new System.Drawing.Point(127, 314);
+            this.nUpDo_Matrix1_2.Maximum = new decimal(new int[] {
+            -159383552,
+            46653770,
+            5421,
+            0});
+            this.nUpDo_Matrix1_2.Minimum = new decimal(new int[] {
+            -159383552,
+            46653770,
+            5421,
+            -2147483648});
+            this.nUpDo_Matrix1_2.Name = "nUpDo_Matrix1_2";
+            this.nUpDo_Matrix1_2.Size = new System.Drawing.Size(44, 20);
+            this.nUpDo_Matrix1_2.TabIndex = 18;
             // 
-            // label11
+            // nUpDo_Matrix1_1
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(21, 206);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(38, 13);
-            this.label11.TabIndex = 36;
-            this.label11.Text = "Offset:";
+            this.nUpDo_Matrix1_1.DecimalPlaces = 10;
+            this.nUpDo_Matrix1_1.Location = new System.Drawing.Point(77, 314);
+            this.nUpDo_Matrix1_1.Maximum = new decimal(new int[] {
+            -159383552,
+            46653770,
+            5421,
+            0});
+            this.nUpDo_Matrix1_1.Minimum = new decimal(new int[] {
+            -159383552,
+            46653770,
+            5421,
+            -2147483648});
+            this.nUpDo_Matrix1_1.Name = "nUpDo_Matrix1_1";
+            this.nUpDo_Matrix1_1.Size = new System.Drawing.Size(44, 20);
+            this.nUpDo_Matrix1_1.TabIndex = 17;
+            this.nUpDo_Matrix1_1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // nUpDo_Matrix1_0
+            // 
+            this.nUpDo_Matrix1_0.DecimalPlaces = 10;
+            this.nUpDo_Matrix1_0.Location = new System.Drawing.Point(24, 314);
+            this.nUpDo_Matrix1_0.Maximum = new decimal(new int[] {
+            -159383552,
+            46653770,
+            5421,
+            0});
+            this.nUpDo_Matrix1_0.Minimum = new decimal(new int[] {
+            -159383552,
+            46653770,
+            5421,
+            -2147483648});
+            this.nUpDo_Matrix1_0.Name = "nUpDo_Matrix1_0";
+            this.nUpDo_Matrix1_0.Size = new System.Drawing.Size(47, 20);
+            this.nUpDo_Matrix1_0.TabIndex = 16;
+            // 
+            // nUpDo_Matrix0_2
+            // 
+            this.nUpDo_Matrix0_2.DecimalPlaces = 10;
+            this.nUpDo_Matrix0_2.Location = new System.Drawing.Point(127, 288);
+            this.nUpDo_Matrix0_2.Maximum = new decimal(new int[] {
+            -159383552,
+            46653770,
+            5421,
+            0});
+            this.nUpDo_Matrix0_2.Minimum = new decimal(new int[] {
+            -159383552,
+            46653770,
+            5421,
+            -2147483648});
+            this.nUpDo_Matrix0_2.Name = "nUpDo_Matrix0_2";
+            this.nUpDo_Matrix0_2.Size = new System.Drawing.Size(44, 20);
+            this.nUpDo_Matrix0_2.TabIndex = 15;
+            // 
+            // nUpDo_Matrix0_1
+            // 
+            this.nUpDo_Matrix0_1.DecimalPlaces = 10;
+            this.nUpDo_Matrix0_1.Location = new System.Drawing.Point(77, 288);
+            this.nUpDo_Matrix0_1.Maximum = new decimal(new int[] {
+            -159383552,
+            46653770,
+            5421,
+            0});
+            this.nUpDo_Matrix0_1.Minimum = new decimal(new int[] {
+            -159383552,
+            46653770,
+            5421,
+            -2147483648});
+            this.nUpDo_Matrix0_1.Name = "nUpDo_Matrix0_1";
+            this.nUpDo_Matrix0_1.Size = new System.Drawing.Size(44, 20);
+            this.nUpDo_Matrix0_1.TabIndex = 14;
+            // 
+            // nUpDo_Matrix0_0
+            // 
+            this.nUpDo_Matrix0_0.DecimalPlaces = 10;
+            this.nUpDo_Matrix0_0.Location = new System.Drawing.Point(24, 288);
+            this.nUpDo_Matrix0_0.Maximum = new decimal(new int[] {
+            -159383552,
+            46653770,
+            5421,
+            0});
+            this.nUpDo_Matrix0_0.Minimum = new decimal(new int[] {
+            -159383552,
+            46653770,
+            5421,
+            -2147483648});
+            this.nUpDo_Matrix0_0.Name = "nUpDo_Matrix0_0";
+            this.nUpDo_Matrix0_0.Size = new System.Drawing.Size(47, 20);
+            this.nUpDo_Matrix0_0.TabIndex = 13;
+            this.nUpDo_Matrix0_0.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // Btn_TransformMatrix
+            // 
+            this.Btn_TransformMatrix.Location = new System.Drawing.Point(9, 245);
+            this.Btn_TransformMatrix.Name = "Btn_TransformMatrix";
+            this.Btn_TransformMatrix.Size = new System.Drawing.Size(168, 23);
+            this.Btn_TransformMatrix.TabIndex = 12;
+            this.Btn_TransformMatrix.Text = "Použít";
+            this.Btn_TransformMatrix.UseVisualStyleBackColor = true;
+            this.Btn_TransformMatrix.Click += new System.EventHandler(this.Btn_TransformMatrix_Click);
+            // 
+            // NuUpDo_zkosY
+            // 
+            this.NuUpDo_zkosY.Location = new System.Drawing.Point(102, 97);
+            this.NuUpDo_zkosY.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.NuUpDo_zkosY.Name = "NuUpDo_zkosY";
+            this.NuUpDo_zkosY.Size = new System.Drawing.Size(75, 20);
+            this.NuUpDo_zkosY.TabIndex = 11;
+            // 
+            // NuUpDo_zkosX
+            // 
+            this.NuUpDo_zkosX.Location = new System.Drawing.Point(102, 73);
+            this.NuUpDo_zkosX.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.NuUpDo_zkosX.Name = "NuUpDo_zkosX";
+            this.NuUpDo_zkosX.Size = new System.Drawing.Size(75, 20);
+            this.NuUpDo_zkosX.TabIndex = 10;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(41, 176);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(55, 13);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Vertikální:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(32, 152);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Horizontální:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 125);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(53, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Zvětšení:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(41, 99);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(55, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Vertikální:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(32, 75);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Horizontální:";
+            // 
+            // NuUpDo_scaleY
+            // 
+            this.NuUpDo_scaleY.DecimalPlaces = 1;
+            this.NuUpDo_scaleY.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.NuUpDo_scaleY.Location = new System.Drawing.Point(102, 174);
+            this.NuUpDo_scaleY.Name = "NuUpDo_scaleY";
+            this.NuUpDo_scaleY.Size = new System.Drawing.Size(75, 20);
+            this.NuUpDo_scaleY.TabIndex = 4;
+            this.NuUpDo_scaleY.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // NuUpDo_scaleX
+            // 
+            this.NuUpDo_scaleX.DecimalPlaces = 1;
+            this.NuUpDo_scaleX.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.NuUpDo_scaleX.Location = new System.Drawing.Point(102, 148);
+            this.NuUpDo_scaleX.Name = "NuUpDo_scaleX";
+            this.NuUpDo_scaleX.Size = new System.Drawing.Size(75, 20);
+            this.NuUpDo_scaleX.TabIndex = 3;
+            this.NuUpDo_scaleX.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // nUpDo_Rotate
+            // 
+            this.nUpDo_Rotate.Location = new System.Drawing.Point(77, 15);
+            this.nUpDo_Rotate.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.nUpDo_Rotate.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.nUpDo_Rotate.Name = "nUpDo_Rotate";
+            this.nUpDo_Rotate.Size = new System.Drawing.Size(100, 20);
+            this.nUpDo_Rotate.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 50);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Zkosení:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(45, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Rotace:";
             // 
             // MainWindow
             // 
@@ -1287,6 +1308,17 @@
             this.Informace.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrixOffset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrixDivider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix2_2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix2_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix2_0)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix1_2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix1_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix1_0)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix0_2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix0_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix0_0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nuUpDo_specific1)).EndInit();
             this.tb_TransFiltry.ResumeLayout(false);
             this.tb_TransFiltry.PerformLayout();
@@ -1304,17 +1336,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.NuUpDo_scaleY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NuUpDo_scaleX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUpDo_Rotate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix2_2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix2_1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix2_0)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix1_2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix1_1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix1_0)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix0_2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix0_1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrix0_0)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrixOffset)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nUpDo_KonMatrixDivider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

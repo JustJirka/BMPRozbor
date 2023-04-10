@@ -145,10 +145,16 @@ namespace BMPRozbor
 
         private void BlurToolStripMenu_Click(object sender, EventArgs e)//pridat nastavení maximální velikosti
         {
-            lbl_specific1.Text = "Zadejte úroveň rozmazání:";
+            lbl_specific1.Text = "Zadejte úroveň zvětšení pixelů:";
             uprava = 1;//rozmazani
-            tabPage2.Text = "Rozmazání";
+            tabPage2.Text = "Zvětšení pixelů";
             TbCont_RightTabs.SelectedIndex = 1;
+            nuUpDo_specific1.Maximum = Math.Min(Soubor.BiHeight(),Soubor.BiWidth());
+            nuUpDo_specific1.Minimum = 1;
+            nuUpDo_specific1.Increment = 1;
+            nuUpDo_specific1.DecimalPlaces = 0;
+            nuUpDo_specific1.Value = 1;
+
         }
 
         private void BtnApplyTrasnformation(object sender, EventArgs e)
@@ -328,8 +334,8 @@ namespace BMPRozbor
             };
             double[,] matrixZkos =
             {
-                {1, (double)NuUpDo_zkosY.Value,0},
-                {(double)NuUpDo_zkosX.Value,1,0},
+                {1, (double)NuUpDo_zkosX.Value,0},
+                {(double)NuUpDo_zkosY.Value,1,0},
                 {0,0,1 }
             };
             double[,] transformations= new double[3,3];
@@ -392,6 +398,12 @@ namespace BMPRozbor
             OperatinsBMP.ApplyConvolutionMatrix(ref Soubor, matice, (int)nUpDo_KonMatrixDivider.Value, (int)nUpDo_KonMatrixOffset.Value);
             picBx_hlavni.Refresh();
 
+        }
+
+        private void nUpDo_KonMatrixDivider_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown control = (NumericUpDown)sender;
+            if (control.Value == 0) control.Value = 1;
         }
     }
 }

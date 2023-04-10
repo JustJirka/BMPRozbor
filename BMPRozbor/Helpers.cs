@@ -266,6 +266,8 @@ namespace BMPRozbor
         {
             byte[] bfOffBits = Helpers.IntToByteArray((uint)image.byteArray.Length, 4);
             Array.Copy(bfOffBits, 0, image.byteArray, 2, 4);
+            byte[] newBiSizeImage = Helpers.IntToByteArray((uint)(image.BfSize() - image.BfOffBits()), 4);
+            Array.Copy(newBiSizeImage, 0, image.byteArray, 34, 4);
         }
     }
 }

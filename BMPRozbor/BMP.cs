@@ -102,7 +102,7 @@ namespace BMPRozbor
         {
             File.WriteAllBytes(path, byteArray);
         }
-        public int[] GetPixelAtPosition(int x, int y)//chyba v 8 bit obrázkach
+        public int[] GetPixelAtPosition(int x, int y)
         {
             int byteOffset = BfOffBits() * 8 + y * Scanline() + x * BiBitCount(); // calculate the byte offset for the pixel
             if (BiBitCount() == 1 || BiBitCount() == 4 || BiBitCount() == 8 || BiBitCount() == 16)
